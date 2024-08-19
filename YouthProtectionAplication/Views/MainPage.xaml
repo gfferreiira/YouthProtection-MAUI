@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="YouthProtectionAplication.Views.MainPage"
+             Title="MainPage" 
+              BackgroundColor="White" >
+
+
+<Grid RowDefinitions="*,*">
+
+    <Image HeightRequest="300" Source="logo.png" />
+
+    <Border
+            Grid.Row="1"
+            Margin="0,0,0,40"
+         >
+        <!--Colocar Padding na escola, pois preciso ver a visão pelo cllr, verificar a possibilidade de adicionar o HorizontalOptions também-->
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="40,40,40,40" />
+        </Border.StrokeShape>
+
+        <VerticalStackLayout 
+                Padding="20" 
+                Spacing="30" 
+                VerticalOptions="Center">
+
+            <Label Text="Login" TextColor="#FF9900"
+                       FontSize="Large" 
+                       HorizontalOptions="Center" 
+                       FontFamily="MontserratRegular"
+                       />
+
+            <Entry
+                   FontSize="Medium"
+                   Placeholder="E-mail"
+                   FontFamily="MontserratRegular"
+                   TextColor="Black" />
+
+            <Entry
+                    FontSize="Medium"
+                    Placeholder="Password"
+                    FontFamily="MontserratRegular"
+                    TextColor="Black" 
+                     IsPassword="True" />
+
+            <Button
+                   CornerRadius="20"
+                    Text="Entrar"
+                    FontSize="Large"
+                    BackgroundColor="#956239"
+                    Padding="50,10,50,10"
+                    HorizontalOptions="CenterAndExpand"  
+                    FontFamily="MontserratRegular"
+                    TextColor="White"
+                    />
+
+            <Button
+                       BackgroundColor="White"
+                       Text="Criar Conta"
+                       FontSize="Micro"
+                       HorizontalOptions="Start"
+                       Command="{Binding CreateAccountCommand}"
+                       />
+
+        </VerticalStackLayout>
+
+
+    </Border>
+</Grid>
+</ContentPage>
