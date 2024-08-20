@@ -7,10 +7,17 @@
     xmlns:views="clr-namespace:YouthProtectionAplication.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="YouthProtectionAplication">
-
+    
+    <TabBar>
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate views:MainPage}"
         Route="MainPage" />
 
+    <ShellContent
+    Title="CreateAccount"
+    ContentTemplate="{DataTemplate views:CreateAccountPage}"
+    Route="CreateAccount" />
+
+    </TabBar>        
 </Shell>

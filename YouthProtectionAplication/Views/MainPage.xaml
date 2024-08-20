@@ -2,17 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="YouthProtectionAplication.Views.MainPage"
-             Title="MainPage" 
               BackgroundColor="White" >
 
 
-<Grid RowDefinitions="*,*">
+<Grid RowDefinitions="*,*,100">
 
-    <Image HeightRequest="300" Source="logo.png" />
+    <Image HeightRequest="400" Source="logo.png" />
 
     <Border
             Grid.Row="1"
-            Margin="0,0,0,40"
+            Margin="20,0,20,40"  
          >
         <!--Colocar Padding na escola, pois preciso ver a visão pelo cllr, verificar a possibilidade de adicionar o HorizontalOptions também-->
 
@@ -20,31 +19,31 @@
             <RoundRectangle CornerRadius="40,40,40,40" />
         </Border.StrokeShape>
 
-        <VerticalStackLayout 
-                Padding="20" 
+            <VerticalStackLayout 
+                Padding="0" 
                 Spacing="30" 
                 VerticalOptions="Center">
 
-            <Label Text="Login" TextColor="#FF9900"
+                <Label Text="Login" TextColor="#FF9900"
                        FontSize="Large" 
                        HorizontalOptions="Center" 
                        FontFamily="MontserratRegular"
                        />
 
-            <Entry
+                <Entry
                    FontSize="Medium"
                    Placeholder="E-mail"
                    FontFamily="MontserratRegular"
                    TextColor="Black" />
 
-            <Entry
+                <Entry
                     FontSize="Medium"
                     Placeholder="Password"
                     FontFamily="MontserratRegular"
                     TextColor="Black" 
                      IsPassword="True" />
 
-            <Button
+                <Button
                    CornerRadius="20"
                     Text="Entrar"
                     FontSize="Large"
@@ -54,18 +53,25 @@
                     FontFamily="MontserratRegular"
                     TextColor="White"
                     />
+            </VerticalStackLayout>
+        </Border>
+        <Button
+                  Grid.Row="2"
+                    
+                     BackgroundColor="White"
+                      TextColor="Black"
+                     Text="Criar Conta"
+  
+                     HorizontalOptions="Start"
+                     Command="{Binding CreateAccountCommand}"
+                    />
 
-            <Button
-                       BackgroundColor="White"
-                       Text="Criar Conta"
-                       FontSize="Micro"
-                       HorizontalOptions="Start"
-                       Command="{Binding CreateAccountCommand}"
-                       />
-
-        </VerticalStackLayout>
+           
+        
+    
+            
+           
+    </Grid>
 
 
-    </Border>
-</Grid>
 </ContentPage>

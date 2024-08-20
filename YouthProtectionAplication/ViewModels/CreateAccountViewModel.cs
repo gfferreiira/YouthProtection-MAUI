@@ -7,15 +7,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using YouthProtectionAplication.Views;
 
+
 namespace YouthProtectionAplication.ViewModels
 {
-    public partial class MainPageViewModel
+    public partial class CreateAccountViewModel
     {
-
-        [RelayCommand]
-        public async Task CreateAccount()
-        {
-            await Shell.Current.GoToAsync(nameof(CreateAccountPage));
-        }
     }
 }
