@@ -4,11 +4,11 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:YouthProtectionAplication"
-    xmlns:views="clr-namespace:YouthProtectionAplication.Views"
+    xmlns:views="clr-namespace:YouthProtectionAplication.Views.Usuarios"
     Shell.FlyoutBehavior="Disabled"
     Title="YouthProtectionAplication">
     
-    <TabBar>
+    
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate views:MainPage}"
@@ -19,5 +19,5 @@
     ContentTemplate="{DataTemplate views:CreateAccountPage}"
     Route="CreateAccount" />
 
-    </TabBar>        
+        
 </Shell>

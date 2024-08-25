@@ -1,4 +1,5 @@
 ﻿using YouthProtectionAplication.Views;
+using YouthProtectionAplication.Views.Usuarios;
 
 namespace YouthProtectionAplication
 {
@@ -9,6 +10,7 @@ namespace YouthProtectionAplication
             InitializeComponent();
 
             Routing.RegisterRoute(nameof(CreateAccountPage), typeof(CreateAccountPage));
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         }
     }
 }

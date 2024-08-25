@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:YouthProtectionAplication.ViewModels"
+             x:DataType="vm:CreateAccountViewModel"
+             x:Class="YouthProtectionAplication.Views.Usuarios.CreateAccountPage"
+             >
+    <VerticalStackLayout>
+        <Grid RowDefinitions="150,50,*,*,*,*,*,*">
+            <Image HeightRequest="180" Source="logo.png" />
+
+
+
+
+            <Entry  Grid.Row="1"  Margin="60,0,60,0"
+     
+                 FontSize="Medium"
+                 Placeholder="Nome de Usuário"
+                 FontFamily="MontserratRegular"
+                 TextColor="Black" 
+                 Text="{Binding Name}"  />
+            <!--Nome de Usuário será gerado automaticamente atráves de uma API, com um botão de reload do lado-->
+
+
+            <Entry Grid.Row="2"  Margin="60,40,60,0"
+                FontSize="Medium"
+                Placeholder="E-mail"
+                FontFamily="MontserratRegular"
+                TextColor="Black"  
+                 Text="{Binding Email}"/>
+
+            <Entry Grid.Row="3"  Margin="60,40,60,0"
+                 FontSize="Medium"
+                 Placeholder="Número de Telefone"
+                 FontFamily="MontserratRegular"
+                 TextColor="Black" 
+                  Text="{Binding PhoneNumber}"/>
+            
+            <Picker  Title="UF" Grid.Row="4" Margin="60,40,60,0"  FontFamily="MontserratRegular" 
+                     SelectedItem="{Binding Uf}" x:Name= "ClassPicker"
+                 >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>AC</x:String>
+                        <x:String>AL</x:String>
+                        <x:String>AP</x:String>
+                        <x:String>AM</x:String>
+                        <x:String>BA</x:String>
+                        <x:String>CE</x:String>
+                        <x:String>DF</x:String>
+                        <x:String>ES</x:String>
+                        <x:String>GO</x:String>
+                        <x:String>MA</x:String>
+                        <x:String>MT</x:String>
+                        <x:String>MS</x:String>
+                        <x:String>MG</x:String>
+                        <x:String>PA</x:String>
+                        <x:String>PB</x:String>
+                        <x:String>PR</x:String>
+                        <x:String>PE</x:String>
+                        <x:String>PI</x:String>
+                        <x:String>RJ</x:String>
+                        <x:String>RN</x:String>
+                        <x:String>RS</x:String>
+                        <x:String>RO</x:String>
+                        <x:String>RR</x:String>
+                        <x:String>SC</x:String>
+                        <x:String>SP</x:String>
+                        <x:String>SE</x:String>
+                        <x:String>TO</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            
+
+            <Entry Grid.Row="5"  Margin="60,40,60,0"
+                FontSize="Medium"
+                Placeholder="Cidade"
+                FontFamily="MontserratRegular"
+                TextColor="Black"
+                Text="{Binding City}"  />
+
+
+
+
+
+            <Entry Grid.Row="6"  Margin="60,40,60,0"
+                 FontSize="Medium"
+                 Placeholder="Password"
+                 FontFamily="MontserratRegular"
+                 TextColor="Black"  
+                IsPassword="True"
+                 Text="{Binding Password}"  />
+
+
+            <Button Grid.Row="7" Margin="60,40,60,0"
+                    CornerRadius="20"
+                     Text="Prosseguir"
+                     FontSize="Medium"
+                     BackgroundColor="#956239"
+                     Padding="50,0,50,0"
+                     HorizontalOptions="CenterAndExpand"  
+                     FontFamily="MontserratRegular"
+                     TextColor="White"
+                    Command="{Binding SaveCommand}"
+                        />
+
+
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>

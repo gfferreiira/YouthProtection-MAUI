@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="YouthProtectionAplication.Views.MainPage"
-              BackgroundColor="White" >
+             x:Class="YouthProtectionAplication.Views.Usuarios.MainPage"
+             Title="MainPage" BackgroundColor="White">
+    <Grid RowDefinitions="*,*,100">
 
-
-<Grid RowDefinitions="*,*,100">
-
-    <Image HeightRequest="400" Source="logo.png" />
+        <Image HeightRequest="400" Source="logo.png" />
 
         <Border
             Grid.Row="1"
             Margin="20,0,20,40"  
          >
             <Border.StrokeShape>
-            <RoundRectangle CornerRadius="40,40,40,40" />
-        </Border.StrokeShape>
+                <RoundRectangle CornerRadius="40,40,40,40" />
+            </Border.StrokeShape>
 
             <VerticalStackLayout 
                 Padding="0" 
@@ -64,12 +62,11 @@
                      Command="{Binding CreateAccountCommand}"
                     />
 
-           
-        
-    
-            
-           
-    </Grid>
 
+
+
+
+
+    </Grid>
 
 </ContentPage>
