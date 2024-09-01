@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace YouthProtectionAplication.Models.Login
 {
-    public class CreateAccountRequest
+    public class Usuario
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

@@ -1,12 +1,14 @@
-using YouthProtectionAplication.ViewModels;
+using YouthProtectionAplication.ViewModels.Usuarios;
 
 namespace YouthProtectionAplication.Views.Usuarios;
 
 public partial class CreateAccountPage : ContentPage
 {
-	public CreateAccountPage(CreateAccountViewModel createAccountViewModel)
+    UsuarioViewModel viewModel;
+    public CreateAccountPage()
 	{
 		InitializeComponent();
-		BindingContext = createAccountViewModel;
-	}
+        viewModel = new UsuarioViewModel();
+        BindingContext = viewModel;
+    }
 }

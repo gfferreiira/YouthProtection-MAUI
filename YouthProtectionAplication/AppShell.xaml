@@ -11,7 +11,7 @@
     
     <ShellContent
         Title="Login"
-        ContentTemplate="{DataTemplate views:MainPage}"
+        ContentTemplate="{DataTemplate views:LoginView}"
         Route="MainPage" />
 
     <ShellContent
