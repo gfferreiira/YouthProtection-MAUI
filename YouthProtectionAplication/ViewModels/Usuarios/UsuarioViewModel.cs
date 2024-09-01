@@ -195,6 +195,25 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                 Usuario usuario = new Usuario();
                 usuario.Email = Login;
                 usuario.Password = Senha;
+
+                var validator = new LoginContract(usuario);
+
+                if (!validator.IsValid)
+                {
+                    var messages =
+                            validator
+                            .Notifications
+                            .Select(x => x.Message);
+
+                    var sb = new StringBuilder();
+                    foreach (var message in messages)
+                        sb.Append($"{message}\n");
+
+                    await Shell.Current.DisplayAlert("Atenção", sb.ToString(), "OK");
+
+                    return;
+                }
+
                 Usuario uAutenticado = await _uService.PostAutenticarUsuarioAsync(usuario);
 
                 if (!string.IsNullOrEmpty(usuario.Email))
