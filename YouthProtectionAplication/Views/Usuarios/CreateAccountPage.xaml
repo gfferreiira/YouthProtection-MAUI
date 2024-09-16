@@ -38,7 +38,7 @@
                TextColor="Black"          
                Margin="60,40,60,0"
                Grid.Row="3"
-                MaxLength="10" Text="{Binding BirthDate}"/>
+               MaxLength="10" Text="{Binding BirthDate}"/>
              
 
                

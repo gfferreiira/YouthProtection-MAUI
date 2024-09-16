@@ -22,7 +22,7 @@ namespace YouthProtectionAplication.Services.Usuarios
         public async Task<Usuario> PostRegistrarUsuarioAsync(Usuario u)
         {
             string urlComplementar = "/Register";
-            u.Id = await _request.PostReturnIntAsync(_apiUrlBase + urlComplementar, u);
+            u =  await _request.PostAsync(_apiUrlBase + urlComplementar, u, string.Empty);
 
             return u;
         }

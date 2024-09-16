@@ -56,6 +56,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         //usuario no ato de LOGIN
         private string login = string.Empty;
         private string senha = string.Empty;
+     
 
         public string FictionalName
         {
@@ -156,6 +157,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             }
         }
 
+        
         #endregion
 
 
@@ -196,19 +198,19 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
 
                 Usuario uRegistrado = await _uService.PostRegistrarUsuarioAsync(u);
 
+            
+
                 if (uRegistrado != null)
                 {
-                }
-
-                if (uRegistrado.Id != 0)
-                {
-                    string mensagem = $"Usuário Id {uRegistrado.Id} Registrado com sucesso";
+                    string mensagem = "Usuário Registrado com sucesso";
                     await Application.Current.MainPage.DisplayAlert("Informação", mensagem, "OK");
 
                     await Application.Current.MainPage
-                           .Navigation.PopAsync();
+                           .DisplayAlert("Informação", mensagem, "OK");
+                            await Shell.Current.GoToAsync(nameof(LoginView));
                     return;
                 }
+                
             }
             catch (Exception ex)
             {
