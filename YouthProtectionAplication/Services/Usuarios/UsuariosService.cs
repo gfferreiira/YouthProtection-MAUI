@@ -12,7 +12,7 @@ namespace YouthProtectionAplication.Services.Usuarios
 
         private readonly Request _request;
 
-        private const string _apiUrlBase = "";  //URL DA API VAI FICAR AQUI
+        private const string _apiUrlBase = "http://localhost:5189/Auth";  //URL DA API VAI FICAR AQUI
 
         public UsuariosService()
         {
@@ -21,7 +21,7 @@ namespace YouthProtectionAplication.Services.Usuarios
 
         public async Task<Usuario> PostRegistrarUsuarioAsync(Usuario u)
         {
-            string urlComplementar = "/Cadastrar";
+            string urlComplementar = "/Register";
             u.Id = await _request.PostReturnIntAsync(_apiUrlBase + urlComplementar, u);
 
             return u;
@@ -29,7 +29,7 @@ namespace YouthProtectionAplication.Services.Usuarios
 
         public async Task<Usuario> PostAutenticarUsuarioAsync(Usuario u)
         {
-            string urlComplementar = "/Autenticar";
+            string urlComplementar = "/Login";
             u = await _request.PostAsync(_apiUrlBase + urlComplementar, u, string.Empty);
 
             return u;

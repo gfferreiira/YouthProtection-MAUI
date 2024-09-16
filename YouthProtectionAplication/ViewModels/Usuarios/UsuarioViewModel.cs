@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using YouthProtectionAplication.Contracs.Usuarios;
 using YouthProtectionAplication.Models.Login;
+using YouthProtectionAplication.Models.Login.Enums;
 using YouthProtectionAplication.Services.Usuarios;
 using YouthProtectionAplication.Views;
 using YouthProtectionAplication.Views.Diario;
@@ -43,23 +44,25 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         #region AtributosPropriedades
 
 
-        private string name = string.Empty;
+        private string fictionalName = string.Empty;
         private string password = string.Empty;
         private string email = string.Empty;
         private string city = string.Empty;
         private string uf = string.Empty;
-        private string phoneNumber = string.Empty;
+        private string cellPhone = string.Empty;
+        private string birthDate = string.Empty;
+        private UsuarioRole role;
 
         //usuario no ato de LOGIN
         private string login = string.Empty;
         private string senha = string.Empty;
 
-        public string Name
+        public string FictionalName
         {
-            get { return name; }
+            get { return fictionalName; }
             set
             {
-                name = value;
+                fictionalName = value;
                 OnPropertyChanged();
             }
         }
@@ -104,12 +107,12 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             }
         }
 
-        public string PhoneNumber
+        public string CellPhone
         {
-            get { return phoneNumber; }
+            get { return cellPhone; }
             set
             {
-                phoneNumber = value;
+                cellPhone = value;
                 OnPropertyChanged();
             }
         }
@@ -134,6 +137,25 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             }
         }
 
+        public string BirthDate
+        {
+            get { return birthDate; }
+            set
+            {
+                birthDate = value;
+                OnPropertyChanged();
+            }
+        }
+        public UsuarioRole Role
+        {
+            get { return role; }
+            set
+            {
+                role = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
 
@@ -143,12 +165,15 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             try
             {
                 Usuario u = new Usuario();
-                u.Name = Name;
+                u.FictionalName = FictionalName;
                 u.Password = Password;
                 u.Email = Email;
                 u.City = City;
                 u.Uf = Uf;
-                u.PhoneNumber = PhoneNumber;
+                u.CellPhone = CellPhone;
+                u.Role = UsuarioRole.User;
+                u.BirthDate = BirthDate;
+              
 
                 var validator = new CreateAccountContract(u);
 
@@ -173,11 +198,16 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
 
                 if (uRegistrado != null)
                 {
+                }
+
+                if (uRegistrado.Id != 0)
+                {
                     string mensagem = $"Usuário Id {uRegistrado.Id} Registrado com sucesso";
                     await Application.Current.MainPage.DisplayAlert("Informação", mensagem, "OK");
 
                     await Application.Current.MainPage
                            .Navigation.PopAsync();
+                    return;
                 }
             }
             catch (Exception ex)
@@ -216,14 +246,15 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
 
                 Usuario uAutenticado = await _uService.PostAutenticarUsuarioAsync(usuario);
 
-                if (!string.IsNullOrEmpty(usuario.Email))
+                if (!string.IsNullOrEmpty(uAutenticado.Token))
                 {
-                    string mensagem = $"Bem Vindo {usuario.Name}";
+                    string mensagem = $"Bem Vindo {usuario.FictionalName}";
 
 
 
                     Preferences.Set("UsuarioId", uAutenticado.Id);
-                    Preferences.Set("UsuarioUsername", uAutenticado.Name);
+                    Preferences.Set("UsuarioToken", uAutenticado.Token);
+                    Preferences.Set("UsuarioUsername", uAutenticado.FictionalName);
                     Preferences.Set("UsuarioEmail", uAutenticado.Email);
 
                     await Application.Current.MainPage

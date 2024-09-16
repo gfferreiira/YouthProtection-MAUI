@@ -4,8 +4,10 @@
         
              x:Class="YouthProtectionAplication.Views.Usuarios.CreateAccountPage"
              >
+    <ScrollView>
+  
     <VerticalStackLayout>
-        <Grid RowDefinitions="150,50,*,*,*,*,*,*">
+        <Grid RowDefinitions="150,50,*,*,*,*,*,*,*">
             <Image HeightRequest="180" Source="logo.png" />
 
 
@@ -17,7 +19,7 @@
                  Placeholder="Nome de Usuário"
                  FontFamily="MontserratRegular"
                  TextColor="Black" 
-                 Text="{Binding Name}"  />
+                 Text="{Binding FictionalName}"  />
             <!--Nome de Usuário será gerado automaticamente atráves de uma API, com um botão de reload do lado-->
 
 
@@ -28,15 +30,27 @@
                 TextColor="Black"  
                  Text="{Binding Email}"/>
 
-            <Entry Grid.Row="3"  Margin="60,40,60,0"
+
+                <Entry 
+               Placeholder="Data de Nascimento"     
+               FontFamily="MontserratRegular"
+               FontSize="Medium"
+               TextColor="Black"          
+               Margin="60,40,60,0"
+               Grid.Row="3"
+                MaxLength="10" Text="{Binding BirthDate}"/>
+             
+
+               
+            <Entry Grid.Row="4"  Margin="60,40,60,0"
                  FontSize="Medium"
                  Placeholder="Número de Telefone"
                  FontFamily="MontserratRegular"
                  TextColor="Black" 
-                  Text="{Binding PhoneNumber}"/>
+                  Text="{Binding CellPhone}"/>
             
-            <Picker  Title="UF" Grid.Row="4" Margin="60,40,60,0"  FontFamily="MontserratRegular" 
-                     SelectedItem="{Binding Uf}" x:Name= "ClassPicker"
+            <Picker  Title="UF" Grid.Row="5" Margin="60,40,60,0"  FontFamily="MontserratRegular" 
+                     SelectedItem="{Binding Uf}" x:Name= "ClassPicker" HorizontalOptions="Start"
                  >
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
@@ -72,7 +86,7 @@
             </Picker>
             
 
-            <Entry Grid.Row="5"  Margin="60,40,60,0"
+            <Entry Grid.Row="6"  Margin="60,40,60,0"
                 FontSize="Medium"
                 Placeholder="Cidade"
                 FontFamily="MontserratRegular"
@@ -83,7 +97,7 @@
 
 
 
-            <Entry Grid.Row="6"  Margin="60,40,60,0"
+            <Entry Grid.Row="7"  Margin="60,40,60,0"
                  FontSize="Medium"
                  Placeholder="Password"
                  FontFamily="MontserratRegular"
@@ -92,7 +106,7 @@
                  Text="{Binding Password}"  />
 
 
-            <Button Grid.Row="7" Margin="60,40,60,0"
+            <Button Grid.Row="8" Margin="60,40,60,0"
                     CornerRadius="20"
                      Text="Prosseguir"
                      FontSize="Medium"
@@ -108,4 +122,5 @@
         </Grid>
 
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
