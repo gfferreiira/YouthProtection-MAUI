@@ -8,29 +8,29 @@ using YouthProtectionAplication.Models.Login;
 
 namespace YouthProtectionAplication.Contracs.Usuarios
 {
-    public class CreateAccountContract : Contract<CreateAccountRequest>
+    public class CreateAccountContract : Contract<Usuario>
     {
-        public CreateAccountContract(CreateAccountRequest createAccount)
+        public CreateAccountContract(Usuario usuario)
         {
             Requires()
-                .IsEmail(createAccount.Email, nameof(createAccount.Email), "Email Invalido")
-                .IsNotNullOrEmpty(createAccount.Email , nameof(createAccount.Email), "Email Não pode estar vazio");
+                .IsEmail(usuario.Email, nameof(usuario.Email), "Email Invalido")
+                .IsNotNullOrEmpty(usuario.Email , nameof(usuario.Email), "Email Não pode estar vazio");
 
             Requires()
-                .IsNotNullOrEmpty(createAccount.PhoneNumber, nameof(createAccount.PhoneNumber), "Telefone Não pode estar vazio");
+                .IsNotNullOrEmpty(usuario.CellPhone, nameof(usuario.CellPhone), "Telefone Não pode estar vazio");
 
             Requires()
-                .IsNotNullOrEmpty(createAccount.Uf, nameof(createAccount.Uf), "UF Não pode estar vazio");
+                .IsNotNullOrEmpty(usuario.Uf, nameof(usuario.Uf), "UF Não pode estar vazio");
 
             Requires()
-                .IsNotNullOrEmpty(createAccount.City, nameof(createAccount.City), "Cidade Não pode estar vazio");
+                .IsNotNullOrEmpty(usuario.City, nameof(usuario.City), "Cidade Não pode estar vazio");
 
 
             Requires()
-                .IsNotNullOrEmpty(createAccount.Password, nameof(createAccount.Password), "Senha Não pode estar vazio");
+                .IsNotNullOrEmpty(usuario.Password, nameof(usuario.Password), "Senha Não pode estar vazio");
 
             Requires()
-                .IsNotNullOrEmpty(createAccount.Name, nameof(createAccount.Name), "Nome Não pode estar vazio");
+                .IsNotNullOrEmpty(usuario.FictionalName, nameof(usuario.FictionalName), "Nome Não pode estar vazio");
         }
     }
 }

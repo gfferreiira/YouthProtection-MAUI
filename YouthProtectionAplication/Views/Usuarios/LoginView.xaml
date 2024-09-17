@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="YouthProtectionAplication.Views.Usuarios.MainPage"
+             x:Class="YouthProtectionAplication.Views.Usuarios.LoginView"
              Title="MainPage" BackgroundColor="White">
     <Grid RowDefinitions="*,*,100">
 
@@ -30,14 +30,14 @@
                    FontSize="Medium"
                    Placeholder="E-mail"
                    FontFamily="MontserratRegular"
-                   TextColor="Black" />
+                   TextColor="Black" Text="{Binding Login}"/>
 
                 <Entry
                     FontSize="Medium"
                     Placeholder="Password"
                     FontFamily="MontserratRegular"
                     TextColor="Black" 
-                     IsPassword="True" />
+                     IsPassword="True" Text="{Binding Senha}" />
 
                 <Button
                    CornerRadius="20"
@@ -48,6 +48,7 @@
                     HorizontalOptions="CenterAndExpand"  
                     FontFamily="MontserratRegular"
                     TextColor="White"
+                    Command="{Binding AutenticarCommand}"
                     />
             </VerticalStackLayout>
         </Border>
