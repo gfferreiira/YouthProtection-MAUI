@@ -1,4 +1,6 @@
-﻿namespace YouthProtectionAplication
+﻿using YouthProtectionAplication.Views.Usuarios;
+
+namespace YouthProtectionAplication
 {
     public partial class App : Application
     {
@@ -7,6 +9,8 @@
             InitializeComponent();
 
             MainPage = new AppShell();
+
+           
         }
     }
 }

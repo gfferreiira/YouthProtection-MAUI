@@ -7,8 +7,27 @@
     xmlns:views="clr-namespace:YouthProtectionAplication.Views.Usuarios"
     Shell.FlyoutBehavior="Disabled"
     Title="YouthProtectionAplication">
-    
-    
+
+
+    <!---   <Shell.FlyoutHeaderTemplate>
+     <DataTemplate>
+         <Grid>
+             <Grid.RowDefinitions>
+                 <RowDefinition Height="{OnPlatform Android=130, iOS=200}"></RowDefinition>
+                 <RowDefinition Height="*"></RowDefinition>
+                 <RowDefinition Height="40"></RowDefinition>
+             </Grid.RowDefinitions>
+             <FlexLayout Grid.Row="0" Direction="Row" AlignItems="Center" HorizontalOptions="Center">
+                 <Image Source="logosemnome.png" MaximumWidthRequest="70"/>
+                 <VerticalStackLayout Padding="10,0,0,0" Spacing="0">
+                     <Label Text="Youth Protection" FontAttributes="Bold" FontSize="Medium" />
+                 
+                 </VerticalStackLayout>
+             </FlexLayout>
+         </Grid>
+     </DataTemplate>
+ </Shell.FlyoutHeaderTemplate>  -->
+
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate views:LoginView}"
@@ -19,5 +38,6 @@
     ContentTemplate="{DataTemplate views:CreateAccountPage}"
     Route="CreateAccount" />
 
-        
+
+    <ShellContent Title="Sair" Icon="sair.png" ContentTemplate="{DataTemplate views:LoginView}" Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False"></ShellContent>
 </Shell>

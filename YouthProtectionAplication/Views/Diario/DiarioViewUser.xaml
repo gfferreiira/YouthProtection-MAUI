@@ -2,16 +2,41 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="YouthProtectionAplication.Views.Diario.DiarioViewUser"
+              BackgroundColor="White"
+              Shell.PresentationMode="Animated"
              >
     <ScrollView>
-    <VerticalStackLayout>
-        <Grid RowDefinitions="100,*">
-            <Image HeightRequest="100" Source="logo.png" HorizontalOptions="Start" />
-      
-            
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,30" BackgroundColor="#FFF4E3">
+                <Image HeightRequest="80" Source="logosemnome.png" HorizontalOptions="Start" Grid.Row="0"/>
+                
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Padding="0, 0, 0, 0" >
+                <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding Posts}" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <VerticalStackLayout Padding="10">
+                                    <Label Text="{Binding UserName}" FontSize="20" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Title}" FontSize="15" FontAttributes="Italic"/>
+                                    <Label Text="{Binding PostText}" FontSize="10"/>
+                                </VerticalStackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+
+
         </Grid>
-   
-        </VerticalStackLayout>
 
 
     </ScrollView>

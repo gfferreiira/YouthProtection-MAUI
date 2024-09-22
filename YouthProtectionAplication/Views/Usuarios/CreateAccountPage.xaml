@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-        
+            Shell.NavBarIsVisible="False"
              x:Class="YouthProtectionAplication.Views.Usuarios.CreateAccountPage"
              >
     <ScrollView>
@@ -38,7 +38,10 @@
                TextColor="Black"          
                Margin="60,40,60,0"
                Grid.Row="3"
-               MaxLength="10" Text="{Binding BirthDate}"/>
+               MaxLength="10" Text="{Binding BirthDate}"
+               TextChanged="OnDateEntryTextChanged"
+               x:Name="dateEntry"
+               Keyboard="Numeric"/>
              
 
                
@@ -47,7 +50,10 @@
                  Placeholder="Número de Telefone"
                  FontFamily="MontserratRegular"
                  TextColor="Black" 
-                  Text="{Binding CellPhone}"/>
+                  Text="{Binding CellPhone}"
+                   Keyboard="Numeric"
+                    TextChanged="OnCellPhoneEntryTextChanged"
+                    x:Name="cellPhoneEntry"/>
             
             <Picker  Title="UF" Grid.Row="5" Margin="60,40,60,0"  FontFamily="MontserratRegular" 
                      SelectedItem="{Binding Uf}" x:Name= "ClassPicker" HorizontalOptions="Start"
@@ -116,6 +122,7 @@
                      FontFamily="MontserratRegular"
                      TextColor="White"
                     Command="{Binding RegistrarCommand}"
+                   x:Name="btnCadastrar"
                         />
 
 

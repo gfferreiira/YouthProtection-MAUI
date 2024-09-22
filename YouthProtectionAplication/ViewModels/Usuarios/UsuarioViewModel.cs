@@ -7,8 +7,8 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using YouthProtectionAplication.Contracs.Usuarios;
-using YouthProtectionAplication.Models.Login;
-using YouthProtectionAplication.Models.Login.Enums;
+using YouthProtectionAplication.Models;
+using YouthProtectionAplication.Models.Enums;
 using YouthProtectionAplication.Services.Usuarios;
 using YouthProtectionAplication.Views;
 using YouthProtectionAplication.Views.Diario;
@@ -28,6 +28,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         {
             _uService = new UsuariosService();
             InicializarCommands();
+            
         }
 
         public void InicializarCommands()
@@ -50,7 +51,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         private string city = string.Empty;
         private string uf = string.Empty;
         private string cellPhone = string.Empty;
-        private string birthDate = string.Empty;
+        private string birthDate;
         private UsuarioRole role;
 
         //usuario no ato de LOGIN

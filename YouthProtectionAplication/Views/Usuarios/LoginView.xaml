@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="YouthProtectionAplication.Views.Usuarios.LoginView"
-             Title="MainPage" BackgroundColor="White">
+             Title="MainPage" BackgroundColor="White"
+             Shell.NavBarIsVisible="False">
     <Grid RowDefinitions="*,*,100">
 
         <Image HeightRequest="400" Source="logo.png" />

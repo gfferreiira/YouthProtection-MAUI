@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YouthProtectionAplication.Models.Login.Enums
+namespace YouthProtectionAplication.Models.Enums
 {
-    public enum UsuarioRole
+    public enum TipoPostagemEnum
     {
-        Admin ,
-        User ,
-        Voluntary
+        Publico = 0,
+        Privado = 1
     }
 }

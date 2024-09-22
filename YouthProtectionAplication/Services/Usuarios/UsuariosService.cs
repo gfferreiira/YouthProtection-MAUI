@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YouthProtectionAplication.Models.Login;
+using YouthProtectionAplication.Models;
 
 namespace YouthProtectionAplication.Services.Usuarios
 {
