@@ -18,7 +18,7 @@
                 
             </StackLayout>
 
-            <StackLayout Grid.Row="1" Padding="0, 0, 0, 0" >
+            <StackLayout Grid.Row="1" Padding="30, 15,30, 15" >
                 <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding Posts}" >
                     <ListView.ItemTemplate>
                         <DataTemplate>

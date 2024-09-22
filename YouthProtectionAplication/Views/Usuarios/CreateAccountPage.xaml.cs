@@ -11,6 +11,7 @@ public partial class CreateAccountPage : ContentPage
         InitializeComponent();
         viewModel = new UsuarioViewModel();
         BindingContext = viewModel;
+      //  Application.Current.UserAppTheme = AppTheme.Dark;
     }
 
     private async void OnButtonCadastrarPressed(object sender, EventArgs e)

@@ -11,5 +11,6 @@ public partial class LoginView : ContentPage
 
         _usuarioViewModel = new UsuarioViewModel();
         BindingContext = _usuarioViewModel;
+       // Application.Current.UserAppTheme = AppTheme.Dark;
     }
 }
