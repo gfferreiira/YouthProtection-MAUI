@@ -14,11 +14,11 @@ namespace YouthProtectionAplication.Contracs.Usuarios
         {
         
         Requires()
-                .IsEmail(usuario.Email, nameof(usuario.Email), "E-mail is invalid")
-                .IsNotNullOrEmpty(usuario.Email, nameof(usuario.Email), "E-mail is invalid");
+                .IsEmail(usuario.Email, nameof(usuario.Email), "Por gentileza, digitar um e-mail valido")
+                .IsNotNullOrEmpty(usuario.Email, nameof(usuario.Email), "E-mail não pode estar vazio");
 
         Requires()
-                .IsNotNullOrEmpty(usuario.Password, nameof(usuario.Password), "Password is invalid");
+                .IsNotNullOrEmpty(usuario.Password, nameof(usuario.Password), "Senha Não pode estar vazio");
     }
 }
 }
