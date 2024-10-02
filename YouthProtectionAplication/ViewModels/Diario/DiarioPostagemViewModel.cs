@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Services.Maps;
+using YouthProtectionAplication.Models;
+using YouthProtectionAplication.Models.Enums;
 using YouthProtectionAplication.Services.Diario;
 
 namespace YouthProtectionAplication.ViewModels.Diario
@@ -22,47 +24,59 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         private int idUser;
         private int idPostagem;
-        private string titulo = string.Empty;
         private string texto = string.Empty;
         private DateTime dataPostagem;
-        private ObservableCollection<TipoPostagemEnum> listaTipoPostagem;
 
         #region Atributos Propriedades
-        public int IdUser 
-        { 
+        public int IdUser
+        {
             get => idUser;
             set => idUser = value;
         }
-        public int IdPostagem 
+        public int IdPostagem
         {
-            get => idPostagem; 
-            set => idPostagem = value; 
+            get => idPostagem;
+            set => idPostagem = value;
         }
-        public string Titulo 
-        { 
-            get => titulo; 
-            set => titulo = value;
-        }
+        
         public string Texto
-        { 
-            get => texto; 
-            set => texto = value; 
+        {
+            get => texto;
+            set => texto = value;
         }
         public DateTime DataPostagem
         {
-            get => dataPostagem; 
+            get => dataPostagem;
             set => dataPostagem = value;
         }
 
-         public ObservableCollection<TipoPostagemEnum> listaTipoPostagem
+
+
+        private ObservableCollection<TipoPostagem> listaTiposPostagem;
+        public ObservableCollection<TipoPostagem> ListaTiposPostagem
         {
-            get { return listaTipoPostagem; }
+            get { return listaTiposPostagem; }
             set
-             {
-                 if (value != null)
-                 {
-                     listaTipoPostagem = value;
-                     OnPropertyChanged();
+            {
+                if (value != null)
+                {
+                    listaTiposPostagem = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private TipoPostagem tipoPostagemSelecionado;
+
+        public TipoPostagem TipoPostagemSelecionado
+        {
+            get { return tipoPostagemSelecionado; }
+            set
+            {
+                if (value != null)
+                {
+                    tipoPostagemSelecionado = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -71,32 +85,48 @@ namespace YouthProtectionAplication.ViewModels.Diario
         #endregion
 
         #region Métodos 
-    
+
         public async Task ObterTipoPostagem()
         {
             try
             {
-                ListaTipoPostagem = new ObservableCollection<TipoPostagemEnum>();
-                ListaTipoPostagem.Add(new TipoPostagemEnum() {Id = 0, Descricao = "Público" });
-                ListaTipoPostagem.Add(new TipoPostagemEnum() {Id = 1, Descricao = "Privado" });
-                OnPropertyChanged(nameof(ListaTipoPostagem));
+                ListaTiposPostagem = new ObservableCollection<TipoPostagem>();
+                listaTiposPostagem.Add(new TipoPostagem() { Id = 0, Descricao = "Público" });
+                listaTiposPostagem.Add(new TipoPostagem() { Id = 1, Descricao = "Privado" });
+                OnPropertyChanged(nameof(ListaTiposPostagem));
             }
-             catch (Exception ex)
+            catch (Exception ex)
             {
                 await Application.Current.MainPage
                     .DisplayAlert("Ops", ex.Message + " Detalhes: " + ex.InnerException, "Ok");
             }
-         }
-                
+        }
 
-        
+        public async Task SalvarPostagem()
+        {
+            DataPostagem = DateTime.Now;
+            Postagem model = new Postagem()
+            {
+                Texto = this.Texto,
+                DataPostagem = DataPostagem.ToString("dd/MM/yyyy HH:mm"),
+                TipoPost = (TipoPostagemEnum)tipoPostagemSelecionado.Id,
+                idUser = this.IdUser,
+                idPostagem = this.IdPostagem
+            };
+        //    if (model.idPostagem == 0)
+              
+        }
+
+
+
         #endregion
-        
 
 
-        
 
-       
 
-        
+
+
+
+
+    }
 }

@@ -286,7 +286,8 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             #region Navegacao
             public async Task CreateAccount()
         {
-            await Shell.Current.GoToAsync(nameof(CreateAccountPage));
+            await Application.Current.MainPage.
+                 Navigation.PushAsync(new CreateAccountPage());
         }
 
 
