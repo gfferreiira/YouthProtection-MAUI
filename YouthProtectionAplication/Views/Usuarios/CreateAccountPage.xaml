@@ -52,6 +52,7 @@
                  TextColor="Black" 
                   Text="{Binding CellPhone}"
                    Keyboard="Numeric"
+                   MaxLength="14"
                     TextChanged="OnCellPhoneEntryTextChanged"
                     x:Name="cellPhoneEntry"/>
             

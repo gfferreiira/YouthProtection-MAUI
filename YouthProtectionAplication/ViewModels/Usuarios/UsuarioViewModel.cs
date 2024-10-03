@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using YouthProtectionAplication.Services.Usuarios;
 using YouthProtectionAplication.Views;
 using YouthProtectionAplication.Views.Diario;
 using YouthProtectionAplication.Views.Usuarios;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace YouthProtectionAplication.ViewModels.Usuarios
@@ -28,7 +30,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         {
             _uService = new UsuariosService();
             InicializarCommands();
-            
+
         }
 
         public void InicializarCommands()
@@ -57,7 +59,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         //usuario no ato de LOGIN
         private string login = string.Empty;
         private string senha = string.Empty;
-     
+
 
         public string FictionalName
         {
@@ -158,7 +160,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             }
         }
 
-        
+
         #endregion
 
 
@@ -176,9 +178,45 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                 u.CellPhone = CellPhone;
                 u.Role = UsuarioRole.User;
                 u.BirthDate = BirthDate;
-              
 
-                var validator = new CreateAccountContract(u);
+
+
+                var culture = new CultureInfo("pt-PT");
+                if (DateTime.TryParseExact(u.BirthDate, "dd/MM/yyyy", culture, DateTimeStyles.None,
+                out DateTime valor))
+                {
+                    if (valor > DateTime.Now)
+                    {
+                        await Application.Current.MainPage
+                        .DisplayAlert("Informação", "Erro" + "Detalhes:" + "Data de Nascimento Invalida, tente novamente", "Ok");
+                        return;
+                    }
+
+                    int age = DateTime.Now.Year - valor.Year;
+                    if (valor > DateTime.Now.AddYears(-age)) age--;
+
+                    if (age >= 15 && age <= 100)
+                    {
+
+
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage
+                        .DisplayAlert("Informação", "Erro: " + "Idade deve estar entre 15 e 100 anos, tente novamente", "Ok");
+                        return;
+                    }
+                }
+                else
+                {
+                    await Application.Current.MainPage
+                         .DisplayAlert("Informação", "Erro" + "Detalhes:" + "Data de Nascimento Invalida, tente novamente", "Ok");
+                    return;
+                }
+
+
+
+                    var validator = new CreateAccountContract(u);
 
                 if (!validator.IsValid)
                 {
@@ -199,7 +237,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
 
                 Usuario uRegistrado = await _uService.PostRegistrarUsuarioAsync(u);
 
-            
+
 
                 if (uRegistrado != null)
                 {
@@ -208,10 +246,10 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
 
                     await Application.Current.MainPage
                            .DisplayAlert("Informação", mensagem, "OK");
-                            await Shell.Current.GoToAsync(nameof(LoginView));
+                    await Shell.Current.GoToAsync(nameof(LoginView));
                     return;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -281,10 +319,48 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             }
         }
 
-            #endregion
+        public async void ValidarDataNascimento(string data)
+        {
+            var culture = new CultureInfo("pt-PT");
+            if (DateTime.TryParseExact(data, "dd/MM/yyyy", culture, DateTimeStyles.None,
+            out DateTime valor))
+            {
+                if (valor > DateTime.Now)
+                {
+                    await Application.Current.MainPage
+                    .DisplayAlert("Informação", "Erro" + "Detalhes:" + "Data de Nascimento Invalida, tente novamente", "Ok");
+                    return;
+                }
 
-            #region Navegacao
-            public async Task CreateAccount()
+                int age = DateTime.Now.Year - valor.Year;
+                if (valor > DateTime.Now.AddYears(-age)) age--;
+
+                if (age >= 15 && age <= 100)
+                {
+                   
+
+                }
+                else
+                {
+                    await Application.Current.MainPage
+                    .DisplayAlert("Informação", "Erro" + "Detalhes:" + "Idade deve estar entre 15 e 100 anos., tente novamente", "Ok");
+                    return;
+                }
+            }
+            else
+            {
+                await Application.Current.MainPage
+                     .DisplayAlert("Informação", "Erro" + "Detalhes:" + "Data de Nascimento Invalida, tente novamente", "Ok");
+                return;
+            }
+        }
+
+
+
+        #endregion
+
+        #region Navegacao
+        public async Task CreateAccount()
         {
             await Application.Current.MainPage.
                  Navigation.PushAsync(new CreateAccountPage());
@@ -296,4 +372,3 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
 
     }
 }
-
