@@ -188,24 +188,21 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                     if (valor > DateTime.Now)
                     {
                         await Application.Current.MainPage
-                        .DisplayAlert("Informação", "Erro" + "Detalhes:" + "Data de Nascimento Invalida, tente novamente", "Ok");
+                        .DisplayAlert("Informação", "Erro: " + "Data de Nascimento Invalida, tente novamente", "Ok");
                         return;
                     }
 
                     int age = DateTime.Now.Year - valor.Year;
                     if (valor > DateTime.Now.AddYears(-age)) age--;
 
-                    if (age >= 15 && age <= 100)
-                    {
-
-
-                    }
-                    else
+                    if (age < 16 || age > 100)
                     {
                         await Application.Current.MainPage
-                        .DisplayAlert("Informação", "Erro: " + "Idade deve estar entre 15 e 100 anos, tente novamente", "Ok");
+                        .DisplayAlert("Informação", "Erro: " + "Data de Nascimento Invalida ou não autorizada, verifique e tente novamente tente novamente", "Ok");
                         return;
+
                     }
+                   
                 }
                 else
                 {
