@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using YouthProtectionAplication.Models;
 using YouthProtectionAplication.Models.Enums;
 using YouthProtectionAplication.Services.Diario;
+using YouthProtectionAplication.Views.Diario;
 
 namespace YouthProtectionAplication.ViewModels.Diario
 {
@@ -113,8 +114,15 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 idUser = this.IdUser,
                 idPostagem = this.IdPostagem
             };
-        //    if (model.idPostagem == 0)
-              
+            if (model.idPostagem == 0)
+                await UserDiarioService.PostPostagemAsync(model);
+            else
+                await UserDiarioService.PutPostagemAsync(model);
+
+            await Application.Current.MainPage
+                    .DisplayAlert("Mensagem", "Postagem feita com sucesso", "Ok");
+
+            Application.Current.MainPage = new DiarioViewUser();
         }
 
 

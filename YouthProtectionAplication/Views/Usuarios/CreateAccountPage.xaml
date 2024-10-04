@@ -125,9 +125,10 @@
                     Command="{Binding RegistrarCommand}"
                    x:Name="btnCadastrar"
                         />
+               
 
 
-        </Grid>
+            </Grid>
 
     </VerticalStackLayout>
     </ScrollView>

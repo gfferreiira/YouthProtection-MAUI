@@ -75,6 +75,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\Diario\DiarioCreatePostUser.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Diario\DiarioViewUser.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

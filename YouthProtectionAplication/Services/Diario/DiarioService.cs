@@ -22,12 +22,12 @@ namespace YouthProtectionAplication.Services.Diario
             _token = token;
         }
 
-        public async Task<int> PostPersonagemAsync(Postagem p)
+        public async Task<int> PostPostagemAsync(Postagem p)
         {
             return await _request.PostReturnIntAsync(apiUrlBase, p, _token);
         }
 
-        public async Task<ObservableCollection<Postagem>> GetPostagemAsync()
+        public async Task<ObservableCollection<Postagem>> GetPostagemAsyncPerId()
         {
             string urlComplementar = string.Format("{0}", "/GetAll");
             ObservableCollection<Models.Postagem> listaPersonagens = await
@@ -36,22 +36,22 @@ namespace YouthProtectionAplication.Services.Diario
             return listaPersonagens;
         }
 
-        public async Task<Postagem> GetPersonagemAsync(int personagemId)
+        public async Task<Postagem> GetAllPostagemAsync(int idPostagem)
         {
-            string urlComplementar = string.Format("/{0}", personagemId);
-            var personagem = await _request.GetAsync<Models.Postagem>(apiUrlBase + urlComplementar, _token);
-            return personagem;
+            string urlComplementar = string.Format("/{0}", idPostagem);
+            var postagem = await _request.GetAsync<Models.Postagem>(apiUrlBase + urlComplementar, _token);
+            return postagem;
         }
 
-        public async Task<int> PutPersonagemAsync(Postagem p)
+        public async Task<int> PutPostagemAsync(Postagem p)
         {
             var result = await _request.PutAsync(apiUrlBase, p, _token);
             return result;
         }
 
-        public async Task<int> DeletePersonagemAsync(int PostagemId)
+        public async Task<int> DeletePostagemAsync(int idPostagem)
         {
-            string urlComplementar = string.Format("/{0}", PostagemId);
+            string urlComplementar = string.Format("/{0}", idPostagem);
             var result = await _request.DeleteAsync(apiUrlBase + urlComplementar, _token);
             return result;
         }

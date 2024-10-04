@@ -9,8 +9,8 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="150" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="500" />
+                <RowDefinition Height="300" />
             </Grid.RowDefinitions>
 
             <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,30" BackgroundColor="#FFF4E3">
@@ -18,7 +18,7 @@
                 
             </StackLayout>
 
-            <StackLayout Grid.Row="1" Padding="30, 15,30, 15" >
+            <VerticalStackLayout Grid.Row="1" Padding="30, 15,30, 15" >
                 <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding Posts}" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -32,7 +32,22 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackLayout>
+            </VerticalStackLayout>
+
+
+            <Button Text="+"
+                WidthRequest="25"
+                HeightRequest="25"
+                BackgroundColor="#4CAF50"
+                TextColor="White"
+                FontSize="16"
+                FontAttributes="Bold"
+                CornerRadius="25"
+                 HorizontalOptions="End"
+                VerticalOptions="Center"
+                    Grid.Row="3"
+                />
+
 
 
 

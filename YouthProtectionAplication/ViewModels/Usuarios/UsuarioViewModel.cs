@@ -316,42 +316,6 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             }
         }
 
-        public async void ValidarDataNascimento(string data)
-        {
-            var culture = new CultureInfo("pt-PT");
-            if (DateTime.TryParseExact(data, "dd/MM/yyyy", culture, DateTimeStyles.None,
-            out DateTime valor))
-            {
-                if (valor > DateTime.Now)
-                {
-                    await Application.Current.MainPage
-                    .DisplayAlert("Informação", "Erro" + "Detalhes:" + "Data de Nascimento Invalida, tente novamente", "Ok");
-                    return;
-                }
-
-                int age = DateTime.Now.Year - valor.Year;
-                if (valor > DateTime.Now.AddYears(-age)) age--;
-
-                if (age >= 15 && age <= 100)
-                {
-                   
-
-                }
-                else
-                {
-                    await Application.Current.MainPage
-                    .DisplayAlert("Informação", "Erro" + "Detalhes:" + "Idade deve estar entre 15 e 100 anos., tente novamente", "Ok");
-                    return;
-                }
-            }
-            else
-            {
-                await Application.Current.MainPage
-                     .DisplayAlert("Informação", "Erro" + "Detalhes:" + "Data de Nascimento Invalida, tente novamente", "Ok");
-                return;
-            }
-        }
-
 
 
         #endregion
@@ -360,7 +324,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         public async Task CreateAccount()
         {
             await Application.Current.MainPage.
-                 Navigation.PushAsync(new CreateAccountPage());
+                 Navigation.PushAsync(new DiarioViewUser());
         }
 
 
