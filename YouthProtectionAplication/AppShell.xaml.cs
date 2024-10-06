@@ -10,7 +10,7 @@ namespace YouthProtectionAplication
         {
             InitializeComponent();
 
-           
+           Routing.RegisterRoute("cadPostagemView", typeof(DiarioCreatePostUser));
         }
     }
 }

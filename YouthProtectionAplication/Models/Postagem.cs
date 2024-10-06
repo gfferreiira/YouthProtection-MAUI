@@ -9,9 +9,8 @@ namespace YouthProtectionAplication.Models
 {
     public class Postagem
     {
-        public int idUser { get; set; }
+       
         public int idPostagem { get; set; }
-        public string Titulo { get; set; } = string.Empty;
         public string Texto { get; set; } = string.Empty;
         public string DataPostagem { get; set; } = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
 

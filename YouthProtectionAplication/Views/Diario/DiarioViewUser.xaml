@@ -46,6 +46,7 @@
                  HorizontalOptions="End"
                 VerticalOptions="Center"
                     Grid.Row="3"
+                 Command="{Binding NovaPostagem}"
                 />
 
 

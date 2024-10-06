@@ -11,6 +11,7 @@ using YouthProtectionAplication.Views.Diario;
 
 namespace YouthProtectionAplication.ViewModels.Diario
 {
+    [QueryProperty("PostagemSelecionadaId", "pId")]
     public class DiarioPostagemViewModel : BaseViewModel
     {
         private DiarioService UserDiarioService;
@@ -111,7 +112,6 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 Texto = this.Texto,
                 DataPostagem = DataPostagem.ToString("dd/MM/yyyy HH:mm"),
                 TipoPost = (TipoPostagemEnum)tipoPostagemSelecionado.Id,
-                idUser = this.IdUser,
                 idPostagem = this.IdPostagem
             };
             if (model.idPostagem == 0)

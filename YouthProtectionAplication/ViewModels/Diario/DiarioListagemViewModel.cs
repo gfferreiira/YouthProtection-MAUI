@@ -25,11 +25,32 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
             _ = ObterPostagens();
 
+            NovaPostagem = new Command(async () => { await ExibirPostagem(); });
+
+            RemoverPostagemCommand = 
+                new Command<Postagem>(async (Postagem p) => { await RemoverPostagem(p); });
+
 
         }
         public ICommand NovaPostagem { get;}
         public ICommand RemoverPostagemCommand { get; set; }
 
+
+        private Postagem postagemSelecionado;
+        public Postagem PostagemSelecionado
+        {
+            get { return postagemSelecionado; }
+            set
+            {
+                if (value != null)
+                {
+                    postagemSelecionado = value;
+
+                    Shell.Current
+                        .GoToAsync($"cadPostagemView?pId={postagemSelecionado.idPostagem}");
+                }
+            }
+        }
 
         #region Métodos
         public async Task ObterPostagens()
@@ -68,7 +89,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                     .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "OK");
             }
         }
-        public async Task SelecionarPostagem()
+        public async Task ExibirPostagem()
         {
             try
             {
