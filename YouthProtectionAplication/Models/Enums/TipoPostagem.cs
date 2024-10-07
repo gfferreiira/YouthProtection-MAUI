@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace YouthProtectionAplication.Models.Enums
 {
-    public class TipoPostagem
+    public enum TipoPostagemEnum
     {
-        public int Id { get; set; }
-
-        public string Descricao { get; set; }
+        Publico = 0,
+        Privado = 1
     }
 }

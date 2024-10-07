@@ -16,16 +16,21 @@ namespace YouthProtectionAplication.ViewModels.Diario
         private DiarioService pdiarioService;
 
         public ObservableCollection<Postagem> Diarios { get; set; }
+        public ObservableCollection<Postagem> FilteredItems { get; set; }
 
         public DiarioListagemViewModel()
         {
             string token = Preferences.Get("UsuarioToken", string.Empty);
+            string FictionalName = Preferences.Get("UsuarioUsername", string.Empty);
             pdiarioService = new DiarioService(token);
             Diarios = new ObservableCollection<Postagem>();
+            FilteredItems = new ObservableCollection<Postagem>();
 
             _ = ObterPostagens();
 
             NovaPostagem = new Command(async () => { await ExibirPostagem(); });
+
+            NovaPostagemPopUpCommand = new Command(ExibirPostagemPop);
 
             RemoverPostagemCommand = 
                 new Command<Postagem>(async (Postagem p) => { await RemoverPostagem(p); });
@@ -33,6 +38,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         }
         public ICommand NovaPostagem { get;}
+        public ICommand NovaPostagemPopUpCommand { get; }
         public ICommand RemoverPostagemCommand { get; set; }
 
 
@@ -47,7 +53,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                     postagemSelecionado = value;
 
                     Shell.Current
-                        .GoToAsync($"cadPostagemView?pId={postagemSelecionado.idPostagem}");
+                        .GoToAsync($"cadPostagemView?pId={postagemSelecionado.publicationId}");
                 }
             }
         }
@@ -57,8 +63,11 @@ namespace YouthProtectionAplication.ViewModels.Diario
         {
             try
             {
+               
                 Diarios = await pdiarioService.GetPostagemAsyncPerId();
-                OnPropertyChanged(nameof(Diarios));
+
+               FilteredItems = new ObservableCollection<Postagem>(Diarios.Where(diario => diario.PublicationStatus == 0).ToList());
+                OnPropertyChanged(nameof(FilteredItems));
             }
             catch (Exception ex)
             {
@@ -75,7 +84,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 if (await Application.Current.MainPage
                     .DisplayAlert("Confirmação", "Confirma a remoção desta postagem?", "Sim", "Não"))
                 {
-                    await pdiarioService.DeletePostagemAsync(p.idPostagem);
+                    await pdiarioService.DeletePostagemAsync(p.publicationId);
 
                     await Application.Current.MainPage.DisplayAlert("Mensagem",
                        "Postagem Removida com sucesso!", "OK");
@@ -93,12 +102,27 @@ namespace YouthProtectionAplication.ViewModels.Diario
         {
             try
             {
-                Application.Current.MainPage = new DiarioCreatePostUser();
+                
             }
             catch (Exception ex)
             {
                       await Application.Current.MainPage
                     .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "OK");
+            }
+        }
+
+      
+        public async void ExibirPostagemPop()
+        {
+            try
+            {
+                
+                MessagingCenter.Send(this, "ExibirPostagemPop");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+              .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "OK");
             }
         }
     }

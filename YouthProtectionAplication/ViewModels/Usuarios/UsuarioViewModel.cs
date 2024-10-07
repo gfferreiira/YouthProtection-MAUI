@@ -241,9 +241,8 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                     string mensagem = "Usuário Registrado com sucesso";
                     await Application.Current.MainPage.DisplayAlert("Informação", mensagem, "OK");
 
-                    await Application.Current.MainPage
-                           .DisplayAlert("Informação", mensagem, "OK");
-                    await Shell.Current.GoToAsync(nameof(LoginView));
+                    
+                    await Application.Current.MainPage.Navigation.PushAsync(new LoginView());
                     return;
                 }
 
@@ -294,11 +293,15 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                     Preferences.Set("UsuarioToken", uAutenticado.Token);
                     Preferences.Set("UsuarioUsername", uAutenticado.FictionalName);
                     Preferences.Set("UsuarioEmail", uAutenticado.Email);
+                    Preferences.Set("UsuarioCidade", uAutenticado.City);
+                    Preferences.Set("UsuarioTelefone", uAutenticado.CellPhone);
+                    Preferences.Set("UsuarioUf", uAutenticado.Uf);
+                    Preferences.Set("UsuarioSenha", uAutenticado.Password); 
 
                     await Application.Current.MainPage
                        .DisplayAlert("Informação", mensagem, "OK");
 
-                    await Shell.Current.GoToAsync(nameof(DiarioViewUser));
+                    Application.Current.MainPage = new AppShell();
                 }
 
                 else
@@ -324,7 +327,20 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         public async Task CreateAccount()
         {
             await Application.Current.MainPage.
-                 Navigation.PushAsync(new DiarioViewUser());
+                 Navigation.PushAsync(new CreateAccountPage());
+        }
+
+        public async Task ExibirPerfil()
+        {
+            try
+            {
+                Application.Current.MainPage = new EditarPerfilView();
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                    .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "OK");
+            }
         }
 
 

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="YouthProtectionAplication.Views.Usuarios.EditarPerfilView"
+             Title="" BackgroundColor="White" >
+    <Grid RowDefinitions="150, 150, *,*,*,*,*">
+
+        <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,0" BackgroundColor="#FFF4E3">
+            <Image HeightRequest="80" Source="logosemnome.png" HorizontalOptions="Start" Grid.Row="0"/>
+           
+        </StackLayout>
+        <Label Text="Meu Perfil" Grid.Row="0" FontFamily="MontserratRegular" FontSize="Medium" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+        <Image HeightRequest="100" Source="gg_profile.png" HorizontalOptions="Center" Grid.Row="1"/>
+
+      
+        <VerticalStackLayout  Padding="0" 
+                            Spacing="0" 
+                             VerticalOptions="Center" Grid.Row="2" >
+
+            <Label Text="Nome" FontSize="Medium" FontFamily="MontserratRegular" TextColor="Black" HorizontalOptions="Center" Margin="0,0,1200,0"/>
+            <Entry Text="{Binding Nome}" FontSize="Medium"  BackgroundColor="Black" Margin="300,20,300,0"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout  Padding="0" 
+                            Spacing="0" 
+                             VerticalOptions="Center" Grid.Row="3" >
+
+            <Picker  Title="Uf" Margin="0,0,1200,0" FontFamily="MontserratRegular" 
+          SelectedItem="{Binding Uf}" x:Name= "ClassPicker" 
+      >
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>AC</x:String>
+                        <x:String>AL</x:String>
+                        <x:String>AP</x:String>
+                        <x:String>AM</x:String>
+                        <x:String>BA</x:String>
+                        <x:String>CE</x:String>
+                        <x:String>DF</x:String>
+                        <x:String>ES</x:String>
+                        <x:String>GO</x:String>
+                        <x:String>MA</x:String>
+                        <x:String>MT</x:String>
+                        <x:String>MS</x:String>
+                        <x:String>MG</x:String>
+                        <x:String>PA</x:String>
+                        <x:String>PB</x:String>
+                        <x:String>PR</x:String>
+                        <x:String>PE</x:String>
+                        <x:String>PI</x:String>
+                        <x:String>RJ</x:String>
+                        <x:String>RN</x:String>
+                        <x:String>RS</x:String>
+                        <x:String>RO</x:String>
+                        <x:String>RR</x:String>
+                        <x:String>SC</x:String>
+                        <x:String>SP</x:String>
+                        <x:String>SE</x:String>
+                        <x:String>TO</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+
+            <Label Text="Uf" FontSize="Medium" FontFamily="MontserratRegular" TextColor="Black" HorizontalOptions="Center" Margin="0,0,1200,0"/>
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>

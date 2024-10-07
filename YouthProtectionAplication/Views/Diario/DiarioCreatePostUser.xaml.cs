@@ -1,33 +1,23 @@
+using CommunityToolkit.Maui.Views;
+using YouthProtectionAplication.ViewModels.Diario;
+
 namespace YouthProtectionAplication.Views.Diario;
 
-public partial class DiarioCreatePostUser : ContentPage
+public partial class DiarioCreatePostUser : Popup
 {
-    private const int MaxLenght = 260;
+    private DiarioPostagemViewModel  cadastroViewModel;
+    
     public DiarioCreatePostUser()
 	{
-		
-
-		InitializeComponent();
+        cadastroViewModel = new DiarioPostagemViewModel();
+        BindingContext = cadastroViewModel;
+        InitializeComponent();
 	}
 
-	private void OnTextChanged(object sender, TextChangedEventArgs e)
-	{
-		string postText = e.NewTextValue ?? string.Empty;
-
-
-		int remainingCharacters = MaxLenght - postText.Length;
-
-
-		CountPostLabel.Text = $"{remainingCharacters} caracteres restantes";
-
-        if (remainingCharacters <= 10)
-        {
-            CountPostLabel.TextColor = Colors.Red; // Alerta quando está próximo do limite
-        }
-        else
-        {
-            CountPostLabel.TextColor = Colors.Black;
-        }
-
+	
+    private void btnCancelar_Clicked(object sender, EventArgs e)
+    {
+        this.Close();
     }
+
 }

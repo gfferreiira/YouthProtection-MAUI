@@ -1,24 +1,76 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="YouthProtectionAplication.Views.Diario.DiarioCreatePostUser"
-             Title="DiarioCreatePostUser">
-    <VerticalStackLayout
-        Padding="0" 
-        Spacing="30" 
-        VerticalOptions="Center">
 
-        <Entry x:Name="InputPostEntry"
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="YouthProtectionAplication.Views.Diario.DiarioCreatePostUser"        
+               xmlns:viewmodels="clr-namespace:YouthProtectionAplication.ViewModels.Diario"
+               Color="White"
+               CanBeDismissedByTappingOutsideOfPopup="False" 
+            
+           >
+
+    <VerticalStackLayout
+        MinimumWidthRequest="350"
+        MinimumHeightRequest="300"
+        Spacing="30" 
+        Padding="100"
+        
+       >
+        <Label Text="NOVA PUBLICAÇÃO" TextColor="#956239" FontSize="Medium" HorizontalOptions="Center" Margin="0,0,0,0"  FontFamily="MontserratRegular"/>
+
+            <Editor 
                Placeholder="Digite aqui no que você está pensando..."
-               TextChanged="OnTextChanged"
                MaxLength="260"
-                
-               HorizontalOptions="CenterAndExpand" 
+               TextColor="Black"
+               HeightRequest="100"
+               WidthRequest="400"
+               FontFamily="MontserratRegular"
+             
+               Text="{Binding PublicationContent}"
                />
 
-        <Label x:Name="CountPostLabel"
-               Text="260 caracteres restantes"
-               HorizontalOptions="Center" />
+        <Label Text="{Binding RemainingCharacters, StringFormat='Caracteres restantes: {0}'}"
+            TextColor="Black"
+               />
 
-    </VerticalStackLayout>
-</ContentPage>
+        <Label Text="Privacidade" TextColor="#8C5400" HorizontalOptions="Center"/>
+
+        <HorizontalStackLayout Spacing="180">
+            <RadioButton Content="Pública"  TextColor="#8C5400"
+                 IsChecked="{Binding ValorTipoPostagemSelecionado, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}"
+                  Value="0"
+                 HorizontalOptions="Start"
+                 Margin="0,0,0,10"/>
+
+        <RadioButton Content="Privada"
+                 IsChecked="{Binding ValorTipoPostagemSelecionado, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" 
+                Value="1"
+                 HorizontalOptions="End"
+                 Margin="0,0,0,10" TextColor="#8C5400" />
+        </HorizontalStackLayout>
+
+
+        <HorizontalStackLayout Spacing="10">
+       
+
+            <Button Text="Cancelar" 
+                    x:Name="btnCancelar"
+                    Clicked="btnCancelar_Clicked"
+                    Margin="0,0,200,0"  
+                    FontFamily="MontserratRegular" 
+                    BackgroundColor="#FFC773" 
+                    TextColor="#8C5400"
+                />
+
+            <Button Text="Publicar"
+                    Command="{Binding SalvarCommand}" 
+                     FontFamily="MontserratRegular"
+                    BackgroundColor="#FFC773"
+                    TextColor="#8C5400"
+                    Clicked="btnCancelar_Clicked"
+         />
+        </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+</toolkit:Popup>

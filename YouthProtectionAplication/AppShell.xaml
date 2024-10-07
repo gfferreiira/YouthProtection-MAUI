@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:YouthProtectionAplication"
-    xmlns:views="clr-namespace:YouthProtectionAplication.Views.Usuarios"
+    xmlns:viewsDiario="clr-namespace:YouthProtectionAplication.Views.Diario"
+    xmlns:viewsUsuario="clr-namespace:YouthProtectionAplication.Views.Usuarios"
     Shell.FlyoutBehavior="Disabled"
     Title="YouthProtectionAplication">
 
@@ -29,15 +30,12 @@
  </Shell.FlyoutHeaderTemplate>  -->
 
     <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate views:LoginView}"
+   
+        ContentTemplate="{DataTemplate viewsDiario:DiarioViewUser}"
+        Route="MainPage"
       />
 
-    <ShellContent
-    Title="CreateAccount"
-    ContentTemplate="{DataTemplate views:CreateAccountPage}"
-    Route="CreateAccount" />
+    
 
 
-    <ShellContent Title="Sair" Icon="sair.png" ContentTemplate="{DataTemplate views:LoginView}" Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False"></ShellContent>
 </Shell>

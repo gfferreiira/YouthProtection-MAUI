@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Views;
 using YouthProtectionAplication.ViewModels.Diario;
 
 namespace YouthProtectionAplication.Views.Diario;
@@ -13,11 +14,13 @@ public partial class DiarioViewUser : ContentPage
 
 		viewModel = new DiarioListagemViewModel();
 		BindingContext = viewModel;
-	}
 
-    protected override void OnAppearing()
+    }
+
+    
+
+    private void Button_Clicked(object sender, EventArgs e)
     {
-        base.OnAppearing();
-        _ = viewModel.ObterPostagens();
+        this.ShowPopup(new DiarioCreatePostUser());
     }
 }

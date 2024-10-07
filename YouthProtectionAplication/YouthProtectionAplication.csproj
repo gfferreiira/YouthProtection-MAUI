@@ -57,13 +57,13 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\Montserrat-Regular.ttf" />
+	  <None Remove="Resources\Images\gg_profile.png" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\LogoSemNome.png" />
-	  <None Remove="Resources\Images\perfil.svg" />
-	  <None Remove="Resources\Images\sair.png" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Flunt" Version="2.0.5" />
 		<PackageReference Include="Flurl" Version="4.0.0" />
@@ -82,6 +82,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Usuarios\CreateAccountPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Usuarios\EditarPerfilView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Usuarios\LoginView.xaml">

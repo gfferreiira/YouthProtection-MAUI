@@ -10,9 +10,10 @@ namespace YouthProtectionAplication.Models
     public class Postagem
     {
        
-        public int idPostagem { get; set; }
-        public string Texto { get; set; } = string.Empty;
-        public string DataPostagem { get; set; } = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+        public long publicationId { get; set; }
+        public string PublicationContent { get; set; }
+        public int PublicationStatus { get; set; }
+        public DateTime DataPostagem { get; set; }
 
         public TipoPostagemEnum TipoPost { get; set; } // enum de tipo de postagem
 
