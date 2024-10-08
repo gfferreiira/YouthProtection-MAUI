@@ -41,19 +41,55 @@ namespace YouthProtectionAplication.ViewModels.Diario
         private DateTime dataPostagem;
         private TipoPostagemEnum tpPostagem;
         private int valorTipoPostagemSelecionado;
+        private string postagemSelecionadoId;
+        private bool isPublic;
+        private bool isPrivate;
+
+
+        public bool IsPublic
+        {
+            get => isPublic;
+            set
+            {
+                if (isPublic != value)
+                {
+                    isPublic = value;
+                    OnPropertyChanged();
+                    OnVisibilityChanged();
+                }
+            }
+        }
+
+        public bool IsPrivate
+        {
+            get => isPrivate;
+            set
+            {
+                if (isPrivate != value)
+                {
+                    isPrivate = value;
+                    OnPropertyChanged();
+                    OnVisibilityChanged();
+                }
+            }
+        }
+
+        private void OnVisibilityChanged()
+        {
+            int visibilityValue = IsPublic ? 0 : 1;
+            // Aqui você pode usar o valor conforme necessário
+            // Ex: enviar para um serviço ou atualizar outra propriedade
+        }
+
+
 
         public int ValorTipoPostagemSelecionado
         {
             get => valorTipoPostagemSelecionado;
             set
             {
-                if (valorTipoPostagemSelecionado != value)
-                {
                     valorTipoPostagemSelecionado = value;
                     OnPropertyChanged();
-
-
-                }
             }
         }
 
@@ -129,6 +165,18 @@ namespace YouthProtectionAplication.ViewModels.Diario
             }
         }
 
+
+        public string PostagemSelecionadoId
+        {
+            set
+            {
+                if(value != null)
+                {
+                    postagemSelecionadoId = Uri.UnescapeDataString(value);
+                    CarregarPostagem();
+                }
+            }
+        }
        
 
 
@@ -141,6 +189,15 @@ namespace YouthProtectionAplication.ViewModels.Diario
         public async Task SalvarPostagem()
         {
             DataPostagem = DateTime.Now;
+            
+            if (isPrivate == false || isPublic == true)
+            {
+                valorTipoPostagemSelecionado = 0;
+            }
+            else
+            {
+                valorTipoPostagemSelecionado = 1;
+            }
 
             Postagem model = new Postagem()
             {
@@ -148,7 +205,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
                 PublicationContent = this.PublicationContent,
                 DataPostagem = DataPostagem,
-                TipoPost = (TipoPostagemEnum)this.ValorTipoPostagemSelecionado,
+                PublicationsRole = (TipoPostagemEnum)this.valorTipoPostagemSelecionado,
                 publicationId = this.PublicationId
             };
             if (model.publicationId == 0)
@@ -167,6 +224,20 @@ namespace YouthProtectionAplication.ViewModels.Diario
         private void UpdateRemainingCharacters()
         {
             RemainingCharacters = MaxCharacters - (PublicationContent?.Length ?? 0);
+        }
+
+
+        public async void CarregarPostagem()
+        {
+            try
+            {
+             //   Postagem p = await
+             //       UserDiarioService.GetPostagemAsyncPerId(int.Parse(postagemSelecionadoId));
+            }
+            catch
+            {
+                //PARA FAZER O GETBYIDPOSTAGEM E CARREGAR POSTAGEM, WELL PRECISA FAZER NA API DO GETBYIDPOSTAGEM
+            }
         }
 
 

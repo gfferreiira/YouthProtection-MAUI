@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YouthProtectionAplication.Models.Enums;
 
+
 namespace YouthProtectionAplication.Models
 {
     public class Postagem
@@ -12,11 +13,12 @@ namespace YouthProtectionAplication.Models
        
         public long publicationId { get; set; }
         public string PublicationContent { get; set; }
-        public int PublicationStatus { get; set; }
+  
         public DateTime DataPostagem { get; set; }
 
-        public TipoPostagemEnum TipoPost { get; set; } // enum de tipo de postagem
+        public TipoPostagemEnum PublicationsRole { get; set; } // enum de tipo de postagem
+        public TipoStatusEnum PublicationStatus { get; set; }
 
-    }
+}
 }
 

@@ -7,14 +7,14 @@
                xmlns:viewmodels="clr-namespace:YouthProtectionAplication.ViewModels.Diario"
                Color="White"
                CanBeDismissedByTappingOutsideOfPopup="False" 
+               VerticalOptions="Start"
             
            >
 
     <VerticalStackLayout
-        MinimumWidthRequest="350"
-        MinimumHeightRequest="300"
-        Spacing="30" 
-        Padding="100"
+        
+        Spacing="20" 
+        Padding="0,30,0,60"
         
        >
         <Label Text="NOVA PUBLICAÇÃO" TextColor="#956239" FontSize="Medium" HorizontalOptions="Center" Margin="0,0,0,0"  FontFamily="MontserratRegular"/>
@@ -23,41 +23,41 @@
                Placeholder="Digite aqui no que você está pensando..."
                MaxLength="260"
                TextColor="Black"
-               HeightRequest="100"
-               WidthRequest="400"
+               HeightRequest="120"
+               WidthRequest="280"
                FontFamily="MontserratRegular"
              
                Text="{Binding PublicationContent}"
                />
 
         <Label Text="{Binding RemainingCharacters, StringFormat='Caracteres restantes: {0}'}"
-            TextColor="Black"
+            TextColor="Black" Margin="10,0,0,0"
                />
 
         <Label Text="Privacidade" TextColor="#8C5400" HorizontalOptions="Center"/>
 
-        <HorizontalStackLayout Spacing="180">
+        <HorizontalStackLayout Spacing="100"  Margin="20,0,20,10">
             <RadioButton Content="Pública"  TextColor="#8C5400"
-                 IsChecked="{Binding ValorTipoPostagemSelecionado, Converter={StaticResource IntToBoolConverter}, ConverterParameter=0}"
+                 IsChecked="{Binding IsPublic}"
                   Value="0"
                  HorizontalOptions="Start"
                  Margin="0,0,0,10"/>
 
         <RadioButton Content="Privada"
-                 IsChecked="{Binding ValorTipoPostagemSelecionado, Converter={StaticResource IntToBoolConverter}, ConverterParameter=1}" 
+                 IsChecked="{Binding IsPrivate}" 
                 Value="1"
                  HorizontalOptions="End"
                  Margin="0,0,0,10" TextColor="#8C5400" />
         </HorizontalStackLayout>
 
 
-        <HorizontalStackLayout Spacing="10">
+        <HorizontalStackLayout Spacing="100"  Margin="20,0,20,10">
        
 
             <Button Text="Cancelar" 
                     x:Name="btnCancelar"
                     Clicked="btnCancelar_Clicked"
-                    Margin="0,0,200,0"  
+                    Margin="0,0,0,0"  
                     FontFamily="MontserratRegular" 
                     BackgroundColor="#FFC773" 
                     TextColor="#8C5400"
@@ -68,6 +68,7 @@
                      FontFamily="MontserratRegular"
                     BackgroundColor="#FFC773"
                     TextColor="#8C5400"
+                    Margin="0,0,10,0"  
                     Clicked="btnCancelar_Clicked"
          />
         </HorizontalStackLayout>

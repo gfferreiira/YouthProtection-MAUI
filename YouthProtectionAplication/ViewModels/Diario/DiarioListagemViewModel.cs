@@ -53,7 +53,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                     postagemSelecionado = value;
 
                     Shell.Current
-                        .GoToAsync($"cadPostagemView?pId={postagemSelecionado.publicationId}");
+                        .GoToAsync($"diarioCreatePostUser?pId={postagemSelecionado.publicationId}");
                 }
             }
         }
