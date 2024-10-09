@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="YouthProtectionAplication.Views.Usuarios.EditarPerfilView"
              Title="" BackgroundColor="White" >
-    <Grid RowDefinitions="150, 150, *,*,*,*,*">
+    <ScrollView>
+    <Grid RowDefinitions="100,100,*,*,*,*,*,*">
 
         <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,0" BackgroundColor="#FFF4E3">
             <Image HeightRequest="80" Source="logosemnome.png" HorizontalOptions="Start" Grid.Row="0"/>
@@ -11,23 +12,24 @@
         </StackLayout>
         <Label Text="Meu Perfil" Grid.Row="0" FontFamily="MontserratRegular" FontSize="Medium" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center"/>
 
-        <Image HeightRequest="100" Source="gg_profile.png" HorizontalOptions="Center" Grid.Row="1"/>
+        <Image HeightRequest="80" Source="gg_profile.png" HorizontalOptions="Center" Grid.Row="1" Margin="0,15,0,0"/>
 
       
         <VerticalStackLayout  Padding="0" 
                             Spacing="0" 
                              VerticalOptions="Center" Grid.Row="2" >
 
-            <Label Text="Nome" FontSize="Medium" FontFamily="MontserratRegular" TextColor="Black" HorizontalOptions="Center" Margin="0,0,1200,0"/>
-            <Entry Text="{Binding Nome}" FontSize="Medium"  BackgroundColor="Black" Margin="300,20,300,0"/>
+            <Label Text="Nome" FontSize="Medium" FontFamily="MontserratRegular" TextColor="Black" HorizontalOptions="Center" Margin="0,0,0,0"/>
+            <Entry Text="{Binding Nome}" FontSize="Medium"  BackgroundColor="Black" Margin="0,0,0,0" HorizontalOptions="Center"/>
         </VerticalStackLayout>
 
         <VerticalStackLayout  Padding="0" 
                             Spacing="0" 
                              VerticalOptions="Center" Grid.Row="3" >
 
-            <Picker  Title="Uf" Margin="0,0,1200,0" FontFamily="MontserratRegular" 
-          SelectedItem="{Binding Uf}" x:Name= "ClassPicker" 
+                <Label Text="Uf" FontSize="Medium" FontFamily="MontserratRegular" TextColor="Black" Margin="50,0,0,0" Grid.Row="3"/>
+                <Picker  Title="-" Margin="60,0,0,0" FontFamily="MontserratRegular" Grid.Row="3"
+          SelectedItem="{Binding Uf}" x:Name= "ClassPicker" HorizontalOptions="Start"
       >
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
@@ -62,9 +64,34 @@
                 </Picker.ItemsSource>
             </Picker>
 
+                <Label Text="Cidadade" FontSize="Medium" FontFamily="MontserratRegular" TextColor="Black" Margin="50,0,0,0" Grid.Row="3"/>
 
-            <Label Text="Uf" FontSize="Medium" FontFamily="MontserratRegular" TextColor="Black" HorizontalOptions="Center" Margin="0,0,1200,0"/>
-        </VerticalStackLayout>
+
+
+                <Button Grid.Row="4"
+          
+           Text="Minhas Anotações"
+           FontSize="Medium"
+           BackgroundColor="#FFC773"
+           Padding="30,0,30,0"
+           HorizontalOptions="Center"  
+           FontFamily="MontserratRegular"
+           TextColor="#935E0F"
+              />
+
+                <Button Grid.Row="5"
+          
+            Text="Minhas Anotações"
+            FontSize="Medium"
+            BackgroundColor="#FFC773"
+            Padding="30,0,30,0"
+            HorizontalOptions="Center"  
+            FontFamily="MontserratRegular"
+            TextColor="#935E0F"
+   />
+            </VerticalStackLayout>
+        
 
     </Grid>
+    </ScrollView>
 </ContentPage>
