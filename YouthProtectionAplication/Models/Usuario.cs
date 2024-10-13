@@ -22,6 +22,7 @@ namespace YouthProtectionAplication.Models
         public string BirthDate { get; set; } = string.Empty;
 
         public UsuarioRole Role { get; set; } // enum de tipo de Usuário
+        public UsuarioStatus UserStatus { get; set; }
 
         public string Token { get; set; } = string.Empty;
     }

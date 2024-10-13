@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="YouthProtectionAplication.Views.Diario.DiarioPostagensExcluidas"
+              BackgroundColor="White"
+               Shell.PresentationMode="Animated"
+             Title="DiarioPostagensExcluidas">
+    <ScrollView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,30" BackgroundColor="#FFF4E3">
+            <Image HeightRequest="80" Source="logosemnome.png" HorizontalOptions="Start" Grid.Row="0"/>
+
+               
+            </StackLayout>
+
+            <Label Text="Anotações Excluidas" TextColor="Black" HorizontalOptions="Center"  VerticalOptions="Center" Grid.Row="0" FontFamily="MontserratRegular" FontSize="Medium" />
+
+            <Image Source="gg_profile.png" HeightRequest="80"  HorizontalOptions="End" Grid.Row="0" Margin="0,0,0,30">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ExibirPerfilCommand}" />
+                </Image.GestureRecognizers>
+
+            </Image>
+
+
+
+            <VerticalStackLayout Grid.Row="1">
+
+            <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding ExcludedItems}" SelectedItem="{Binding PostagemSelecionado}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Remover" IsDestructive="True"
+                                  Command="{Binding Path=BindingContext.RemoverPostagemCommand, Source={x:Reference listView}}"
+                                       CommandParameter="{Binding .}"></MenuItem>
+                            </ViewCell.ContextActions>
+                            <VerticalStackLayout Padding="10">
+                                <Frame BorderColor="Gray" BackgroundColor="White"
+                                     CornerRadius="5" Margin="200,0,200,0" Padding="0,0,0,100">
+                                    <StackLayout Spacing="10" Padding="0">
+
+                                        <Image Source="gg_profile.png"  VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="70" Margin="20,20,200,0" />
+
+                                        <Label Text="{Binding PublicationContent}" FontSize="Small" TextColor="Black" Padding="0,100,0,0" FontFamily="MontserratRegular"/>
+
+
+                                    </StackLayout>
+                                </Frame>
+                            </VerticalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+
+
+
+    </Grid>
+    </ScrollView>
+</ContentPage>

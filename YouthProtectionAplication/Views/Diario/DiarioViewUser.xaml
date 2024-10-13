@@ -5,42 +5,52 @@
               BackgroundColor="White"
               Shell.PresentationMode="Animated"
              >
-    <ScrollView>
+    
+    
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="150" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,30" BackgroundColor="#FFF4E3">
-                <Image HeightRequest="80" Source="logosemnome.png" HorizontalOptions="Start" Grid.Row="0"/>
-                
-            </StackLayout>
+            <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,30" BackgroundColor="#FFF4E3" >
+            <Image HeightRequest="80" Source="logosemnome.png" HorizontalOptions="Start" Grid.Row="0"/>
+          </StackLayout>
+        
 
-            
+            <Image Source="gg_profile.png" HeightRequest="80"  HorizontalOptions="End" Grid.Row="0" Margin="0,0,0,30">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ExibirPerfilCommand}" />
+                </Image.GestureRecognizers>
 
-                <VerticalStackLayout Grid.Row="1">
+            </Image>
+        <ScrollView Grid.Row="1">
+
+            <VerticalStackLayout Grid.Row="1">
 
                 <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding FilteredItems}" SelectedItem="{Binding PostagemSelecionado}" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <ViewCell.ContextActions>
-                                    <MenuItem Text="Remover" IsDestructive="True"
-                                         Command="{Binding Path=BindingContext.RemoverPostagemCommand, Source={x:Reference listView}}"
-                                              CommandParameter="{Binding .}"></MenuItem>
-                                </ViewCell.ContextActions>
+         
                                 <VerticalStackLayout Padding="10">
                                         <Frame BorderColor="Gray" BackgroundColor="White"
                                             CornerRadius="5" Margin="200,0,200,0" Padding="0,0,0,100">
                                         <StackLayout Spacing="10" Padding="0">
+                                            <HorizontalStackLayout>
+                                                <Image Source="gg_profile.png"  VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="70" Margin="20,20,0,0" />
+                                                <Image Source="trash.png"  VerticalOptions="End" HorizontalOptions="End" HeightRequest="60" Margin="800,20,0,0" >
+                                                    <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.RemoverPostagemCommand, Source={x:Reference listView}}"
+                                                                          CommandParameter="{Binding .}"/>
+                                                    </Image.GestureRecognizers>
 
-                                            <Image Source="gg_profile.png"  VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="70" Margin="20,20,200,0" />
+                                                </Image>
+                                            </HorizontalStackLayout>
 
-                                        <Label Text="{Binding PublicationContent}" FontSize="Small" TextColor="Black" Padding="0,100,0,0" FontFamily="MontserratRegular"/>
-                                        
-                                        
+                                            <Label Text="{Binding PublicationContent}" FontSize="Medium" TextColor="Black" Padding="0,80,0,0" FontFamily="MontserratRegular" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                            <Label Text="{Binding CreatedAt}" FontSize="Medium" TextColor="Black"  FontFamily="MontserratRegular" />
                                         </StackLayout>
                                         </Frame>
                                 </VerticalStackLayout>
@@ -49,9 +59,9 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </VerticalStackLayout>
-         
+    </ScrollView>
 
-            <Button Text="+"
+    <Button Text="+"
                 WidthRequest="25"
                 HeightRequest="25"
                 BackgroundColor="#4CAF50"
@@ -59,20 +69,15 @@
                 FontSize="16"
                 FontAttributes="Bold"
                 CornerRadius="25"
-                 HorizontalOptions="End"
+                HorizontalOptions="Center"
                 VerticalOptions="Center"
-                    Grid.Row="3"
-                  Clicked="Button_Clicked"
+                 Grid.Row="2"
+                 Clicked="Button_Clicked"
                  Command="{Binding NovaPostagemPopUpCommand}"
-                  
-                />
+                   />
+            </Grid>
 
 
-
-
-        </Grid>
-
-
-    </ScrollView>
-
+    
+    
 </ContentPage>

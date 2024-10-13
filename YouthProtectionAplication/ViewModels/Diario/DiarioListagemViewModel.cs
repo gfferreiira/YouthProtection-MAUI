@@ -8,6 +8,7 @@ using YouthProtectionAplication.Services.Diario;
 using YouthProtectionAplication.Models;
 using System.Windows.Input;
 using YouthProtectionAplication.Views.Diario;
+using YouthProtectionAplication.Views.Usuarios;
 
 namespace YouthProtectionAplication.ViewModels.Diario
 {
@@ -17,29 +18,56 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         public ObservableCollection<Postagem> Diarios { get; set; }
         public ObservableCollection<Postagem> FilteredItems { get; set; }
+        public ObservableCollection<Postagem> ExcludedItems { get; set; }
 
         public DiarioListagemViewModel()
         {
             string token = Preferences.Get("UsuarioToken", string.Empty);
-            string FictionalName = Preferences.Get("UsuarioUsername", string.Empty);
+            
             pdiarioService = new DiarioService(token);
             Diarios = new ObservableCollection<Postagem>();
             FilteredItems = new ObservableCollection<Postagem>();
+            ExcludedItems = new ObservableCollection<Postagem>();
 
             _ = ObterPostagens();
 
-            NovaPostagem = new Command(async () => { await ExibirPostagem(); });
+            _ = ObterPostagensExcluidas();
+            InicializarCommands();
 
             NovaPostagemPopUpCommand = new Command(ExibirPostagemPop);
 
-            RemoverPostagemCommand = 
+            RemoverPostagemCommand =
                 new Command<Postagem>(async (Postagem p) => { await RemoverPostagem(p); });
 
 
         }
-        public ICommand NovaPostagem { get;}
+
+        public void InicializarCommands()
+        {
+            ExibirPerfilCommand = new Command(async () => await PerfilExibir());
+        }
+
         public ICommand NovaPostagemPopUpCommand { get; }
         public ICommand RemoverPostagemCommand { get; set; }
+        public ICommand ExibirPerfilCommand { get; set; }
+
+
+
+        #region AtributosPropriedades
+
+
+        private string nome = Preferences.Get("UsuarioUsername", string.Empty);
+
+        public string Nome
+        {
+            get { return nome; }
+            set
+            {
+                nome = value;
+                OnPropertyChanged();
+            }
+        }
+
 
 
         private Postagem postagemSelecionado;
@@ -58,16 +86,22 @@ namespace YouthProtectionAplication.ViewModels.Diario
             }
         }
 
+
+
+
+        #endregion
+
         #region Métodos
         public async Task ObterPostagens()
         {
             try
             {
-               
+
                 Diarios = await pdiarioService.GetPostagemAsyncPerId();
 
-               FilteredItems = new ObservableCollection<Postagem>(Diarios.Where(diario => diario.PublicationStatus == 0).ToList());
+                FilteredItems = new ObservableCollection<Postagem>(Diarios.Where(diario => diario.PublicationStatus == 0).ToList());
                 OnPropertyChanged(nameof(FilteredItems));
+
             }
             catch (Exception ex)
             {
@@ -92,31 +126,19 @@ namespace YouthProtectionAplication.ViewModels.Diario
                     _ = ObterPostagens();
                 }
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
                 await Application.Current.MainPage
                     .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "OK");
             }
         }
-        public async Task ExibirPostagem()
-        {
-            try
-            {
-                
-            }
-            catch (Exception ex)
-            {
-                      await Application.Current.MainPage
-                    .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "OK");
-            }
-        }
 
-      
+
         public async void ExibirPostagemPop()
         {
             try
             {
-                
+
                 MessagingCenter.Send(this, "ExibirPostagemPop");
             }
             catch (Exception ex)
@@ -125,7 +147,45 @@ namespace YouthProtectionAplication.ViewModels.Diario
               .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "OK");
             }
         }
-    }
+
+        public async Task ObterPostagensExcluidas()
+        {
+            try
+            {
+
+                Diarios = await pdiarioService.GetPostagemAsyncPerId();
+
+                ExcludedItems = new ObservableCollection<Postagem>(Diarios.Where(diario => diario.PublicationStatus != 0).ToList());
+                OnPropertyChanged(nameof(ExcludedItems));
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                  .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "Ok");
+            }
+        }
+
+
 
         #endregion
+
+        #region Navegação
+
+        public async Task PerfilExibir()
+        {
+            try
+            {
+                Application.Current.MainPage = new EditarPerfilView();
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                    .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "OK");
+            }
+        }
+
+
+        #endregion
+
+    }
 }

@@ -60,6 +60,7 @@
 	  <None Remove="Resources\Images\gg_profile.png" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\LogoSemNome.png" />
+	  <None Remove="Resources\Images\trash.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -76,6 +77,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\Diario\DiarioCreatePostUser.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Diario\DiarioPostagensExcluidas.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Diario\DiarioViewUser.xaml">

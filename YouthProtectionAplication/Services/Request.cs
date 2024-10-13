@@ -39,16 +39,16 @@ namespace YouthProtectionAplication.Services
 
             string serialized = await response.Content.ReadAsStringAsync();
             TResult result = data;
-            if (response.StatusCode == System.Net.HttpStatusCode.OK || response.StatusCode == System.Net.HttpStatusCode.Created)
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 result = await Task.Run(() => JsonConvert.DeserializeObject<TResult>(serialized));
                 else
                 throw new Exception(serialized);
             return result;
 
-
-
         }
-         public async Task<string> DeleteAsync(string uri, string token)
+
+        public async Task<string> DeleteAsync(string uri, string token)
         {
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",

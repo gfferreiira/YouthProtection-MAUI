@@ -10,32 +10,14 @@
     Title="YouthProtectionAplication">
 
 
-    <!---   <Shell.FlyoutHeaderTemplate>
-     <DataTemplate>
-         <Grid>
-             <Grid.RowDefinitions>
-                 <RowDefinition Height="{OnPlatform Android=130, iOS=200}"></RowDefinition>
-                 <RowDefinition Height="*"></RowDefinition>
-                 <RowDefinition Height="40"></RowDefinition>
-             </Grid.RowDefinitions>
-             <FlexLayout Grid.Row="0" Direction="Row" AlignItems="Center" HorizontalOptions="Center">
-                 <Image Source="logosemnome.png" MaximumWidthRequest="70"/>
-                 <VerticalStackLayout Padding="10,0,0,0" Spacing="0">
-                     <Label Text="Youth Protection" FontAttributes="Bold" FontSize="Medium" />
-                 
-                 </VerticalStackLayout>
-             </FlexLayout>
-         </Grid>
-     </DataTemplate>
- </Shell.FlyoutHeaderTemplate>  -->
-
     <ShellContent
    
         ContentTemplate="{DataTemplate viewsDiario:DiarioViewUser}"
         Route="MainPage"
       />
 
-    
+   
+
 
 
 </Shell>

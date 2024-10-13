@@ -59,7 +59,6 @@
                      BackgroundColor="White"
                       TextColor="Black"
                      Text="Criar Conta"
-  
                      HorizontalOptions="Start"
                      Command="{Binding CreateAccountCommand}"
                     />

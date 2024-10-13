@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace YouthProtectionAplication.Models.Enums
 {
-    public enum TipoStatusEnum
+    public enum UsuarioStatus
     {
-        Ativo = 0,
-        Inativo = 1
+        Ativo,
+        Inativo
     }
 }

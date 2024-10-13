@@ -38,13 +38,15 @@ namespace YouthProtectionAplication.ViewModels.Diario
         private int remainingCharacters;
         private int publicationId;
         private string publicationContent = string.Empty;
-        private DateTime dataPostagem;
+        private DateTime createdAt;
         private TipoPostagemEnum tpPostagem;
         private int valorTipoPostagemSelecionado;
         private string postagemSelecionadoId;
         private bool isPublic;
         private bool isPrivate;
 
+
+        #region Atributos Propriedades
 
         public bool IsPublic
         {
@@ -95,7 +97,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
 
 
-        #region Atributos Propriedades
+        
 
         public int PublicationId
         {
@@ -120,12 +122,12 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 }
             }
         }
-        public DateTime DataPostagem
+        public DateTime CreatedAt
         {
-            get => dataPostagem;
+            get => createdAt;
             set
             {
-                dataPostagem = value;
+                createdAt = value;
                 OnPropertyChanged();
             }
         }
@@ -188,7 +190,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         public async Task SalvarPostagem()
         {
-            DataPostagem = DateTime.Now;
+            createdAt = DateTime.Now;
             
             if (isPrivate == false || isPublic == true)
             {
@@ -204,7 +206,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
 
                 PublicationContent = this.PublicationContent,
-                DataPostagem = DataPostagem,
+                CreatedAt = CreatedAt,
                 PublicationsRole = (TipoPostagemEnum)this.valorTipoPostagemSelecionado,
                 publicationId = this.PublicationId
             };
