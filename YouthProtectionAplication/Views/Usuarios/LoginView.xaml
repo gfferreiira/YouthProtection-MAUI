@@ -4,7 +4,7 @@
              x:Class="YouthProtectionAplication.Views.Usuarios.LoginView"
              Title="MainPage" BackgroundColor="White"
              Shell.NavBarIsVisible="False">
-    <Grid RowDefinitions="*,*,100">
+    <Grid RowDefinitions="*,*,100,Auto">
 
         <Image HeightRequest="400" Source="logo.png" />
 
@@ -64,7 +64,7 @@
                     />
 
 
-
+        <Label Grid.Row="3" Text="© 2024 YouthProtection. Todos os direitos reservados." TextColor="Black" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center" Margin="15" />
 
 
 
