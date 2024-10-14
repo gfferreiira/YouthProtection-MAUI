@@ -11,4 +11,9 @@ public partial class EditarPerfilView : ContentPage
         _usuarioViewModel = new UsuarioViewModel();
         BindingContext = _usuarioViewModel;
     }
+
+    private async void OnLabelTapped(object sender, EventArgs e)
+    {
+       
+    }
 }

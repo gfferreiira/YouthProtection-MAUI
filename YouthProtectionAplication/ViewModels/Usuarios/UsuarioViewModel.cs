@@ -334,7 +334,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         public async Task CreateAccount()
         {
             await Application.Current.MainPage.
-                 Navigation.PushAsync(new CreateAccountPage());
+                 Navigation.PushAsync(new DiarioViewUser());
         }
 
         public async Task ExibirPerfil()

@@ -201,9 +201,23 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 valorTipoPostagemSelecionado = 1;
             }
 
+
+            if (isPrivate == false && isPublic == false)
+            {
+                await Application.Current.MainPage
+                    .DisplayAlert("Mensagem", "Selecione se a postagem é publica ou privada", "Ok");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(publicationContent))
+            {
+                await Application.Current.MainPage
+                    .DisplayAlert("Mensagem", "Anotação não pode estar vazia", "Ok");
+                return;
+            }
+
             Postagem model = new Postagem()
             {
-
 
                 PublicationContent = this.PublicationContent,
                 CreatedAt = CreatedAt,
