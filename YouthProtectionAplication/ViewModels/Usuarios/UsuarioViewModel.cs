@@ -27,11 +27,13 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         public ICommand AutenticarCommand { get; set; }
         public ICommand PostagensExcluidasCommand { get; set; }
         public ICommand MinhasAnotacoesCommand { get; set; }
+        public ICommand UpdateUsuarioCommand { get; set; }
 
         public UsuarioViewModel()
         {
             _uService = new UsuariosService();
             InicializarCommands();
+            
 
         }
 
@@ -42,6 +44,8 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             AutenticarCommand = new Command(async () => await AutenticarUsuario());
             PostagensExcluidasCommand = new Command(async () => await AnotacoesExcluidas());
             MinhasAnotacoesCommand = new Command(async () => await MinhasAnotacoes());
+            UpdateUsuarioCommand = new Command(async () => await UpdateUsuarioAsync());
+
 
 
         }
@@ -233,7 +237,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                     foreach (var message in messages)
                         sb.Append($"{message}\n");
 
-                    await Shell.Current.DisplayAlert("Atenção", sb.ToString(), "OK");
+                    await Application.Current.MainPage.DisplayAlert("Atenção", sb.ToString(), "OK");
 
                     return;
                 }
@@ -283,7 +287,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                     foreach (var message in messages)
                         sb.Append($"{message}\n");
 
-                    await Shell.Current.DisplayAlert("Atenção", sb.ToString(), "OK");
+                    await Application.Current.MainPage.DisplayAlert("Atenção", sb.ToString(), "OK");
 
                     return;
                 }
@@ -327,6 +331,52 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         }
 
 
+        public async Task UpdateUsuarioAsync()
+        {
+            try
+            {
+                string token = Preferences.Get("UsuarioToken", string.Empty);
+                Usuario u = new Usuario
+                {
+                    FictionalName = FictionalName,
+                    City = City,
+                    CellPhone = CellPhone,
+                    Uf = Uf,
+                    Token = token
+
+
+
+                };
+
+                var result = _uService.PutUsuarioAsync(u);
+                if (result != null)
+                {
+                    Preferences.Set("UsuarioUsername", u.FictionalName);
+                    Preferences.Set("UsuarioCidade", u.City);
+                    Preferences.Set("UsuarioTelefone", u.CellPhone);
+                    Preferences.Set("UsuarioUf", u.Uf);
+
+                   
+                    await Application.Current.MainPage
+                        .DisplayAlert("Informação:", "Usuário atualizado com sucesso.", "Ok");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                       .DisplayAlert("Informação:", ex.Message + "\n" + ex.InnerException, "Ok");
+            }
+        }
+
+
+        public async void RetornarUsuario()
+        {
+
+        }
+
+
+
 
         #endregion
 
@@ -334,14 +384,19 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         public async Task CreateAccount()
         {
             await Application.Current.MainPage.
-                 Navigation.PushAsync(new DiarioViewUser());
+                 Navigation.PushAsync(new CreateAccountPage());
         }
 
         public async Task ExibirPerfil()
         {
             try
             {
+
+               
+
+
                 Application.Current.MainPage = new EditarPerfilView();
+                
             }
             catch (Exception ex)
             {

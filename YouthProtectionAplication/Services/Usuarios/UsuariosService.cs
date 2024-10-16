@@ -34,5 +34,20 @@ namespace YouthProtectionAplication.Services.Usuarios
 
             return u;
         }
+
+
+        public async Task<Usuario> GetUsuarioAsync(string token)
+        {
+            string urlComplementar = string.Format("/Auth/user/1", token);
+            var usuario = await _request.GetAsync<Models.Usuario>(_apiUrlBase + urlComplementar, string.Empty);
+            return usuario;
+        }
+
+        public async Task<Usuario> PutUsuarioAsync(Usuario u)
+        {
+            string urlComplementar = string.Format("/Update");
+            var usuario = await _request.PutAsync(_apiUrlBase + urlComplementar,u, u.Token);
+            return usuario;
+        }
     }
 }

@@ -32,28 +32,29 @@
 
             <VerticalStackLayout Grid.Row="1">
 
-            <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding ExcludedItems}" SelectedItem="{Binding PostagemSelecionado}" >
+            <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding ExcludedItems}"  >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Text="Remover" IsDestructive="True"
-                                  Command="{Binding Path=BindingContext.RemoverPostagemCommand, Source={x:Reference listView}}"
-                                       CommandParameter="{Binding .}"></MenuItem>
-                            </ViewCell.ContextActions>
-                            <VerticalStackLayout Padding="10">
-                                <Frame BorderColor="Gray" BackgroundColor="White"
-                                     CornerRadius="5" Margin="200,0,200,0" Padding="0,0,0,100">
-                                    <StackLayout Spacing="10" Padding="0">
+                            <ViewCell>
+                                <StackLayout  Margin="50">
+                                    <Frame BorderColor="Gray" BackgroundColor="White"
+                                                        Margin="200,0,200,0" Padding="0,0,0,100"  CornerRadius="5">
+                                        <VerticalStackLayout >
+                                            <Grid ColumnDefinitions="*, *">
+                                                <Image Source="gg_profile.png" Grid.Column="0" HeightRequest="70" Margin="20,20,0,0" HorizontalOptions="Start"/>
+                                                <Image Source="recovery.png"  HeightRequest="70" Grid.Column="1" HorizontalOptions="End" Margin="0,20,20,0">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.ReativarPostagemCommand, Source={x:Reference listView}}"
+                                    CommandParameter="{Binding .}"/>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+                                            </Grid>
 
-                                        <Image Source="gg_profile.png"  VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="70" Margin="20,20,200,0" />
-
-                                        <Label Text="{Binding PublicationContent}" FontSize="Small" TextColor="Black" Padding="0,100,0,0" FontFamily="MontserratRegular"/>
-
-
-                                    </StackLayout>
-                                </Frame>
-                            </VerticalStackLayout>
+                                            <Label Text="{Binding PublicationContent}" FontSize="Medium" TextColor="Black" Padding="0,80,0,0" FontFamily="MontserratRegular" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                            <Label Text="{Binding CreatedAt}" FontSize="Medium" TextColor="Black"  FontFamily="MontserratRegular" />
+                                        </VerticalStackLayout>
+                                    </Frame>
+                                </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

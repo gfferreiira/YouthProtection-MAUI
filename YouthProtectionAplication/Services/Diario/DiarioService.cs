@@ -45,9 +45,10 @@ namespace YouthProtectionAplication.Services.Diario
             return postagem;
         }
 
-        public async Task<int> PutPostagemAsync(Postagem p)
+        public async Task<Postagem> PutPostagemAsync(Postagem p)
         {
-            var result = await _request.PutAsync(apiUrlBase, p, _token);
+            string urlComplementar = string.Format("/publicationsUpdate/{0}", p.publicationId);
+            var result = await _request.PutAsync(apiUrlBase + urlComplementar, p, _token);
             return result;
         }
 

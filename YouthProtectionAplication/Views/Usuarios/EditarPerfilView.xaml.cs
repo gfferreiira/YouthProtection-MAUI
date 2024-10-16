@@ -10,10 +10,13 @@ public partial class EditarPerfilView : ContentPage
 		InitializeComponent();
         _usuarioViewModel = new UsuarioViewModel();
         BindingContext = _usuarioViewModel;
+
     }
 
     private async void OnLabelTapped(object sender, EventArgs e)
     {
-       
+        Application.Current.MainPage = new ConfirmarEditarPerfilView();
+
+
     }
 }

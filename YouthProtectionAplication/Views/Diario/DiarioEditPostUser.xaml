@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="YouthProtectionAplication.Views.Diario.DiarioEditPostUser"
+             Title="DiarioEditPostUser" BackgroundColor="White">
+    <VerticalStackLayout
+    
+    Spacing="20" 
+    Padding="0,30,0,60"
+    
+   >
+        <Label Text="EDITAR ANOTAÇÃO" TextColor="#956239" FontSize="Medium" HorizontalOptions="Center" Margin="0,0,0,0"  FontFamily="MontserratRegular"/>
+
+        <Editor 
+           Placeholder="Digite aqui no que você está pensando..."
+           MaxLength="260"
+           TextColor="Black"
+           HeightRequest="120"
+           WidthRequest="280"
+           FontFamily="MontserratRegular"
+           
+           Text="{Binding PublicationContent}"
+           />
+
+        <Label Text="{Binding RemainingCharacters, StringFormat='Caracteres restantes: {0}'}"
+        TextColor="Black" Margin="10,0,0,0" HorizontalOptions="Center"
+           />
+
+        <Label Text="Privacidade" TextColor="#8C5400" HorizontalOptions="Center"/>
+
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="100">
+            <RadioButton Content="Pública"  TextColor="#8C5400"
+             IsChecked="{Binding IsPublic}"
+              Value="0"
+             HorizontalOptions="Start"
+             Margin="0,0,0,10"/>
+
+            <RadioButton Content="Privada"
+             IsChecked="{Binding IsPrivate}" 
+            Value="1"
+             HorizontalOptions="End"
+             Margin="0,0,0,10" TextColor="#8C5400" />
+        </HorizontalStackLayout>
+
+
+        <VerticalStackLayout Spacing="50"  Margin="20,0,20,10" Padding="0,0,0,0">
+
+
+
+            <Button Text="Publicar"
+                Command="{Binding SalvarUpdateCommand}" 
+                 FontFamily="MontserratRegular"
+                BackgroundColor="#FFC773"
+                TextColor="#8C5400"
+                Margin="0,0,0,0"  
+               HorizontalOptions="Center"
+                    Padding="100,0,100,0" 
+     />
+
+
+            <Button Text="Cancelar" 
+                x:Name="btnCancelar"
+                HorizontalOptions="Center"
+                Margin="0,0,0,0"  
+                FontFamily="MontserratRegular" 
+                BackgroundColor="#FFC773" 
+                TextColor="#8C5400"
+                    Padding="100,0,100,0"
+                    Clicked="btnCancelar_Clicked"
+            />
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

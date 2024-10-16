@@ -17,7 +17,7 @@
         Padding="0,30,0,60"
         
        >
-        <Label Text="NOVA PUBLICAÇÃO" TextColor="#956239" FontSize="Medium" HorizontalOptions="Center" Margin="0,0,0,0"  FontFamily="MontserratRegular"/>
+        <Label Text="CRIAR ANOTAÇÃO" TextColor="#956239" FontSize="Medium" HorizontalOptions="Center" Margin="0,0,0,0"  FontFamily="MontserratRegular"/>
 
             <Editor 
                Placeholder="Digite aqui no que você está pensando..."
@@ -69,7 +69,9 @@
                     BackgroundColor="#FFC773"
                     TextColor="#8C5400"
                     Margin="0,0,10,0"  
-                    Clicked="btnCancelar_Clicked"
+                    Clicked="btnFechar_Clicked"
+      
+                   
          />
         </HorizontalStackLayout>
         </VerticalStackLayout>

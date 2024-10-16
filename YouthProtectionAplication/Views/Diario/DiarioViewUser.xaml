@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="YouthProtectionAplication.Views.Diario.DiarioViewUser"
               BackgroundColor="White"
               Shell.PresentationMode="Animated"
@@ -29,10 +30,15 @@
 
 
             <VerticalStackLayout Grid.Row="1">
-                <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding FilteredItems}" SelectedItem="{Binding PostagemSelecionado}" >
+                <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding FilteredItems}"  >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                             <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Editar"
+                                Command="{Binding BindingContext.EditarCommand, Source={x:Reference listView}}"
+                              CommandParameter="{Binding .}"></MenuItem>
+                                </ViewCell.ContextActions>
                                 <StackLayout  Margin="50">
                                 <Frame BorderColor="Gray" BackgroundColor="White"
                                        Margin="200,0,200,0" Padding="0,0,0,100"  CornerRadius="5">
@@ -79,6 +85,8 @@
             </Grid>
 
 
-    
-    
+
+
+
+
 </ContentPage>

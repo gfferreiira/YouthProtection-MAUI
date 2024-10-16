@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,24 +12,31 @@ using YouthProtectionAplication.Views.Diario;
 
 namespace YouthProtectionAplication.ViewModels.Diario
 {
-    public class DiarioPostagemViewModel : BaseViewModel
+    public class DiarioEdicaoViewModel : BaseViewModel
     {
+        
         private DiarioService UserDiarioService;
 
-        
+       public ICommand SalvarUpdateCommand { get; }
 
-        public ICommand SalvarCommand { get; }
-
-        public DiarioPostagemViewModel()
-        {
+        public DiarioEdicaoViewModel(Postagem postagem)
+        { 
+           Postagem p = postagem;
             string token = Preferences.Get("UsuarioToken", string.Empty);
             UserDiarioService = new DiarioService(token);
             remainingCharacters = MaxCharacters;
-
-            SalvarCommand = new Command(async () => { await SalvarPostagem(); });
-
            
+            PublicationContent = p.PublicationContent;
+            PublicationId = p.publicationId;
+
+
+
+            SalvarUpdateCommand = new Command (async () => { await UpdatePostagem(p); });
+
+
+
         }
+
 
 
 
@@ -39,15 +44,14 @@ namespace YouthProtectionAplication.ViewModels.Diario
         private int remainingCharacters;
         private long publicationId;
         private string publicationContent = string.Empty;
-        private DateTime createdAt;
-        private TipoPostagemEnum tpPostagem;
-        private int valorTipoPostagemSelecionado;
-        private string postagemSelecionadoId;
+        private DateTime modificationDate;
         private bool isPublic;
         private bool isPrivate;
-
+        private TipoPostagemEnum tpPostagem;
+        private int valorTipoPostagemSelecionado;
 
         #region Atributos Propriedades
+
 
         public bool IsPublic
         {
@@ -83,22 +87,15 @@ namespace YouthProtectionAplication.ViewModels.Diario
             // Aqui você pode usar o valor conforme necessário
             // Ex: enviar para um serviço ou atualizar outra propriedade
         }
-
-
-
         public int ValorTipoPostagemSelecionado
         {
             get => valorTipoPostagemSelecionado;
             set
             {
-                    valorTipoPostagemSelecionado = value;
-                    OnPropertyChanged();
+                valorTipoPostagemSelecionado = value;
+                OnPropertyChanged();
             }
         }
-
-
-
-        
 
         public long PublicationId
         {
@@ -109,13 +106,13 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 OnPropertyChanged();
             }
         }
-        
+
         public string PublicationContent
         {
             get => publicationContent;
             set
             {
-                if(publicationContent != value)
+                if (publicationContent != value)
                 {
                     publicationContent = value;
                     OnPropertyChanged();
@@ -123,12 +120,12 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 }
             }
         }
-        public DateTime CreatedAt
+        public DateTime ModificationDate
         {
-            get => createdAt;
+            get => modificationDate;
             set
             {
-                createdAt = value;
+                modificationDate = value;
                 OnPropertyChanged();
             }
         }
@@ -153,7 +150,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
             }
         }
 
-       
+
 
         public int RemainingCharacters
         {
@@ -168,31 +165,23 @@ namespace YouthProtectionAplication.ViewModels.Diario
             }
         }
 
-
-        public string PostagemSelecionadoId
+        private void UpdateRemainingCharacters()
         {
-            set
-            {
-                if(value != null)
-                {
-                    postagemSelecionadoId = Uri.UnescapeDataString(value);
-                    CarregarPostagem();
-                }
-            }
+            RemainingCharacters = MaxCharacters - (PublicationContent?.Length ?? 0);
         }
-       
+
+
 
 
 
         #endregion
 
-        #region Métodos 
+        #region Métodos
 
-
-        public async Task SalvarPostagem()
+        public async Task UpdatePostagem(Postagem postagem)
         {
-            createdAt = DateTime.Now;
-            
+            modificationDate = DateTime.Now;
+
             if (isPrivate == false || isPublic == true)
             {
                 valorTipoPostagemSelecionado = 0;
@@ -201,7 +190,6 @@ namespace YouthProtectionAplication.ViewModels.Diario
             {
                 valorTipoPostagemSelecionado = 1;
             }
-
 
             if (isPrivate == false && isPublic == false)
             {
@@ -217,56 +205,28 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 return;
             }
 
-            Postagem model = new Postagem()
+            Postagem pAtualizada = new Postagem()
             {
-
                 PublicationContent = this.PublicationContent,
-                CreatedAt = CreatedAt,
+                publicationId = postagem.publicationId,
+                ModificationDate = modificationDate,
                 PublicationsRole = (TipoPostagemEnum)this.valorTipoPostagemSelecionado,
-                publicationId = this.PublicationId
             };
-            if (model.publicationId == 0)
-                await UserDiarioService.PostPostagemAsync(model);
-            else
-                await UserDiarioService.PutPostagemAsync(model);
+            if (pAtualizada.publicationId != 0)
+                await UserDiarioService.PutPostagemAsync(pAtualizada);
 
             await Application.Current.MainPage
-                    .DisplayAlert("Mensagem", "Postagem feita com sucesso", "Ok");
-            
-            
+                   .DisplayAlert("Mensagem", "Postagem Atualizada com sucesso", "Ok");
+
             Application.Current.MainPage = new DiarioViewUser();
-           
+
         }
 
 
-        private void UpdateRemainingCharacters()
-        {
-            RemainingCharacters = MaxCharacters - (PublicationContent?.Length ?? 0);
-        }
 
-
-        public async void CarregarPostagem()
-        {
-            try
-            {
-             //   Postagem p = await
-             //       UserDiarioService.GetPostagemAsyncPerId(int.Parse(postagemSelecionadoId));
-            }
-            catch
-            {
-                //PARA FAZER O GETBYIDPOSTAGEM E CARREGAR POSTAGEM, WELL PRECISA FAZER NA API DO GETBYIDPOSTAGEM
-            }
-        }
 
 
         #endregion
-
-
-
-
-
-
-
-
     }
 }
+

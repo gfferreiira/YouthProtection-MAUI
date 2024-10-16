@@ -75,7 +75,7 @@ namespace YouthProtectionAplication.Services
             return result;
         }
 
-        public async Task<int> PutAsync<TResult>(string uri, TResult data, string token)
+        public async Task<TResult> PutAsync<TResult>(string uri, TResult data, string token)
         {
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization
@@ -84,10 +84,10 @@ namespace YouthProtectionAplication.Services
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage response = await httpClient.PutAsync(uri, content);
             string serialized = await response.Content.ReadAsStringAsync();
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                return int.Parse(serialized);
-            else
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 throw new Exception(serialized);
+            TResult result = await Task.Run(() => JsonConvert.DeserializeObject<TResult>(serialized));
+                return result;
         }
 
         

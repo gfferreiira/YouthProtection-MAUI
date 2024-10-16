@@ -60,12 +60,15 @@
 	  <None Remove="Resources\Images\gg_profile.png" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\LogoSemNome.png" />
+	  <None Remove="Resources\Images\recovery.png" />
+	  <None Remove="Resources\Images\sair.png" />
 	  <None Remove="Resources\Images\trash.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="6.0.1" />
 		<PackageReference Include="Flunt" Version="2.0.5" />
 		<PackageReference Include="Flurl" Version="4.0.0" />
 		<PackageReference Include="Flurl.Http" Version="4.0.2" />
@@ -79,10 +82,16 @@
 	  <MauiXaml Update="Views\Diario\DiarioCreatePostUser.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Diario\DiarioEditPostUser.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Diario\DiarioPostagensExcluidas.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Diario\DiarioViewUser.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Usuarios\ConfirmarEditarPerfilView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Usuarios\CreateAccountPage.xaml">
