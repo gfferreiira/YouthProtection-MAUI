@@ -48,7 +48,7 @@
                                                 <Label Text="{Binding Nome}" FontSize="Small" FontFamily="MontserratRegular" TextColor="#956239" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,50,150,0"/>
                                                 <Image Source="trash.png"  HeightRequest="70" Grid.Column="1" HorizontalOptions="End" Margin="0,20,20,0">
                                                     <Image.GestureRecognizers>
-                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.RemoverPostagemCommand, Source={x:Reference listView}}"
+                                                        <TapGestureRecognizer  Command="{Binding Path=BindingContext.RemoverPostagemCommand, Source={x:Reference listView}}"
                                                                 CommandParameter="{Binding .}"/>
                                                     </Image.GestureRecognizers>
                                                 </Image>
