@@ -14,6 +14,7 @@ using YouthProtectionAplication.Services.Usuarios;
 using YouthProtectionAplication.Views;
 using YouthProtectionAplication.Views.Diario;
 using YouthProtectionAplication.Views.Usuarios;
+using YouthProtectionAplication.Views.Chat;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
@@ -28,11 +29,13 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         public ICommand PostagensExcluidasCommand { get; set; }
         public ICommand MinhasAnotacoesCommand { get; set; }
         public ICommand UpdateUsuarioCommand { get; set; }
+        public ICommand UpdateSenhaCommand { get; set; }
 
         public UsuarioViewModel()
         {
             _uService = new UsuariosService();
             InicializarCommands();
+
             
 
         }
@@ -45,8 +48,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             PostagensExcluidasCommand = new Command(async () => await AnotacoesExcluidas());
             MinhasAnotacoesCommand = new Command(async () => await MinhasAnotacoes());
             UpdateUsuarioCommand = new Command(async () => await UpdateUsuarioAsync());
-
-
+            UpdateSenhaCommand = new Command(async () => await AlterarSenhaAsync());
 
         }
 
@@ -69,6 +71,9 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         private string login = string.Empty;
         private string senha = string.Empty;
 
+        //usuario no ato de EDITAR SENHA
+        private string senhaAtual = string.Empty;
+        private string senhaNova = string.Empty;
 
         public string FictionalName
         {
@@ -166,6 +171,26 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             set
             {
                 role = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string SenhaNova
+        {
+            get { return senhaNova; }
+            set
+            {
+                senhaNova = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string SenhaAtual
+        {
+            get { return senhaAtual; }
+            set
+            {
+                senhaAtual = value;
                 OnPropertyChanged();
             }
         }
@@ -307,7 +332,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                     Preferences.Set("UsuarioCidade", uAutenticado.City);
                     Preferences.Set("UsuarioTelefone", uAutenticado.CellPhone);
                     Preferences.Set("UsuarioUf", uAutenticado.Uf);
-                    Preferences.Set("UsuarioSenha", uAutenticado.Password);
+                    Preferences.Set("UsuarioSenha", Senha);
 
                     await Application.Current.MainPage
                        .DisplayAlert("Informação", mensagem, "OK");
@@ -355,10 +380,13 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                     Preferences.Set("UsuarioCidade", u.City);
                     Preferences.Set("UsuarioTelefone", u.CellPhone);
                     Preferences.Set("UsuarioUf", u.Uf);
+                    
 
                    
                     await Application.Current.MainPage
                         .DisplayAlert("Informação:", "Usuário atualizado com sucesso.", "Ok");
+
+                    Application.Current.MainPage = new EditarPerfilView();
 
                 }
             }
@@ -370,13 +398,64 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         }
 
 
-        public async void RetornarUsuario()
+        public async Task RetornarUsuario()
         {
+
+         FictionalName =  Preferences.Get("UsuarioUsername", string.Empty);
+         Email = Preferences.Get("UsuarioEmail", string.Empty);
+         City =  Preferences.Get("UsuarioCidade", string.Empty);
+         Uf =  Preferences.Get("UsuarioUf", string.Empty);
+         Password = Preferences.Get("UsuarioSenha", string.Empty);
+
 
         }
 
 
+        public async Task AlterarSenhaAsync()
+        {
+            try
+            {
+                string token = Preferences.Get("UsuarioToken", string.Empty);
 
+                if (senhaAtual == Password)
+                {
+
+                    Usuario u = new Usuario
+                    {
+                        Password = senhaNova,
+                        Token = token
+                    };
+                    var result = _uService.PutUsuarioAsync(u);
+                    if (result != null)
+                    {
+                  
+                       Preferences.Set("UsuarioSenha", u.Password);
+
+
+
+                        await Application.Current.MainPage
+                            .DisplayAlert("Informação:", "Senha atualizada com sucesso.", "Ok");
+
+                        Application.Current.MainPage = new EditarPerfilView();
+
+                    }
+
+
+                }
+                else
+                {
+                    await Application.Current.MainPage
+                            .DisplayAlert("Informação:", "Senha invalida, Verificar", "Ok");
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage
+                      .DisplayAlert("Informação:", ex.Message + "\n" + ex.InnerException, "Ok");
+            }
+        }
 
         #endregion
 

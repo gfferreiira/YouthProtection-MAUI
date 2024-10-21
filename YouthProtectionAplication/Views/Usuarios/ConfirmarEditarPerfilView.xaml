@@ -83,7 +83,7 @@
             </HorizontalStackLayout>
 
 
-            <VerticalStackLayout Grid.Row="4">
+            <VerticalStackLayout Grid.Row="4" Padding="0" HorizontalOptions="Center"  >
                 <Button
                Grid.Row="4"
             Text="Salvar"
@@ -92,27 +92,30 @@
             Padding="20,0,20,0"
             HorizontalOptions="Center"  
             FontFamily="MontserratRegular"
-            TextColor="#935E0F" 
+            TextColor="#935E0F"
              Margin="0,0,0,50"      
              Command="{Binding UpdateUsuarioCommand}"
        
                 />
 
 
-            
-
-                <Label Text="Alterar Senha" FontSize="Medium" Margin="0,0,200,0" TextColor="Black" FontFamily="MontserratRegular" HorizontalOptions="Center" />
-
             </VerticalStackLayout>
 
-                 <Label Text="Senha Atual" FontSize="Micro" Margin="50" TextColor="Black" FontFamily="MontserratRegular" />
-                <Entry FontSize="Small" WidthRequest="200" BackgroundColor="Black" Text="" HorizontalOptions="Start" Margin="50" IsPassword="True"  Grid.Row="6"/>
+
+            <VerticalStackLayout Grid.Row="5" Padding="0">
+
+                <Label Text="Alterar Senha" FontSize="Medium" Margin="0,0,200,0" TextColor="Black" FontFamily="MontserratRegular" HorizontalOptions="Center" Grid.Row="5" />
+
+
+
+            <Label Text="Senha Atual" FontSize="Micro" Margin="50" TextColor="Black" FontFamily="MontserratRegular"  Grid.Row="5" />
+                <Entry FontSize="Small" WidthRequest="200" Placeholder="Insira sua senha atual" Text="{Binding SenhaAtual}"  TextColor="Black" HorizontalOptions="Start" Margin="50" IsPassword="True"  Grid.Row="6"/>
 
                 <Label Text="Nova Senha" FontSize="Micro" Margin="50" TextColor="Black" FontFamily="MontserratRegular" />
-                <Entry FontSize="Small" WidthRequest="200" BackgroundColor="Black" Text="" HorizontalOptions="Start" Margin="50"  IsPassword="True" />
+                <Entry FontSize="Small" WidthRequest="200" Text="{Binding SenhaNova}" HorizontalOptions="Start" Margin="50"  TextColor="Black" IsPassword="True" Placeholder="Insira a nova senha"/>
+
 
            
-
             <Button
                     Grid.Row="5"
                       Text="Alterar"
@@ -122,12 +125,16 @@
                       HorizontalOptions="Center"  
                       FontFamily="MontserratRegular"
                       TextColor="#935E0F" 
-                       Margin="0,0,0,50"       
-       
+                       Margin="0,0,0,0"       
+                    Command="{Binding UpdateSenhaCommand}"
                         />
+            </VerticalStackLayout>
 
 
-                <Label Grid.Row="6" Text="© 2024 YouthProtection. Todos os direitos reservados." TextColor="Black" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center" Margin="15" />
+
+
+
+            <Label Grid.Row="6" Text="© 2024 YouthProtection. Todos os direitos reservados." TextColor="Black" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center" Margin="15" />
 
 
 

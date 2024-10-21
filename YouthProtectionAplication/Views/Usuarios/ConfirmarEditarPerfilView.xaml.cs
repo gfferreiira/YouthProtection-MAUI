@@ -10,6 +10,7 @@ public partial class ConfirmarEditarPerfilView : ContentPage
 		InitializeComponent();
         _usuarioViewModel = new UsuarioViewModel();
         BindingContext = _usuarioViewModel;
+        _ = _usuarioViewModel.RetornarUsuario();
     }
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)

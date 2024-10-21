@@ -70,21 +70,11 @@ namespace YouthProtectionAplication.ViewModels.Diario
         #region AtributosPropriedades
 
 
-        private string nome = Preferences.Get("UsuarioUsername", string.Empty);
+       
         private Postagem _postagemSelecionada;
         private bool _isPopupVisible;
 
 
-
-        public string Nome
-        {
-            get { return nome; }
-            set
-            {
-                nome = value;
-                OnPropertyChanged();
-            }
-        }
 
         public Postagem PostagemSelecionada
         {

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="YouthProtectionAplication.Views.Chat.ChatViewUser"        
+               xmlns:viewmodels="clr-namespace:YouthProtectionAplication.ViewModels"
+             Color="White"
+            VerticalOptions="Center"
+            >
+    <Grid RowDefinitions="*,*, auto">
+    <Frame BackgroundColor="White"
+           Padding="20"
+           HasShadow="True"
+           CornerRadius="20">
+            <StackLayout>
+
+                <Label Text="Este é um popup com cantos arredondados!"
+                TextColor="Black"   HorizontalOptions="Center" />
+            <Button Text="Fechar"
+                    />
+        </StackLayout>
+    </Frame>
+    </Grid>
+    
+    
+</toolkit:Popup>
+           

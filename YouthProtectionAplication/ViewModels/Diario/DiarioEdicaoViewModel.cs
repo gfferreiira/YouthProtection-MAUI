@@ -180,45 +180,56 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         public async Task UpdatePostagem(Postagem postagem)
         {
-            modificationDate = DateTime.Now;
-
-            if (isPrivate == false || isPublic == true)
+            try
             {
-                valorTipoPostagemSelecionado = 0;
-            }
-            else
-            {
-                valorTipoPostagemSelecionado = 1;
-            }
 
-            if (isPrivate == false && isPublic == false)
+                modificationDate = DateTime.Now;
+
+                if (isPrivate == false || isPublic == true)
+                {
+                    valorTipoPostagemSelecionado = 0;
+                }
+                else
+                {
+                    valorTipoPostagemSelecionado = 1;
+                }
+
+                if (isPrivate == false && isPublic == false)
+                {
+                    await Application.Current.MainPage
+                        .DisplayAlert("Mensagem", "Selecione se a postagem é publica ou privada", "Ok");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(publicationContent))
+                {
+                    await Application.Current.MainPage
+                        .DisplayAlert("Mensagem", "Anotação não pode estar vazia", "Ok");
+                    return;
+                }
+
+                Postagem pAtualizada = new Postagem()
+                {
+                    PublicationContent = this.PublicationContent,
+                    publicationId = postagem.publicationId,
+                    ModificationDate = modificationDate,
+                    PublicationsRole = (TipoPostagemEnum)this.valorTipoPostagemSelecionado,
+                };
+                if (pAtualizada.publicationId != 0)
+                    await UserDiarioService.PutPostagemAsync(pAtualizada);
+
+                await Application.Current.MainPage
+                       .DisplayAlert("Mensagem", "Postagem Atualizada com sucesso", "Ok");
+
+                Application.Current.MainPage = new DiarioViewUser();
+
+
+            }
+            catch (Exception ex)
             {
                 await Application.Current.MainPage
-                    .DisplayAlert("Mensagem", "Selecione se a postagem é publica ou privada", "Ok");
-                return;
+                      .DisplayAlert("Informação:", ex.Message + "\n" + ex.InnerException, "Ok");
             }
-
-            if (string.IsNullOrEmpty(publicationContent))
-            {
-                await Application.Current.MainPage
-                    .DisplayAlert("Mensagem", "Anotação não pode estar vazia", "Ok");
-                return;
-            }
-
-            Postagem pAtualizada = new Postagem()
-            {
-                PublicationContent = this.PublicationContent,
-                publicationId = postagem.publicationId,
-                ModificationDate = modificationDate,
-                PublicationsRole = (TipoPostagemEnum)this.valorTipoPostagemSelecionado,
-            };
-            if (pAtualizada.publicationId != 0)
-                await UserDiarioService.PutPostagemAsync(pAtualizada);
-
-            await Application.Current.MainPage
-                   .DisplayAlert("Mensagem", "Postagem Atualizada com sucesso", "Ok");
-
-            Application.Current.MainPage = new DiarioViewUser();
 
         }
 

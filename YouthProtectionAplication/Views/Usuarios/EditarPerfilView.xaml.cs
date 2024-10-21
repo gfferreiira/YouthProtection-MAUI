@@ -10,6 +10,8 @@ public partial class EditarPerfilView : ContentPage
 		InitializeComponent();
         _usuarioViewModel = new UsuarioViewModel();
         BindingContext = _usuarioViewModel;
+        _ = _usuarioViewModel.RetornarUsuario();
+
 
     }
 

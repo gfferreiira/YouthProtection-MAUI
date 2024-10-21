@@ -79,6 +79,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\Chat\ChatViewUser.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Diario\DiarioCreatePostUser.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -42,7 +42,6 @@ namespace YouthProtectionAplication.ViewModels.Diario
         private DateTime createdAt;
         private TipoPostagemEnum tpPostagem;
         private int valorTipoPostagemSelecionado;
-        private string postagemSelecionadoId;
         private bool isPublic;
         private bool isPrivate;
 
@@ -169,18 +168,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
         }
 
 
-        public string PostagemSelecionadoId
-        {
-            set
-            {
-                if(value != null)
-                {
-                    postagemSelecionadoId = Uri.UnescapeDataString(value);
-                    CarregarPostagem();
-                }
-            }
-        }
-       
+      
 
 
 
@@ -191,51 +179,58 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         public async Task SalvarPostagem()
         {
-            createdAt = DateTime.Now;
-            
-            if (isPrivate == false || isPublic == true)
+            try
             {
-                valorTipoPostagemSelecionado = 0;
-            }
-            else
-            {
-                valorTipoPostagemSelecionado = 1;
-            }
+                createdAt = DateTime.Now;
+
+                if (isPrivate == false || isPublic == true)
+                {
+                    valorTipoPostagemSelecionado = 0;
+                }
+                else
+                {
+                    valorTipoPostagemSelecionado = 1;
+                }
 
 
-            if (isPrivate == false && isPublic == false)
+                if (isPrivate == false && isPublic == false)
+                {
+                    await Application.Current.MainPage
+                        .DisplayAlert("Mensagem", "Selecione se a postagem é publica ou privada", "Ok");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(publicationContent))
+                {
+                    await Application.Current.MainPage
+                        .DisplayAlert("Mensagem", "Anotação não pode estar vazia", "Ok");
+                    return;
+                }
+
+                Postagem model = new Postagem()
+                {
+
+                    PublicationContent = this.PublicationContent,
+                    CreatedAt = CreatedAt,
+                    PublicationsRole = (TipoPostagemEnum)this.valorTipoPostagemSelecionado,
+                    publicationId = this.PublicationId
+                };
+                if (model.publicationId == 0)
+                    await UserDiarioService.PostPostagemAsync(model);
+
+                await Application.Current.MainPage
+                        .DisplayAlert("Mensagem", "Postagem feita com sucesso", "Ok");
+
+
+                Application.Current.MainPage = new DiarioViewUser();
+
+            }
+            catch (Exception ex)
             {
                 await Application.Current.MainPage
-                    .DisplayAlert("Mensagem", "Selecione se a postagem é publica ou privada", "Ok");
-                return;
+                     .DisplayAlert("Informação:", ex.Message + "\n" + ex.InnerException, "Ok");
             }
 
-            if (string.IsNullOrEmpty(publicationContent))
-            {
-                await Application.Current.MainPage
-                    .DisplayAlert("Mensagem", "Anotação não pode estar vazia", "Ok");
-                return;
-            }
-
-            Postagem model = new Postagem()
-            {
-
-                PublicationContent = this.PublicationContent,
-                CreatedAt = CreatedAt,
-                PublicationsRole = (TipoPostagemEnum)this.valorTipoPostagemSelecionado,
-                publicationId = this.PublicationId
-            };
-            if (model.publicationId == 0)
-                await UserDiarioService.PostPostagemAsync(model);
-            else
-                await UserDiarioService.PutPostagemAsync(model);
-
-            await Application.Current.MainPage
-                    .DisplayAlert("Mensagem", "Postagem feita com sucesso", "Ok");
-            
-            
-            Application.Current.MainPage = new DiarioViewUser();
-           
         }
 
 
@@ -243,21 +238,6 @@ namespace YouthProtectionAplication.ViewModels.Diario
         {
             RemainingCharacters = MaxCharacters - (PublicationContent?.Length ?? 0);
         }
-
-
-        public async void CarregarPostagem()
-        {
-            try
-            {
-             //   Postagem p = await
-             //       UserDiarioService.GetPostagemAsyncPerId(int.Parse(postagemSelecionadoId));
-            }
-            catch
-            {
-                //PARA FAZER O GETBYIDPOSTAGEM E CARREGAR POSTAGEM, WELL PRECISA FAZER NA API DO GETBYIDPOSTAGEM
-            }
-        }
-
 
         #endregion
 
