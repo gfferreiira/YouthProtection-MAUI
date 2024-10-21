@@ -7,22 +7,49 @@
                xmlns:viewmodels="clr-namespace:YouthProtectionAplication.ViewModels"
              Color="White"
             VerticalOptions="Center"
+          
             >
-    <Grid RowDefinitions="*,*, auto">
-    <Frame BackgroundColor="White"
-           Padding="20"
-           HasShadow="True"
-           CornerRadius="20">
-            <StackLayout>
-
-                <Label Text="Este é um popup com cantos arredondados!"
+    <ScrollView>
+    <Grid RowDefinitions="auto,*,auto">
+       
+        <Frame BackgroundColor="White"  
+              
+               WidthRequest="500"
+              HasShadow="True"
+           CornerRadius="0">
+                <StackLayout>
+                    <HorizontalStackLayout Grid.Row="0">
+                        <Image Source="gg_profile.png" HeightRequest="80"  HorizontalOptions="Start"></Image>
+                        <Label Text="{Binding Nome}"
                 TextColor="Black"   HorizontalOptions="Center" />
-            <Button Text="Fechar"
-                    />
-        </StackLayout>
-    </Frame>
+                    </HorizontalStackLayout>
+
+                    <Label Text="{Binding PublicationContent}" FontSize="22" TextColor="Black" Padding="0,80,0,0" FontFamily="MontserratRegular" VerticalOptions="Start" Grid.Row="0"/>
+
+
+
+
+                    <Editor 
+                   Placeholder="Digite aqui no que você está pensando..."
+                    PlaceholderColor="#FFFFFF"
+                   MaxLength="100"
+                   TextColor="#FFFFFF"
+                    Background="#956239"
+                   HeightRequest="120"
+                   WidthRequest="280"
+                   FontFamily="MontserratRegular"
+                    Grid.Row="2"
+                   
+                   Text=""
+                   />
+
+                </StackLayout>
+            </Frame>
+
+       
+
+  
     </Grid>
-    
-    
+    </ScrollView>
 </toolkit:Popup>
            

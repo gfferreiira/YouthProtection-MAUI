@@ -42,7 +42,7 @@
                 Spacing="25" Margin="50,0,0,0"
                   Grid.Row="3" VerticalOptions="Start" >
 
-                <Picker  Title="-" Margin="0,0,0,0" FontFamily="MontserratRegular" TextColor="Black" 
+                <Picker  Margin="0,0,0,0" FontFamily="MontserratRegular" TextColor="Black" 
                 SelectedItem="{Binding Uf}" x:Name= "ClassPicker" HorizontalOptions="Start" FontSize="Small"
 >
                     <Picker.ItemsSource>
