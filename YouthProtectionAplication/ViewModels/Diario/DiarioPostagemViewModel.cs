@@ -222,7 +222,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                         .DisplayAlert("Mensagem", "Postagem feita com sucesso", "Ok");
 
 
-                Application.Current.MainPage = new DiarioViewUser();
+                Application.Current.MainPage = new AppShell();
 
             }
             catch (Exception ex)

@@ -489,6 +489,8 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             try
             {
               Application.Current.MainPage = new DiarioPostagensExcluidas();
+
+              
             }
             catch (Exception ex)
             {
@@ -503,7 +505,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         {
             try
             {
-                Application.Current.MainPage = new DiarioViewUser();
+                Application.Current.MainPage = new AppShell();
             }
             catch (Exception ex)
             {

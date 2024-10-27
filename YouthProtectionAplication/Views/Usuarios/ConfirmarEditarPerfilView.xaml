@@ -4,6 +4,7 @@
              x:Class="YouthProtectionAplication.Views.Usuarios.ConfirmarEditarPerfilView"
              BackgroundColor="White"
                Shell.PresentationMode="Animated"
+             Shell.NavBarIsVisible="False"
            >
     <ScrollView>
         <Grid RowDefinitions="100,*,*,80,auto,*,auto">

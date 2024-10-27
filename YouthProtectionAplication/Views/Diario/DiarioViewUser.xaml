@@ -5,6 +5,7 @@
              x:Class="YouthProtectionAplication.Views.Diario.DiarioViewUser"
               BackgroundColor="White"
               Shell.PresentationMode="Animated"
+             Shell.NavBarIsVisible="True"
              >
     
     

@@ -58,6 +58,7 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\Montserrat-Regular.ttf" />
 	  <None Remove="Resources\Images\gg_profile.png" />
+	  <None Remove="Resources\Images\home.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\LogoSemNome.png" />
 	  <None Remove="Resources\Images\recovery.png" />

@@ -198,6 +198,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 {
                     await Application.Current.MainPage
                         .DisplayAlert("Mensagem", "Selecione se a postagem é publica ou privada", "Ok");
+                    Application.Current.MainPage = new AppShell();
                     return;
                 }
 
@@ -205,7 +206,9 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 {
                     await Application.Current.MainPage
                         .DisplayAlert("Mensagem", "Anotação não pode estar vazia", "Ok");
-                    return;
+                    Application.Current.MainPage = new AppShell();
+                    return; 
+                   
                 }
 
                 Postagem pAtualizada = new Postagem()
@@ -221,7 +224,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 await Application.Current.MainPage
                        .DisplayAlert("Mensagem", "Postagem Atualizada com sucesso", "Ok");
 
-                Application.Current.MainPage = new DiarioViewUser();
+                Application.Current.MainPage = new AppShell();
 
 
             }

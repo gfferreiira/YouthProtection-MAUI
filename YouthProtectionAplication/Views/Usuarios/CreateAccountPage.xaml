@@ -4,6 +4,7 @@
             Shell.NavBarIsVisible="False"
              x:Class="YouthProtectionAplication.Views.Usuarios.CreateAccountPage"
              BackgroundColor="White"
+             
              >
     <ScrollView>
   
