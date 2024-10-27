@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="YouthProtectionAplication.Views.Diario.DiarioPostagensExcluidas"
               BackgroundColor="White"
-               Shell.PresentationMode="Animated"
+               Shell.PresentationMode="Animated"   Shell.NavBarIsVisible="False"
              Title="DiarioPostagensExcluidas">
     <ScrollView>
     <Grid>

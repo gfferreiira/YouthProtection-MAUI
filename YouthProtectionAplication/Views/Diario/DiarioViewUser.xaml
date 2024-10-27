@@ -5,7 +5,8 @@
              x:Class="YouthProtectionAplication.Views.Diario.DiarioViewUser"
               BackgroundColor="White"
               Shell.PresentationMode="Animated"
-             Shell.NavBarIsVisible="True"
+              Title="" 
+             Shell.NavBarIsVisible="False"
              >
     
     
@@ -21,12 +22,7 @@
           </StackLayout>
         
 
-            <Image Source="gg_profile.png" HeightRequest="80"  HorizontalOptions="End" Grid.Row="0" Margin="0,0,0,30">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ExibirPerfilCommand}" />
-                </Image.GestureRecognizers>
-
-            </Image>
+            
         <ScrollView Grid.Row="1">
 
 
@@ -72,18 +68,19 @@
 
         </ScrollView>
 
-    <Button Text="+"
-                WidthRequest="25"
-                HeightRequest="25"
+    <Button Text="+" 
+                WidthRequest="40"
+                HeightRequest="40"
                 BackgroundColor="#4CAF50"
                 TextColor="White"
                 FontSize="16"
                 FontAttributes="Bold"
                 CornerRadius="25"
-                HorizontalOptions="Center"
+                HorizontalOptions="End"
                 VerticalOptions="Center"
                  Grid.Row="2"
                  Clicked="Button_Clicked"
+            Margin="0,0,30,20"
                  Command="{Binding NovaPostagemPopUpCommand}"
                    />
             </Grid>

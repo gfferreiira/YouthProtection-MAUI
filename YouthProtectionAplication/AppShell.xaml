@@ -8,18 +8,18 @@
     xmlns:viewsUsuario="clr-namespace:YouthProtectionAplication.Views.Usuarios"
     Shell.FlyoutBehavior="Disabled"
     Title="YouthProtectionAplication"
-    BackgroundColor="#FFF4E3">
+    >
 
 
     
 
 
     <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" >
-
-        <ShellContent
-     Title="Home" Icon="home.svg"
+ 
+        <ShellContent 
+     Title="Home" Icon="home.png"
      ContentTemplate="{DataTemplate viewsDiario:DiarioViewUser}"
-     Route="MainPage" />
+     />
 
 
         <ShellContent
