@@ -54,7 +54,7 @@
                                             </Grid>
 
                                             <Label Text="{Binding PublicationContent}" FontSize="Medium" TextColor="Black" Padding="0,80,0,0" FontFamily="MontserratRegular" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                 <Label Text="{Binding CreatedAt}" FontSize="Medium" TextColor="Black"  FontFamily="MontserratRegular" />
+                                            <Label Text="{Binding DataConvertida}" FontSize="Medium" TextColor="Black"  FontFamily="MontserratRegular" />
                                     </VerticalStackLayout>
                                 </Frame>
                             </StackLayout>

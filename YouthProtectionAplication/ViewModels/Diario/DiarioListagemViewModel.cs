@@ -70,7 +70,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
         #region AtributosPropriedades
 
 
-       
+        private string dataConvertida;
         private Postagem _postagemSelecionada;
         private bool _isPopupVisible;
 
@@ -87,6 +87,19 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 OnPropertyChanged();
             }
          }
+        }
+
+        public string DataConvertida
+        {
+            get => dataConvertida;
+            set
+            {
+                if (dataConvertida != value)
+                {
+                    dataConvertida = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public bool IsPopupVisible
@@ -138,7 +151,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 Diarios = await pdiarioService.GetPostagemAsyncPerId();
 
                 FilteredItems = new ObservableCollection<Postagem>(Diarios.Where(diario => diario.PublicationStatus == 0).ToList());
-
+                
                 
                 OnPropertyChanged(nameof(FilteredItems));
 

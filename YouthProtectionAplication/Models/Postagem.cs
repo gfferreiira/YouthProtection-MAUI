@@ -22,7 +22,7 @@ namespace YouthProtectionAplication.Models
 
         public DateTime CreatedAt { get; set; }
 
-        public string DataConvertida { get; set; }
+        public string DataConvertida => CreatedAt.ToString("HH:mm dd/MM/yyyy ");
         public DateTime ModificationDate { get; set; }
 
 

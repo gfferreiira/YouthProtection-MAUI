@@ -20,7 +20,7 @@ public partial class ConfirmarEditarPerfilView : ContentPage
            if (await Application.Current.MainPage
                  .DisplayAlert("Confirmação", "Deseja realmente sair? As alterações não serão feitas", "Sim", "Não"))
             {
-                Application.Current.MainPage = new EditarPerfilView();
+                Application.Current.MainPage = new AppShell();
             }
         }
         catch 
