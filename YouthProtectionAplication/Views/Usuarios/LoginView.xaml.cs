@@ -19,10 +19,9 @@ public partial class LoginView : ContentPage
     private async void Button_Clicked(object sender, EventArgs e)
     {
 
-            var popup = new ChatViewUser();
+        Application.Current.MainPage = new ChatViewUser();
 
-            var result = await this.ShowPopupAsync(popup);
 
-       
+
     }
 }

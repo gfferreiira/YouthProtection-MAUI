@@ -2,7 +2,7 @@ using CommunityToolkit.Maui.Views;
 
 namespace YouthProtectionAplication.Views.Chat;
 
-public partial class ChatViewUser : Popup
+public partial class ChatViewUser : ContentPage
 {
 	public ChatViewUser()
 	{
