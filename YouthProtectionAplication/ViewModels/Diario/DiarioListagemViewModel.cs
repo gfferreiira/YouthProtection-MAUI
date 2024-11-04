@@ -11,6 +11,7 @@ using YouthProtectionAplication.Views.Diario;
 using YouthProtectionAplication.Views.Usuarios;
 using YouthProtectionAplication.Models.Enums;
 using System.ComponentModel;
+using YouthProtectionAplication.Views.Chat;
 
 
 namespace YouthProtectionAplication.ViewModels.Diario
@@ -73,7 +74,22 @@ namespace YouthProtectionAplication.ViewModels.Diario
         private string dataConvertida;
         private Postagem _postagemSelecionada;
         private bool _isPopupVisible;
+        private Postagem _postagemSelecionadaChat;
 
+
+        public Postagem PostagemSelecionadaChat
+        {
+            get => _postagemSelecionadaChat;
+            set
+            {
+                if (_postagemSelecionadaChat != value)
+                {
+                    _postagemSelecionadaChat = value;
+                    OnPropertyChanged();
+                    InicializarChat(_postagemSelecionadaChat);
+                }
+            }
+        }
 
 
         public Postagem PostagemSelecionada
@@ -124,6 +140,14 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 PostagemSelecionada = postagem;
             Application.Current.MainPage = new DiarioEditPostUser(postagem);
 
+
+        }
+
+        private async void InicializarChat(Postagem postagem)
+        {
+
+            PostagemSelecionadaChat = postagem;
+            Application.Current.MainPage = new ChatViewUser(postagem);
 
         }
 

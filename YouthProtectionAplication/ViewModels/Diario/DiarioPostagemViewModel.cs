@@ -214,6 +214,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                     CreatedAt = CreatedAt,
                     PublicationsRole = (TipoPostagemEnum)this.valorTipoPostagemSelecionado,
                     publicationId = this.PublicationId
+                    
                 };
                 if (model.publicationId == 0)
                     await UserDiarioService.PostPostagemAsync(model);

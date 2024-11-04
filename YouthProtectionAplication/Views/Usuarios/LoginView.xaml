@@ -60,7 +60,7 @@
                       TextColor="Black"
                      Text="Criar Conta"
                      HorizontalOptions="Start"
-                Clicked="Button_Clicked"
+                
             Command="{Binding CreateAccountCommand}"
                    
                     />

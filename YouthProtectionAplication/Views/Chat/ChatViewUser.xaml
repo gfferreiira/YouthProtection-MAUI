@@ -4,50 +4,115 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="YouthProtectionAplication.Views.Chat.ChatViewUser"        
+             xmlns:local="clr-namespace:YouthProtectionAplication.Views.Chat"
                xmlns:viewmodels="clr-namespace:YouthProtectionAplication.ViewModels"
-          BackgroundColor="Black"
+          BackgroundColor="White"
             >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:SenderIdToColumnConverter x:Key="SenderIdToColumnConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ScrollView>
     <Grid RowDefinitions="auto,*,auto">
-       
-        <Frame BackgroundColor="White"  
-              
-               WidthRequest="500"
-              HasShadow="True"
-           CornerRadius="0">
+            <Image HeightRequest="70" Source="sair.png"  Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Margin="20,20,0,0" >
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Frame BackgroundColor="White"  
+                   HasShadow="True"
+                   WidthRequest="800"
+                   CornerRadius="15">
                 <StackLayout>
-                    <HorizontalStackLayout Grid.Row="0">
-                        <Image Source="gg_profile.png" HeightRequest="80"  HorizontalOptions="Start"></Image>
+                    <HorizontalStackLayout Grid.Row="0" Spacing="15">
+                        <Image Source="gg_profile.png" HeightRequest="80" HorizontalOptions="Start" />
                         <Label Text="{Binding Nome}"
-                TextColor="Black"   HorizontalOptions="Center" />
+                               TextColor="Black" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" 
+                               FontSize="Subtitle"  
+                               FontFamily="MontserratRegular" />
                     </HorizontalStackLayout>
-
-                    <Label Text="{Binding PublicationContent}" FontSize="22" TextColor="Black" Padding="0,80,0,0" FontFamily="MontserratRegular" VerticalOptions="Start" Grid.Row="0"/>
-
-
-
-
-                    <Editor 
-                   Placeholder="Digite aqui no que você está pensando..."
-                    PlaceholderColor="#FFFFFF"
-                   MaxLength="100"
-                   TextColor="#FFFFFF"
-                    Background="#956239"
-                   HeightRequest="120"
-                   WidthRequest="280"
-                   FontFamily="MontserratRegular"
-                    Grid.Row="2"
                    
-                   Text=""
-                   />
+                    <Label Text="{Binding PublicationContent}" FontSize="20" 
+                           TextColor="Black"
+                           FontFamily="MontserratRegular" 
+                          Margin="30,80,0,100"
+                           Grid.Row="0" />
 
+
+                    <CollectionView ItemsSource="{Binding Messages}" VerticalOptions="FillAndExpand" BackgroundColor="White" Margin="10,0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <!-- Coluna da Mensagem -->
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                                                                                                           
+                                    
+
+                                    <Frame HasShadow="False" CornerRadius="15" Padding="10"
+                       BackgroundColor="#F5F5F5" Margin="10,4"
+                       Grid.Column="{Binding SenderId, Converter={StaticResource SenderIdToColumnConverter}}">
+
+                                        <Frame.Triggers>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding SenderId}" Value="1">
+                                                
+                                                <!-- Configuração para mensagens enviadas (alinhamento à direita) -->
+                                                <Setter Property="BackgroundColor" Value="#DCF8C6" />
+                                                <Setter Property="HorizontalOptions" Value="End" />
+                                                
+                                                <Setter Property="Margin" Value="50,4,0,4" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding SenderId}" Value="2">
+                                                <!-- Configuração para mensagens recebidas (alinhamento à esquerda) -->
+                                                <Setter Property="BackgroundColor" Value="#FFFFFF" />
+                                                <Setter Property="HorizontalOptions" Value="Start" />
+                                                <Setter Property="Margin" Value="0,4,50,4" />
+                                            </DataTrigger>
+                                        </Frame.Triggers>
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding Content}" FontSize="16" TextColor="Black"/>
+                                            <Label Text="{Binding DataConvertida}" FontSize="9" TextColor="Black"  FontFamily="MontserratRegular" />
+                                        </VerticalStackLayout>
+                                    </Frame>
+
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    
+                    
+                    
+
+
+
+
+                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        <Entry Text="{Binding MensagemAtual}" Placeholder="Digite sua mensagem" 
+                               HorizontalOptions="FillAndExpand" 
+                               TextColor="Black"  
+                               FontFamily="MontserratRegular" />
+                        <Button Text="Enviar" Command="{Binding EnviarMensagemCommand}" 
+                                BackgroundColor="#956239" 
+                                TextColor="White" 
+                                FontFamily="MontserratRegular" />
+                    </StackLayout>
                 </StackLayout>
             </Frame>
 
-       
 
-  
-    </Grid>
+
+
+        </Grid>
     </ScrollView>
 </ContentPage>
            

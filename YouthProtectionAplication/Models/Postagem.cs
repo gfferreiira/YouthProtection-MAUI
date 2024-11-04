@@ -17,6 +17,7 @@ namespace YouthProtectionAplication.Models
         public long publicationId { get; set; }
         public string PublicationContent { get; set; }
         public string Nome { get; set; } = Preferences.Get("UsuarioUsername", string.Empty);
+        public long UserId { get; set; }
 
 
 

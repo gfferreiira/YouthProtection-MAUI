@@ -16,12 +16,5 @@ public partial class LoginView : ContentPage
        // Application.Current.UserAppTheme = AppTheme.Dark;
     }
 
-    private async void Button_Clicked(object sender, EventArgs e)
-    {
-
-        Application.Current.MainPage = new ChatViewUser();
-
-
-
-    }
+    
 }

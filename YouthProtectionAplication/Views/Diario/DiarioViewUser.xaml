@@ -27,7 +27,7 @@
 
 
             <VerticalStackLayout Grid.Row="1">
-                <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding FilteredItems}"  >
+                <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding FilteredItems}" SelectedItem="{Binding PostagemSelecionadaChat}"  >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                             <ViewCell>
