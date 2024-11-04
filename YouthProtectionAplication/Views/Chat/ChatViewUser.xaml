@@ -17,15 +17,13 @@
 
     <ScrollView>
     <Grid RowDefinitions="auto,*,auto">
-            <Image HeightRequest="70" Source="sair.png"  Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start" Margin="20,20,0,0" >
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                </Image.GestureRecognizers>
-            </Image>
+           
 
             <Frame BackgroundColor="White"  
                    HasShadow="True"
-                   WidthRequest="800"
+                   WidthRequest="320"
+                   MaximumWidthRequest="500"
+                   MinimumWidthRequest="200"
                    CornerRadius="15">
                 <StackLayout>
                     <HorizontalStackLayout Grid.Row="0" Spacing="15">
@@ -36,6 +34,12 @@
                                VerticalOptions="Center" 
                                FontSize="Subtitle"  
                                FontFamily="MontserratRegular" />
+
+                        <Image HeightRequest="70" Source="sair.png"   VerticalOptions="End" HorizontalOptions="End"  >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
                     </HorizontalStackLayout>
                    
                     <Label Text="{Binding PublicationContent}" FontSize="20" 
