@@ -39,17 +39,7 @@ namespace YouthProtectionAplication.ViewModels.Chat
             chatTimer.Start();
 
         }
-
-        private async Task TimerElapsedAsync()
-        {
-            if (!_isFetching) // Verifica se já está buscando mensagens
-            {
-                await GetAllMessagesAsync();
-            }
-        }
-
-
-        public ICommand EnviarMensagemCommand { get; }
+      public ICommand EnviarMensagemCommand { get; }
 
 
 
@@ -58,7 +48,7 @@ namespace YouthProtectionAplication.ViewModels.Chat
         private string publicationContent = string.Empty;
         private string mensagemAtual;
         private string dataConvertida;
-
+        private bool _isFetching;
 
 
         #region Atributos Propriedades
@@ -132,7 +122,7 @@ namespace YouthProtectionAplication.ViewModels.Chat
         #region Métodos
 
         
-        private bool _isFetching;
+       
 
         public async Task GetAllMessagesAsync()
         {
@@ -192,6 +182,14 @@ namespace YouthProtectionAplication.ViewModels.Chat
                 _lastMessageId = _lastMessageId + 1;
             }
 
+        }
+
+        private async Task TimerElapsedAsync()
+        {
+            if (!_isFetching)
+            {
+                await GetAllMessagesAsync();
+            }
         }
 
 
