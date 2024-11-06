@@ -38,8 +38,9 @@ namespace YouthProtectionAplication.ViewModels.Chat
             chatTimer.Elapsed += async (sender, e) => await TimerElapsedAsync();
             chatTimer.Start();
 
+
         }
-      public ICommand EnviarMensagemCommand { get; }
+        public ICommand EnviarMensagemCommand { get; }
 
 
 
@@ -131,7 +132,7 @@ namespace YouthProtectionAplication.ViewModels.Chat
             {
                 _isFetching = true; // Marca que a busca está em andamento
 
-                var mensagens = await chatService.ObterMensagensAsync();
+                var mensagens = await chatService.ObterMensagensAsync(Preferences.Get("PostagemId", 0L));
 
                 var novasMensagens = mensagens.Where(m => m.Id > _lastMessageId).ToList();
 
@@ -164,10 +165,13 @@ namespace YouthProtectionAplication.ViewModels.Chat
 
         private async Task EnviarMensagemAsync()
         {
+            long idSender = Preferences.Get("UsuarioId", 0L);
+            var chatId = chatService.ObterChatId(Preferences.Get("PostagemId", 0L));
+
             var novaMensagem = new ChatUser
             {
-                ChatId = 8,
-                SenderId = 1,
+                ChatId = Convert.ToInt64(chatId),
+                SenderId = idSender,
                 SentAt = DateTime.Now,
                 Content = MensagemAtual
             };

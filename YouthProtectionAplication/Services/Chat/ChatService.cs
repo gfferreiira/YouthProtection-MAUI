@@ -25,9 +25,12 @@ namespace YouthProtectionAplication.Services.Chat
             _token = token;
         }
 
-        public async Task<List<ChatUser>> ObterMensagensAsync()
+        public async Task<List<ChatUser>> ObterMensagensAsync(long idPostagem)
         {
-            string urlComplementar = string.Format("/messages/8");
+            string urlComplementar = string.Format("/GetChatBy" + "/{0}", idPostagem);
+            var ChatId = await _request.GetAsync<Models.ChatUser>(apiUrlBase + urlComplementar, _token);
+         
+            urlComplementar = string.Format("/messages" + "/{0}", ChatId);
             ObservableCollection<Models.ChatUser> chatMessages =  await _request.GetAsync<ObservableCollection <Models.ChatUser>> ( apiUrlBase + urlComplementar, _token);
             return new List<ChatUser>(chatMessages); 
         }
@@ -36,6 +39,13 @@ namespace YouthProtectionAplication.Services.Chat
         {
             string urlComplementar = "/send";
             await _request.PostAsync(apiUrlBase + urlComplementar, novaMensagem, _token);
+        }
+
+        public async Task<ChatUser> ObterChatId(long idPostagem)
+        {
+            string urlComplementar = string.Format("/GetChatBy" + "/{0}", idPostagem);
+            var chatId = await _request.GetAsync<Models.ChatUser>(apiUrlBase + urlComplementar, _token);
+            return chatId;
         }
 
 
