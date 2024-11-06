@@ -462,8 +462,9 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         #region Navegacao
         public async Task CreateAccount()
         {
-            Postagem p = new Postagem();
-            Application.Current.MainPage = new ChatViewUser(p);
+
+            await Application.Current.MainPage.
+                    Navigation.PushAsync(new CreateAccountPage());
         }
 
         public async Task ExibirPerfil()

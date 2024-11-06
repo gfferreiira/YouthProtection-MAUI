@@ -26,8 +26,8 @@
                    MinimumWidthRequest="200"
                    CornerRadius="15">
                 <StackLayout>
-                    <HorizontalStackLayout Grid.Row="0" Spacing="15">
-                        <Image Source="gg_profile.png" HeightRequest="80" HorizontalOptions="Start" />
+                    <HorizontalStackLayout Grid.Row="0" Spacing="30">
+                        <Image Source="gg_profile.png" HeightRequest="60" HorizontalOptions="Start" />
                         <Label Text="{Binding Nome}"
                                TextColor="Black" 
                                HorizontalOptions="Center" 
@@ -35,7 +35,7 @@
                                FontSize="Subtitle"  
                                FontFamily="MontserratRegular" />
 
-                        <Image HeightRequest="70" Source="sair.png"   VerticalOptions="End" HorizontalOptions="End"  >
+                        <Image HeightRequest="60" Source="sair.png"  Margin="40,0,0,0"  >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                             </Image.GestureRecognizers>

@@ -50,6 +50,9 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
             EditarCommand = new Command<Postagem>(OnEditarPostagem);
 
+            InicializarChatCommand =
+                new Command<Postagem>(async (Postagem postagem) => { await InicializarChat(postagem); });
+
 
         }
 
@@ -60,6 +63,8 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         public ICommand NovaPostagemPopUpCommand { get; }
         public ICommand RemoverPostagemCommand { get; set; }
+
+        public ICommand InicializarChatCommand { get; set; }
         public ICommand ExibirPerfilCommand { get; set; }
         public ICommand ReativarPostagemCommand {  get; set; }
         public ICommand EditarCommand { get; set; }
@@ -70,7 +75,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         #region AtributosPropriedades
 
-
+        private string nome = Preferences.Get("UsuarioUsername", string.Empty);
         private string dataConvertida;
         private Postagem _postagemSelecionada;
         private bool _isPopupVisible;
@@ -87,6 +92,19 @@ namespace YouthProtectionAplication.ViewModels.Diario
                     _postagemSelecionadaChat = value;
                     OnPropertyChanged();
                     InicializarChat(_postagemSelecionadaChat);
+                }
+            }
+        }
+
+        public string Nome
+        {
+            get => nome;
+            set
+            {
+                if (nome != value) 
+                {
+                    nome = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -143,7 +161,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         }
 
-        private async void InicializarChat(Postagem postagem)
+        private async Task InicializarChat(Postagem postagem)
         {
 
             PostagemSelecionadaChat = postagem;

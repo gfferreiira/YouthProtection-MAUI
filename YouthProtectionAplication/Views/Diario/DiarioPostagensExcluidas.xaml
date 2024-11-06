@@ -19,9 +19,9 @@
                
             </StackLayout>
 
-            <Label Text="Anotações Excluidas" TextColor="Black" HorizontalOptions="Center"  VerticalOptions="Center" Grid.Row="0" FontFamily="MontserratRegular" FontSize="Medium" />
+            <Label Text="Anotações Excluidas" TextColor="Black" HorizontalOptions="Center"  VerticalOptions="Center" Margin="5,0,0,20" Grid.Row="0" FontFamily="MontserratRegular" FontSize="Medium" />
 
-            <Image Source="gg_profile.png" HeightRequest="80"  HorizontalOptions="End" Grid.Row="0" Margin="0,0,0,30">
+            <Image Source="gg_profile.png" HeightRequest="60"  HorizontalOptions="End" Grid.Row="0" Margin="0,0,5,30">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ExibirPerfilCommand}" />
                 </Image.GestureRecognizers>
@@ -38,11 +38,11 @@
                             <ViewCell>
                                 <StackLayout  Margin="50">
                                     <Frame BorderColor="Gray" BackgroundColor="White"
-                                                        Margin="200,0,200,0" Padding="0,0,0,100"  CornerRadius="5">
+                                                         VerticalOptions="Center" Padding="20,0,20,40"  CornerRadius="5">
                                         <VerticalStackLayout >
                                             <Grid ColumnDefinitions="*, *">
-                                                <Image Source="gg_profile.png" Grid.Column="0" HeightRequest="70" Margin="20,20,0,0" HorizontalOptions="Start"/>
-                                                <Image Source="recovery.png"  HeightRequest="70" Grid.Column="1" HorizontalOptions="End" Margin="0,20,20,0">
+                                                <Image Source="gg_profile.png" Grid.Column="0" HeightRequest="50" Margin="0,20,0,0" HorizontalOptions="Start"/>
+                                                <Image Source="recovery.png"  HeightRequest="40" Grid.Column="1" HorizontalOptions="End" Margin="0,20,0,0">
                                                     <Image.GestureRecognizers>
                                                         <TapGestureRecognizer Command="{Binding Path=BindingContext.ReativarPostagemCommand, Source={x:Reference listView}}"
                                     CommandParameter="{Binding .}"/>
@@ -50,8 +50,8 @@
                                                 </Image>
                                             </Grid>
 
-                                            <Label Text="{Binding PublicationContent}" FontSize="Medium" TextColor="Black" Padding="0,80,0,0" FontFamily="MontserratRegular" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                            <Label Text="{Binding CreatedAt}" FontSize="Medium" TextColor="Black"  FontFamily="MontserratRegular" />
+                                            <Label Text="{Binding PublicationContent}" FontSize="Medium" TextColor="Black" Padding="0,50,0,0" FontFamily="MontserratRegular" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                            <Label Text="{Binding CreatedAt}" FontSize="Medium" TextColor="Black"  FontFamily="MontserratRegular" Padding="0,50,0,0"  />
                                         </VerticalStackLayout>
                                     </Frame>
                                 </StackLayout>

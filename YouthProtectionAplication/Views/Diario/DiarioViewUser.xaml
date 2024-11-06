@@ -27,7 +27,7 @@
 
 
             <VerticalStackLayout Grid.Row="1">
-                <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding FilteredItems}" SelectedItem="{Binding PostagemSelecionadaChat}"  >
+                <ListView x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding FilteredItems}"  >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                             <ViewCell>
@@ -35,17 +35,22 @@
                                     <MenuItem Text="Editar"
                                 Command="{Binding BindingContext.EditarCommand, Source={x:Reference listView}}"
                               CommandParameter="{Binding .}"></MenuItem>
+
+                                    <MenuItem Text="Excluir"
+                                              Command="{Binding BindingContext.RemoverPostagemCommand, Source={x:Reference listView}}"
+                                              CommandParameter="{Binding .}" />
+
                                 </ViewCell.ContextActions>
-                                <StackLayout  Margin="50">
+                                <StackLayout  Margin="30">
                                 <Frame BorderColor="Gray" BackgroundColor="White"
-                                       Margin="200,0,200,0" Padding="0,0,0,100"  CornerRadius="5">
+                                      Padding="20,0,20,40"  CornerRadius="5">
                                     <VerticalStackLayout >
                                             <Grid ColumnDefinitions="*, *">
-                                                <Image Source="gg_profile.png" Grid.Column="0" HeightRequest="70" Margin="20,20,0,0" HorizontalOptions="Start"/>
+                                                <Image Source="gg_profile.png" Grid.Column="0" HeightRequest="50" Margin="0,20,0,0" HorizontalOptions="Start"/>
                                                 <Label Text="{Binding Nome}" FontSize="Small" FontFamily="MontserratRegular" TextColor="#956239" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,50,150,0"/>
-                                                <Image Source="trash.png"  HeightRequest="70" Grid.Column="1" HorizontalOptions="End" Margin="0,20,20,0">
+                                                <Image Source="chat.png"  HeightRequest="50" Grid.Column="1" HorizontalOptions="End" Margin="0,20,0,0">
                                                     <Image.GestureRecognizers>
-                                                        <TapGestureRecognizer  Command="{Binding Path=BindingContext.RemoverPostagemCommand, Source={x:Reference listView}}"
+                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.InicializarChatCommand, Source={x:Reference listView}}"
                                                                 CommandParameter="{Binding .}"/>
                                                     </Image.GestureRecognizers>
                                                 </Image>
@@ -53,8 +58,8 @@
                                                 
                                             </Grid>
 
-                                            <Label Text="{Binding PublicationContent}" FontSize="Medium" TextColor="Black" Padding="0,80,0,0" FontFamily="MontserratRegular" VerticalOptions="Center" HorizontalOptions="Center"/>
-                                            <Label Text="{Binding DataConvertida}" FontSize="Medium" TextColor="Black"  FontFamily="MontserratRegular" />
+                                            <Label Text="{Binding PublicationContent}" FontSize="Medium" TextColor="Black" Padding="0,50,0,0" FontFamily="MontserratRegular" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                            <Label Text="{Binding DataConvertida}" FontSize="Medium" TextColor="Black"  FontFamily="MontserratRegular" Margin="0,50,0,0" />
                                     </VerticalStackLayout>
                                 </Frame>
                             </StackLayout>
