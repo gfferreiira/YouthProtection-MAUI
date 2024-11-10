@@ -57,7 +57,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
 
         #region AtributosPropriedades
 
-
+        private long id;
         private string fictionalName = string.Empty;
         private string password = string.Empty;
         private string email = string.Empty;
@@ -75,6 +75,17 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         private string senhaAtual = string.Empty;
         private string senhaNova = string.Empty;
 
+
+        public long Id
+        {
+            get { return id;  }
+            set
+            {
+                id = value;
+                OnPropertyChanged();
+            }
+        }
+            
         public string FictionalName
         {
             get { return fictionalName; }
@@ -205,6 +216,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
             try
             {
                 Usuario u = new Usuario();
+             
                 u.FictionalName = FictionalName;
                 u.Password = Password;
                 u.Email = Email;
@@ -333,6 +345,8 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                     Preferences.Set("UsuarioTelefone", uAutenticado.CellPhone);
                     Preferences.Set("UsuarioUf", uAutenticado.Uf);
                     Preferences.Set("UsuarioSenha", Senha);
+
+                    _ = _uService.GetUsuarioAsync(uAutenticado.Token);
 
                     await Application.Current.MainPage
                        .DisplayAlert("Informação", mensagem, "OK");

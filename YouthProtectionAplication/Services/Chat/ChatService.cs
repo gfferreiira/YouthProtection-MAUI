@@ -17,7 +17,7 @@ namespace YouthProtectionAplication.Services.Chat
 
         private string _token;
 
-        private const string apiUrlBase = "https://www.well.somee.com/Chat";
+        private const string apiUrlBase = "http://youthprotection.somee.com/YouthProtectionApi/Chat";
 
         public ChatService(string token)
         {
@@ -25,12 +25,9 @@ namespace YouthProtectionAplication.Services.Chat
             _token = token;
         }
 
-        public async Task<List<ChatUser>> ObterMensagensAsync(long idPostagem)
+        public async Task<List<ChatUser>> ObterMensagensAsync(long Id)
         {
-            string urlComplementar = string.Format("/GetChatBy" + "/{0}", idPostagem);
-            var ChatId = await _request.GetAsync<Models.ChatUser>(apiUrlBase + urlComplementar, _token);
-         
-            urlComplementar = string.Format("/messages" + "/{0}", ChatId);
+           string urlComplementar = string.Format("/messages" + "/{0}", Id);
             ObservableCollection<Models.ChatUser> chatMessages =  await _request.GetAsync<ObservableCollection <Models.ChatUser>> ( apiUrlBase + urlComplementar, _token);
             return new List<ChatUser>(chatMessages); 
         }
@@ -41,11 +38,11 @@ namespace YouthProtectionAplication.Services.Chat
             await _request.PostAsync(apiUrlBase + urlComplementar, novaMensagem, _token);
         }
 
-        public async Task<ChatUser> ObterChatId(long idPostagem)
+        public async Task<long> ObterChatId(long idPostagem)
         {
             string urlComplementar = string.Format("/GetChatBy" + "/{0}", idPostagem);
-            var chatId = await _request.GetAsync<Models.ChatUser>(apiUrlBase + urlComplementar, _token);
-            return chatId;
+            var response = await _request.GetAsync<Models.Response.ResponseModel>(apiUrlBase + urlComplementar, _token);
+            return response.Id;
         }
 
 

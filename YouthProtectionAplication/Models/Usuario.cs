@@ -11,7 +11,7 @@ namespace YouthProtectionAplication.Models
 {
     public class Usuario
     {
-        public long Id { get; set; }
+        public long Id { get; set; } = 0L;
         public string FictionalName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         [EmailAddress]

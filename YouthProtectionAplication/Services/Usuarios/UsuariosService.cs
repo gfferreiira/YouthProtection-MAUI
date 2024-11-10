@@ -12,7 +12,7 @@ namespace YouthProtectionAplication.Services.Usuarios
 
         private readonly Request _request;
 
-        private const string _apiUrlBase = "https://www.well.somee.com/Auth";  //URL DA API VAI FICAR AQUI
+        private const string _apiUrlBase = "http://youthprotection.somee.com/YouthProtectionApi/Auth";  //URL DA API VAI FICAR AQUI
 
         public UsuariosService()
         {
