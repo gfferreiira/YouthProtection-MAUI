@@ -90,9 +90,8 @@ namespace YouthProtectionAplication.Services
                 return result;
         }
 
-        
 
-        
-        
+
+
     }
 }

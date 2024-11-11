@@ -14,7 +14,7 @@ namespace YouthProtectionAplication.Services.Diario
 
         private string _token;
 
-        private const string apiUrlBase = "http://youthprotection.somee.com/YouthProtectionApi/Publications";
+        private const string apiUrlBase = "http://localhost:5189/Publications";
 
         public DiarioService(string token)
         {

@@ -17,7 +17,7 @@ namespace YouthProtectionAplication.Services.Chat
 
         private string _token;
 
-        private const string apiUrlBase = "http://youthprotection.somee.com/YouthProtectionApi/Chat";
+        private const string apiUrlBase = "http://localhost:5189/Chat";
 
         public ChatService(string token)
         {
@@ -25,9 +25,9 @@ namespace YouthProtectionAplication.Services.Chat
             _token = token;
         }
 
-        public async Task<List<ChatUser>> ObterMensagensAsync(long Id)
+        public async Task<List<ChatUser>> ObterMensagensAsync(long IdChat)
         {
-           string urlComplementar = string.Format("/messages" + "/{0}", Id);
+           string urlComplementar = string.Format("/messages" + "/{0}", IdChat);
             ObservableCollection<Models.ChatUser> chatMessages =  await _request.GetAsync<ObservableCollection <Models.ChatUser>> ( apiUrlBase + urlComplementar, _token);
             return new List<ChatUser>(chatMessages); 
         }

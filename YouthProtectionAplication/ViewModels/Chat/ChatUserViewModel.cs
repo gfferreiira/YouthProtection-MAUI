@@ -33,13 +33,9 @@ namespace YouthProtectionAplication.ViewModels.Chat
             PublicationId = p.publicationId;
             _lastMessageId = 0;
 
+
             EnviarMensagemCommand = new Command(async () => await EnviarMensagemAsync());
             _ = LoadFirstIdAsync(p);
-
-            chatTimer = new System.Timers.Timer(5000);
-            chatTimer.Elapsed += async (sender, e) => await TimerElapsedAsync();
-            chatTimer.Start();
-
 
         }
         public ICommand EnviarMensagemCommand { get; }
@@ -49,6 +45,7 @@ namespace YouthProtectionAplication.ViewModels.Chat
         private string nome = Preferences.Get("UsuarioUsername", string.Empty);
         
         private long publicationId;
+        private long idChat;
         private string publicationContent = string.Empty;
         private string mensagemAtual;
         private string dataConvertida;
@@ -81,6 +78,7 @@ namespace YouthProtectionAplication.ViewModels.Chat
             }
         }
 
+      
         public string PublicationContent
         {
             get => publicationContent;
@@ -118,6 +116,20 @@ namespace YouthProtectionAplication.ViewModels.Chat
             }
         }
 
+        public long IdChat
+        {
+            get => idChat;
+            set
+            {
+                if (idChat != value)
+                {
+                    idChat = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
 
         #endregion
 
@@ -125,12 +137,13 @@ namespace YouthProtectionAplication.ViewModels.Chat
 
         #region Métodos
 
-        public async Task LoadFirstIdAsync(Postagem postagem)
+        public async Task<long> LoadFirstIdAsync(Postagem postagem)
         {
 
-           long Id = await chatService.ObterChatId(Preferences.Get("PostagemId", 0L));
+            IdChat = await chatService.ObterChatId(Preferences.Get("PostagemId", 0L));
 
-            Preferences.Set("IdChat", Id);
+            return IdChat;
+
         }
         
        
@@ -142,7 +155,7 @@ namespace YouthProtectionAplication.ViewModels.Chat
             {
                 _isFetching = true; // Marca que a busca está em andamento
 
-                var mensagens = await chatService.ObterMensagensAsync(Preferences.Get("IdChat", 0L));
+                var mensagens = await chatService.ObterMensagensAsync(IdChat);
 
                 var novasMensagens = mensagens.Where(m => m.Id > _lastMessageId).ToList();
 
