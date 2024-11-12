@@ -38,12 +38,6 @@ namespace YouthProtectionAplication.Services.Diario
             return listaPersonagens;
         }
 
-        public async Task<Postagem> GetAllPostagemAsync(int idPostagem)
-        {
-            string urlComplementar = string.Format("/publication", "/{0}", idPostagem);
-            var postagem = await _request.GetAsync<Models.Postagem>(apiUrlBase + urlComplementar, _token);
-            return postagem;
-        }
 
         public async Task<Postagem> PutPostagemAsync(Postagem p)
         {
@@ -58,6 +52,17 @@ namespace YouthProtectionAplication.Services.Diario
             var result = await _request.DeleteAsync(apiUrlBase + urlComplementar, _token);
             return result;
         }
+
+
+        public async Task<ObservableCollection<Postagem>> GetPostagemAsyncVoluntary()
+        {
+            string urlComplementar = string.Format("/Publications/");
+            ObservableCollection<Models.Postagem> listaPersonagens = await
+            _request.GetAsync<ObservableCollection<Models.Postagem>>(apiUrlBase + urlComplementar,
+            _token);
+            return listaPersonagens;
+        }
+
 
     }
 }

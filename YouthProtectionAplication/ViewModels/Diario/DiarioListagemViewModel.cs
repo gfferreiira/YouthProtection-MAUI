@@ -29,7 +29,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
         public DiarioListagemViewModel()
         {
             string token = Preferences.Get("UsuarioToken", string.Empty);
-            
+
             pdiarioService = new DiarioService(token);
             Diarios = new ObservableCollection<Postagem>();
             FilteredItems = new ObservableCollection<Postagem>();
@@ -38,7 +38,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
             _ = ObterPostagens();
 
             _ = ObterPostagensExcluidas();
-            InicializarCommands();
+        
 
             NovaPostagemPopUpCommand = new Command(ExibirPostagemPop);
 
@@ -56,17 +56,14 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         }
 
-        public void InicializarCommands()
-        {
-            ExibirPerfilCommand = new Command(async () => await PerfilExibir());
-        }
+       
 
         public ICommand NovaPostagemPopUpCommand { get; }
         public ICommand RemoverPostagemCommand { get; set; }
 
         public ICommand InicializarChatCommand { get; set; }
         public ICommand ExibirPerfilCommand { get; set; }
-        public ICommand ReativarPostagemCommand {  get; set; }
+        public ICommand ReativarPostagemCommand { get; set; }
         public ICommand EditarCommand { get; set; }
 
 
@@ -102,7 +99,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
             get => nome;
             set
             {
-                if (nome != value) 
+                if (nome != value)
                 {
                     nome = value;
                     OnPropertyChanged();
@@ -127,14 +124,14 @@ namespace YouthProtectionAplication.ViewModels.Diario
         public Postagem PostagemSelecionada
         {
             get => _postagemSelecionada;
-        set
-        {
-            if (_postagemSelecionada != value)
+            set
             {
-                _postagemSelecionada = value;
-                OnPropertyChanged();
+                if (_postagemSelecionada != value)
+                {
+                    _postagemSelecionada = value;
+                    OnPropertyChanged();
+                }
             }
-         }
         }
 
         public string DataConvertida
@@ -168,8 +165,8 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         private async void OnEditarPostagem(Postagem postagem)
         {
-            
-                PostagemSelecionada = postagem;
+
+            PostagemSelecionada = postagem;
             Application.Current.MainPage = new DiarioEditPostUser(postagem);
 
 
@@ -207,8 +204,8 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 Diarios = await pdiarioService.GetPostagemAsyncPerId();
 
                 FilteredItems = new ObservableCollection<Postagem>(Diarios.Where(diario => diario.PublicationStatus == 0).ToList());
-                
-                
+
+
                 OnPropertyChanged(nameof(FilteredItems));
 
             }
@@ -287,7 +284,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                         publicationId = p.publicationId,
                         PublicationContent = p.PublicationContent,
                         PublicationStatus = 0,
-                        
+
 
                     };
                     await pdiarioService.PutPostagemAsync(pp);
@@ -298,7 +295,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                     _ = ObterPostagensExcluidas();
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 await Application.Current.MainPage
                    .DisplayAlert("Ops", ex.Message + " Detalhes: " + ex.InnerException, "Ok");
@@ -306,28 +303,13 @@ namespace YouthProtectionAplication.ViewModels.Diario
         }
 
 
-      
-
-        #endregion
-
-        #region Navegação
-
-        public async Task PerfilExibir()
-        {
-            try
-            {
-               
-                Application.Current.MainPage = new EditarPerfilView();
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage
-                    .DisplayAlert("Ops", ex.Message + "Detalhes: " + ex.InnerException, "OK");
-            }
-        }
 
 
         #endregion
+
+     
+
 
     }
+
 }

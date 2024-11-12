@@ -51,7 +51,7 @@ namespace YouthProtectionAplication
                 {
                     Title = "Perfil",
                     Icon = "gg_profile.png",
-                    ContentTemplate = new DataTemplate(typeof(EditarPerfilView))
+                    ContentTemplate = new DataTemplate(typeof(EditarPerfilVoluntary))
                 });
             }
 

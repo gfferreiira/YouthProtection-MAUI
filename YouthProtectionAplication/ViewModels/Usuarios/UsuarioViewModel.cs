@@ -401,7 +401,18 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                     await Application.Current.MainPage
                         .DisplayAlert("Informação:", "Usuário atualizado com sucesso.", "Ok");
 
-                    Application.Current.MainPage = new EditarPerfilView();
+                    int tipoUsuario = Preferences.Get("UsuarioRole", 0);
+
+                    if (tipoUsuario == 1)
+                    {
+                        Application.Current.MainPage = new EditarPerfilView();
+                    }
+                    else if (tipoUsuario == 2 || tipoUsuario == 0)
+                    {
+                        Application.Current.MainPage = new EditarPerfilVoluntary();
+                    }
+
+
 
                 }
             }
