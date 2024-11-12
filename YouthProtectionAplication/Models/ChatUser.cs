@@ -18,5 +18,8 @@ namespace YouthProtectionAplication.Models
         public DateTime SentAt { get; set; }
 
         public string DataConvertida => SentAt.ToString("HH:mm dd/MM");
+
+
+        public bool IsMessageFromCurrentUser { get; set; }
     }
 }

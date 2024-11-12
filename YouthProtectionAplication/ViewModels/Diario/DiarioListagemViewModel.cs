@@ -76,6 +76,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
         #region AtributosPropriedades
 
         private string nome = Preferences.Get("UsuarioUsername", string.Empty);
+        private long userId = Preferences.Get("UsuarioId", 0L);
         private string dataConvertida;
         private Postagem _postagemSelecionada;
         private bool _isPopupVisible;
@@ -104,6 +105,19 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 if (nome != value) 
                 {
                     nome = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public long UserId
+        {
+            get => userId;
+            set
+            {
+                if (userId != value)
+                {
+                    userId = value;
                     OnPropertyChanged();
                 }
             }
@@ -165,7 +179,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
         {
 
             PostagemSelecionadaChat = postagem;
-            Application.Current.MainPage = new ChatViewUser(postagem);
+            Application.Current.MainPage = new ChatViewUser(postagem, userId);
 
         }
 

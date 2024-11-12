@@ -16,13 +16,14 @@ namespace YouthProtectionAplication.ViewModels.Chat
         public ObservableCollection<ChatUser> Messages { get; set; }
 
       
-
+        public long UsuarioIdAtual { get; set; }
         private ChatService chatService;
         private readonly System.Timers.Timer chatTimer;
         private long _lastMessageId;
-        public ChatUserViewModel(Postagem postagem)
+
+        public ChatUserViewModel(Postagem postagem, long userId)
         {
-            long IdUser = Preferences.Get("UsuarioId", 0L);
+            UsuarioIdAtual = Preferences.Get("UsuarioId", 0L);
             string token = Preferences.Get("UsuarioToken", string.Empty);
             chatService = new ChatService(token);
             Postagem p = postagem;
@@ -32,11 +33,15 @@ namespace YouthProtectionAplication.ViewModels.Chat
             PublicationContent = p.PublicationContent;
             PublicationId = p.publicationId;
             _lastMessageId = 0;
-
+            UsuarioIdAtual = userId;
 
             EnviarMensagemCommand = new Command(async () => await EnviarMensagemAsync());
             _ = LoadFirstIdAsync(p);
 
+
+            chatTimer = new System.Timers.Timer(5000);
+            chatTimer.Elapsed += async (sender, e) => await TimerElapsedAsync();
+            chatTimer.Start();
         }
         public ICommand EnviarMensagemCommand { get; }
 
@@ -163,6 +168,10 @@ namespace YouthProtectionAplication.ViewModels.Chat
                 {
                     foreach (var mensagem in novasMensagens)
                     {
+                       if (mensagem.SenderId == UsuarioIdAtual)
+                        {
+                            mensagem.IsMessageFromCurrentUser = true;
+                        }
                         Messages.Add(mensagem);
 
                     }
@@ -191,12 +200,13 @@ namespace YouthProtectionAplication.ViewModels.Chat
             long idSender = Preferences.Get("UsuarioId", 0L);
             var novaMensagem = new ChatUser
             {
-                ChatId = Preferences.Get("IdChat", 0L),
-                SenderId = 6,
+                ChatId = IdChat,
+                SenderId = idSender,
                 SentAt = DateTime.Now,
                 Content = MensagemAtual
             };
 
+            novaMensagem.IsMessageFromCurrentUser = true;
             await chatService.EnviarMensagemAsync(novaMensagem);
             Messages.Add(novaMensagem);
             MensagemAtual = string.Empty;

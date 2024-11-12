@@ -8,9 +8,9 @@ namespace YouthProtectionAplication.Views.Chat;
 public partial class ChatViewUser : ContentPage
 {
 	ChatUserViewModel chatViewModel;
-	public ChatViewUser(Models.Postagem postagem)
+	public ChatViewUser(Models.Postagem postagem, long userId)
 	{
-        chatViewModel = new ChatUserViewModel(postagem);
+        chatViewModel = new ChatUserViewModel(postagem, userId);
 		BindingContext = chatViewModel;
         InitializeComponent();
     }
@@ -18,11 +18,6 @@ public partial class ChatViewUser : ContentPage
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        
-            if (await Application.Current.MainPage
-                  .DisplayAlert("Confirmação", "Deseja realmente sair? As alterações não serão feitas", "Sim", "Não"))
-            {
-                Application.Current.MainPage = new AppShell();
-            }
+      Application.Current.MainPage = new AppShell();
     }
 }

@@ -9,12 +9,6 @@
           BackgroundColor="White"
             >
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <local:SenderIdToColumnConverter x:Key="SenderIdToColumnConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ScrollView>
     <Grid RowDefinitions="auto,*,auto">
            
@@ -59,23 +53,20 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                                                                                                           
-                                    
+
+
 
                                     <Frame HasShadow="False" CornerRadius="15" Padding="10"
-                       BackgroundColor="#F5F5F5" Margin="10,4"
-                       Grid.Column="{Binding SenderId, Converter={StaticResource SenderIdToColumnConverter}}">
-
+                       BackgroundColor="#F5F5F5" Margin="10,4">
                                         <Frame.Triggers>
-                                            <DataTrigger TargetType="Frame" Binding="{Binding SenderId}" Value="1">
+                                        <DataTrigger TargetType="Frame" Binding="{Binding IsMessageFromCurrentUser}" Value="True">
                                                 
                                                 <!-- Configuração para mensagens enviadas (alinhamento à direita) -->
                                                 <Setter Property="BackgroundColor" Value="#DCF8C6" />
                                                 <Setter Property="HorizontalOptions" Value="End" />
-                                                
                                                 <Setter Property="Margin" Value="50,4,0,4" />
                                             </DataTrigger>
-                                            <DataTrigger TargetType="Frame" Binding="{Binding SenderId}" Value="2">
+                                        <DataTrigger TargetType="Frame" Binding="{Binding IsMessageFromCurrentUser}"  Value="False">
                                                 <!-- Configuração para mensagens recebidas (alinhamento à esquerda) -->
                                                 <Setter Property="BackgroundColor" Value="#FFFFFF" />
                                                 <Setter Property="HorizontalOptions" Value="Start" />
