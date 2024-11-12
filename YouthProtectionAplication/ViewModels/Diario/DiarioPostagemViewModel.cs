@@ -79,8 +79,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
         private void OnVisibilityChanged()
         {
             int visibilityValue = IsPublic ? 0 : 1;
-            // Aqui você pode usar o valor conforme necessário
-            // Ex: enviar para um serviço ou atualizar outra propriedade
+      
         }
 
 

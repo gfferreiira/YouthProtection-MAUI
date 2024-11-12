@@ -42,6 +42,13 @@ namespace YouthProtectionAplication
             {
                 tabBar.Items.Add(new ShellContent
                 {
+                    Title = "Home",
+                    Icon = "gg_profile.png",
+                    ContentTemplate = new DataTemplate(typeof(DiarioViewVoluntary))
+                });
+
+                tabBar.Items.Add(new ShellContent
+                {
                     Title = "Perfil",
                     Icon = "gg_profile.png",
                     ContentTemplate = new DataTemplate(typeof(EditarPerfilView))
