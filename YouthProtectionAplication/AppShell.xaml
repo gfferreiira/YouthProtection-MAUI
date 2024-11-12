@@ -11,31 +11,5 @@
     >
 
 
-    
-
-
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" >
- 
-        <ShellContent 
-     Title="Home" Icon="home.png"
-     ContentTemplate="{DataTemplate viewsDiario:DiarioViewUser}"
-     />
-
-
-        <ShellContent
-        Title="Perfil" Icon="gg_profile.png"
-        ContentTemplate="{DataTemplate viewsUsuario:EditarPerfilView}"
-      />
-
-       
-    </FlyoutItem>
-
-
-   
-
-
-
-
-
 
 </Shell>

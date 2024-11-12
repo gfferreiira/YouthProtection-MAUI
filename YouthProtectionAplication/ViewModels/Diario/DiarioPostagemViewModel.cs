@@ -223,7 +223,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                         .DisplayAlert("Mensagem", "Postagem feita com sucesso", "Ok");
 
 
-                Application.Current.MainPage = new AppShell();
+                Application.Current.MainPage = new AppShell(Preferences.Get("UsuarioRole", 0));
 
             }
             catch (Exception ex)

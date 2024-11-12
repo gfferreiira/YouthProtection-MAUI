@@ -344,6 +344,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                     Preferences.Set("UsuarioCidade", uAutenticado.City);
                     Preferences.Set("UsuarioTelefone", uAutenticado.CellPhone);
                     Preferences.Set("UsuarioUf", uAutenticado.Uf);
+                    Preferences.Set("UsuarioRole", (int)uAutenticado.Role);
                     Preferences.Set("UsuarioSenha", Senha);
 
                     _ = _uService.GetUsuarioAsync(uAutenticado.Token);
@@ -351,7 +352,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
                     await Application.Current.MainPage
                        .DisplayAlert("Informação", mensagem, "OK");
 
-                    Application.Current.MainPage = new AppShell();
+                    Application.Current.MainPage = new AppShell(Preferences.Get("UsuarioRole", 0));
                 }
 
                 else
@@ -520,7 +521,7 @@ namespace YouthProtectionAplication.ViewModels.Usuarios
         {
             try
             {
-                Application.Current.MainPage = new AppShell();
+                Application.Current.MainPage = new AppShell(Preferences.Get("UsuarioRole", 0));
             }
             catch (Exception ex)
             {

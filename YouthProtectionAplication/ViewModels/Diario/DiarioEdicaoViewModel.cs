@@ -198,7 +198,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 {
                     await Application.Current.MainPage
                         .DisplayAlert("Mensagem", "Selecione se a postagem é publica ou privada", "Ok");
-                    Application.Current.MainPage = new AppShell();
+                    Application.Current.MainPage = new AppShell(Preferences.Get("UsuarioRole", 0));
                     return;
                 }
 
@@ -206,7 +206,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 {
                     await Application.Current.MainPage
                         .DisplayAlert("Mensagem", "Anotação não pode estar vazia", "Ok");
-                    Application.Current.MainPage = new AppShell();
+                    Application.Current.MainPage = new AppShell(Preferences.Get("UsuarioRole", 0));
                     return; 
                    
                 }
@@ -224,7 +224,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 await Application.Current.MainPage
                        .DisplayAlert("Mensagem", "Postagem Atualizada com sucesso", "Ok");
 
-                Application.Current.MainPage = new AppShell();
+                Application.Current.MainPage = new AppShell(Preferences.Get("UsuarioRole", 0));
 
 
             }

@@ -7,7 +7,6 @@ namespace YouthProtectionAplication
         public App()
         {
             InitializeComponent();
-
             MainPage = new NavigationPage(new LoginView());
 
            

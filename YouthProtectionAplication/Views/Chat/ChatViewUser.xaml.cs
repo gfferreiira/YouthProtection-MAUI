@@ -18,6 +18,6 @@ public partial class ChatViewUser : ContentPage
 
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-      Application.Current.MainPage = new AppShell();
+      Application.Current.MainPage = new AppShell(Preferences.Get("UsuarioRole", 0));
     }
 }

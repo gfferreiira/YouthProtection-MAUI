@@ -21,7 +21,7 @@ public partial class DiarioEditPostUser : ContentPage
             if (await Application.Current.MainPage
                   .DisplayAlert("Confirmação", "Deseja realmente sair? As alterações não serão feitas", "Sim", "Não"))
             {
-                Application.Current.MainPage = new AppShell();
+                Application.Current.MainPage = new AppShell(Preferences.Get("UsuarioRole", 0));
             }
         }
         catch
