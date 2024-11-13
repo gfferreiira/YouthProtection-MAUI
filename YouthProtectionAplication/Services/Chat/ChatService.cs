@@ -17,7 +17,7 @@ namespace YouthProtectionAplication.Services.Chat
 
         private string _token;
 
-        private const string apiUrlBase = "http://localhost:5189/Chat";
+        private const string apiUrlBase = "https://www.well.somee.com/Chat";
 
         public ChatService(string token)
         {

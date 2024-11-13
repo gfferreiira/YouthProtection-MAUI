@@ -12,7 +12,7 @@ namespace YouthProtectionAplication.Services.Attendance
 
         private string _token;
 
-        private const string apiUrlBase = "http://localhost:5189/Attendance";
+        private const string apiUrlBase = "https://www.well.somee.com/Attendance";
 
         public AttendanceService(string token)
         {
