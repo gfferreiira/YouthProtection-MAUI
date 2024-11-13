@@ -2,11 +2,107 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="YouthProtectionAplication.Views.Chat.ChatViewVoluntary"
-             Title="ChatViewVoluntary">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewmodels="clr-namespace:YouthProtectionAplication.ViewModels"
+              xmlns:local="clr-namespace:YouthProtectionAplication.Views.Chat"
+               BackgroundColor="White">
+    <ScrollView>
+        <Grid RowDefinitions="auto,*,auto">
+
+
+            <Frame BackgroundColor="White"  
+                HasShadow="True"
+                WidthRequest="320"
+                MaximumWidthRequest="500"
+                MinimumWidthRequest="200"
+                CornerRadius="15">
+                <StackLayout>
+                    <HorizontalStackLayout Grid.Row="0" Spacing="30">
+                        <Image Source="gg_profile.png" HeightRequest="60" HorizontalOptions="Start" />
+                        <Image HeightRequest="60" Source="sair.png"  Margin="40,0,0,0" HorizontalOptions="End" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </HorizontalStackLayout>
+
+                    <Label Text="{Binding PublicationContent}" FontSize="20" 
+                        TextColor="Black"
+                        FontFamily="MontserratRegular" 
+                       Margin="30,80,0,100"
+                        Grid.Row="0" />
+
+
+                    <CollectionView ItemsSource="{Binding Messages}" VerticalOptions="FillAndExpand" BackgroundColor="White" Margin="10,0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <!-- Coluna da Mensagem -->
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+
+
+
+                                    <Frame HasShadow="False" CornerRadius="15" Padding="10"
+                    BackgroundColor="#F5F5F5" Margin="10,4">
+                                        <Frame.Triggers>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding IsMessageFromCurrentUser}" Value="True">
+
+                                                <!-- Configuração para mensagens enviadas (alinhamento à direita) -->
+                                                <Setter Property="BackgroundColor" Value="#DCF8C6" />
+                                                <Setter Property="HorizontalOptions" Value="End" />
+                                                <Setter Property="Margin" Value="50,4,0,4" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding IsMessageFromCurrentUser}"  Value="False">
+                                                <!-- Configuração para mensagens recebidas (alinhamento à esquerda) -->
+                                                <Setter Property="BackgroundColor" Value="#FFFFFF" />
+                                                <Setter Property="HorizontalOptions" Value="Start" />
+                                                <Setter Property="Margin" Value="0,4,50,4" />
+                                            </DataTrigger>
+                                        </Frame.Triggers>
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding Content}" FontSize="16" TextColor="Black"/>
+                                            <Label Text="{Binding DataConvertida}" FontSize="9" TextColor="Black"  FontFamily="MontserratRegular" />
+                                        </VerticalStackLayout>
+                                    </Frame>
+
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+
+
+
+
+
+
+                    <StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+                        <Entry Text="{Binding MensagemAtual}" Placeholder="Digite sua mensagem" 
+                            HorizontalOptions="FillAndExpand" 
+                            TextColor="Black"  
+                            FontFamily="MontserratRegular" />
+                        <Button Text="Enviar" Command="{Binding EnviarMensagemCommand}" 
+                             BackgroundColor="#956239" 
+                             TextColor="White" 
+                             FontFamily="MontserratRegular" />
+                    </StackLayout>
+
+                    <Button Text="Finalizar Atendimento" Command="{Binding FinalizarAtendimentoCommand}" 
+                                    BackgroundColor="#956239" WidthRequest="200" Margin="0,20,0,0"
+                                    TextColor="White" 
+                                    FontFamily="MontserratRegular" />
+
+
+                </StackLayout>
+            </Frame>
+
+
+
+
+        </Grid>
+    </ScrollView>
 </ContentPage>

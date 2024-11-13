@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using YouthProtectionAplication.Models;
 using YouthProtectionAplication.Services.Diario;
 using YouthProtectionAplication.Views.Chat;
@@ -31,8 +32,11 @@ namespace YouthProtectionAplication.ViewModels.Voluntario
 
             _ = ObterPostagens();
 
-        }
+            InicializarChatCommand =
+                new Command<Postagem>(async (Postagem postagem) => { await InicializarChat(postagem); });
 
+        }
+        public ICommand InicializarChatCommand { get; set; }
 
 
         private long userId = Preferences.Get("UsuarioId", 0L);
@@ -96,10 +100,19 @@ namespace YouthProtectionAplication.ViewModels.Voluntario
 
         private async Task InicializarChat(Postagem postagem)
         {
-
-            PostagemSelecionadaChat = postagem;
-            Application.Current.MainPage = new ChatViewVoluntary(postagem, userId);
-
+            try
+            {
+                if (await Application.Current.MainPage
+                     .DisplayAlert("Confirmação", "Deseja Iniciar o Atendimento?", "Sim", "Não"))
+                {
+                    PostagemSelecionadaChat = postagem;
+                    Application.Current.MainPage = new ChatViewVoluntary(postagem, userId);
+                }
+            }
+            catch 
+            {
+                
+            }
         }
 
         #endregion
