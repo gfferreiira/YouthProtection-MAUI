@@ -178,9 +178,9 @@ namespace YouthProtectionAplication.ViewModels.Diario
             }
         }
 
+        #endregion
 
-
-
+        #region Métodos
         private async void OnEditarPostagem(Postagem postagem)
         {
 
@@ -225,16 +225,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
         {
             IsPopupVisible = false;
         }
-
-
-
-
-
-
-
-        #endregion
-
-        #region Métodos
+        
         public async Task ObterPostagens()
         {
             try
