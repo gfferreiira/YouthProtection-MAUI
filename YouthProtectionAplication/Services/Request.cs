@@ -69,6 +69,8 @@ namespace YouthProtectionAplication.Services
             HttpResponseMessage response = await httpClient.GetAsync(uri);
             string serialized = await response.Content.ReadAsStringAsync();
 
+           // if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError) (EM CASO DE ALGUM PROBLEMA, TIRAR DE COMENTARIO E DEIXAR ATIVO
+               //throw new Exception(serialized);
             TResult result = await Task.Run(() => JsonConvert.DeserializeObject<TResult>(serialized));
             return result;
         }
