@@ -45,6 +45,13 @@ namespace YouthProtectionAplication.Services.Chat
             return response.Id;
         }
 
+        public async Task<Response.ResponseModel> ObterChat(long idPostagem)
+        {
+            string urlComplementar = string.Format("/GetChatBy" + "/{0}", idPostagem);
+            var response = await _request.GetAsync<Models.Response.ResponseModel>(apiUrlBase + urlComplementar, _token);
+            return response;
+        }
+
 
 
     }

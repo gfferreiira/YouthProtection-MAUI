@@ -12,6 +12,8 @@ using YouthProtectionAplication.Views.Usuarios;
 using YouthProtectionAplication.Models.Enums;
 using System.ComponentModel;
 using YouthProtectionAplication.Views.Chat;
+using YouthProtectionAplication.Services.Attendance;
+using YouthProtectionAplication.Services.Chat;
 
 
 namespace YouthProtectionAplication.ViewModels.Diario
@@ -19,6 +21,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
     public class DiarioListagemViewModel : BaseViewModel
     {
         private DiarioService pdiarioService;
+        private ChatService  chatService;
 
 
 
@@ -31,6 +34,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
             string token = Preferences.Get("UsuarioToken", string.Empty);
 
             pdiarioService = new DiarioService(token);
+            chatService = new ChatService(token);
             Diarios = new ObservableCollection<Postagem>();
             FilteredItems = new ObservableCollection<Postagem>();
             ExcludedItems = new ObservableCollection<Postagem>();
@@ -74,6 +78,7 @@ namespace YouthProtectionAplication.ViewModels.Diario
 
         private string nome = Preferences.Get("UsuarioUsername", string.Empty);
         private long userId = Preferences.Get("UsuarioId", 0L);
+        private long idChat;
         private string dataConvertida;
         private Postagem _postagemSelecionada;
         private bool _isPopupVisible;
@@ -115,6 +120,19 @@ namespace YouthProtectionAplication.ViewModels.Diario
                 if (userId != value)
                 {
                     userId = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public long IdChat
+        {
+            get => idChat;
+            set
+            {
+                if (idChat != value)
+                {
+                    idChat = value;
                     OnPropertyChanged();
                 }
             }
@@ -176,10 +194,31 @@ namespace YouthProtectionAplication.ViewModels.Diario
         {
 
             PostagemSelecionadaChat = postagem;
+    
+
+            _ = LoadFirstIdAsync(PostagemSelecionadaChat);
+
+        
+        }
+
+        public async Task LoadFirstIdAsync(Postagem postagem)
+        {
+            
+            Response.ResponseModel  response = new Response.ResponseModel();
+            response = await chatService.ObterChat(PostagemSelecionadaChat.publicationId);
+
+            if(response == null || response.AttendanceId <= 0)
+            {
+                await Application.Current.MainPage.DisplayAlert("Aviso", "Nenhum atendimento iniciado, aguarde um voluntário.", "OK");
+                IdChat = 0;
+                return;
+               
+            }
+
+            IdChat = response.AttendanceId;
             Application.Current.MainPage = new ChatViewUser(postagem, userId);
 
         }
-
 
 
         public void CancelarEdicao()

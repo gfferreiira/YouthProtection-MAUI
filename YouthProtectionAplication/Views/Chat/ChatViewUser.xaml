@@ -29,7 +29,7 @@
                                FontSize="Subtitle"  
                                FontFamily="MontserratRegular" />
 
-                        <Image HeightRequest="60" Source="sair.png"  Margin="40,0,0,0"  >
+                        <Image HeightRequest="60" Source="sair.png"  Margin="0,0,0,0"  >
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                             </Image.GestureRecognizers>
