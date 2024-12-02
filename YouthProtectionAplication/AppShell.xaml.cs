@@ -38,7 +38,7 @@ namespace YouthProtectionAplication
                     ContentTemplate = new DataTemplate(typeof(EditarPerfilView)) 
                 });
             }
-            else if (userRole == 2)
+            else if (userRole == 2 || userRole == 0)
             {
                 tabBar.Items.Add(new ShellContent
                 {
